@@ -18,7 +18,9 @@
     "url": "https://github.com/Romaleso261981/filmoteka2021/issues"
   },
   "dependencies": {
-    "modern-normalize": "^1.1.0"
+    "modern-normalize": "^1.1.0",
+    "normalize": "^0.3.1",
+    "normalize-css": "^2.3.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
