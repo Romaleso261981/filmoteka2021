@@ -5,7 +5,7 @@
   "homepage": "https://github.com/Romaleso261981/filmoteka2021",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /parcel-project-template/"
+    "build": "parcel build src/*.html --public-url /filmoteka2021/"
   },
   "repository": {
     "type": "git",
