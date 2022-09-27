@@ -2,7 +2,7 @@
   "name": "filmoteka2021",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://github.com/Romaleso261981/filmoteka2021",
+  "homepage": "https://Romaleso261981/filmoteka2021",
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /filmoteka2021/"
