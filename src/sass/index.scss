@@ -1,9 +1,12 @@
-@import './common';
-@import './footer';
-@import './header';
-@import './main-page';
-@import './modal-command';
-@import './modal-header';
+@import './base/common';
+
+@import './components/conteiner';
+
+@import './layout/header';
+@import './layout/main-page';
+@import './layout/modal-command';
+@import './layout/modal-header';
+@import './layout/footer';
+
 @import './pagination';
 @import './scroll-up';
-
