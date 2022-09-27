@@ -309,6 +309,9 @@ function onMyLibrary() {
 
     //! ПОКАЗЫВАЕМ блок кнопок WATCHED и QUEUE в header:
     refs.watchedQueueHeader.hidden = false;
+
+    //! Очищаем контейнер:
+    clearMovieContainer();
 }
 
 
