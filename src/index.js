@@ -311,6 +311,8 @@ function onMyLibrary() {
     refs.watchedQueueHeader.hidden = false;
 
 
+
+
     //! Очищаем контейнер:
     clearMovieContainer();
 }
