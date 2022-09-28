@@ -49,7 +49,7 @@ p.query=t.currentTarget.elements.searchQuery.value.trim(),//! + убираем �
 console.log("searchQuery: ",p.query),//!
 t.currentTarget.elements.searchQuery.value="",""===p.query)return alert("Поле ввода не долно быть пустым!");
 //! Задаем значение переменной (currentPage = "Movie search") для определения типа запроса в кнопке LOAD MORE
-x="Movie search",
+g="Movie search",
 //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
 u.resultNotSuccessful.hidden=!0,
 //! Делаем сброс значения page = 1 после submit form 
@@ -58,7 +58,7 @@ p.resetPage(),
 //! Кнопка LOAD MORE => показываем и отключаем
 m.show(),m.disable(),
 //! Очищаем контейнер при новом вводе данных в input form:
-b();
+y();
 //! Делаем ОБЩИЙ fetch-запрос с помощью метода .fetchHits из класса ThemoviedbApiService
 const e=await p.getSearchMovies();
 //! Перезаписываем в глобальную переменную (films) значение всей (results)
@@ -69,7 +69,7 @@ function(t){t.length||(
 //! ПОКАЗЫВАЕМ строку предупреждения об отсутствии фильмов:
 u.resultNotSuccessful.hidden=!1,m.hide())}(e),
 //! Рисование интерфейса
-N(e),
+k(e),
 //! Кнопка LOAD MORE => включаем
 m.enable()}
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
@@ -84,21 +84,21 @@ m.disable(),
 //! проверяеm значения переменной (currentPage) 
 //! и СРАЗУ получаем в переменной films нужный массив объектов 
 //! для отрисовки следующих 20 фильмов
-await async function(){if("home-Filmoteka"===x){const t=await p.getTrendingAllDay();d=t}else{if("Movie search"!==x)return;{const t=await p.getSearchMovies();d=t}}}
+await async function(){if("home-Filmoteka"===g){const t=await p.getTrendingAllDay();d=t}else{if("Movie search"!==g)return;{const t=await p.getSearchMovies();d=t}}}
 //!  Ф-ция, к-рая получает id жанра и возвращает тип жанра
 (),
 //! Очищаем контейнер:
-b(),
+y(),
 //!  Проверка results на ОКОНЧАНИЕ КОЛЛЕКЦИИИ
 //! Рисование интерфейса
-N(d),
+k(d),
 //! Кнопка LOAD MORE => включаем
 m.enable()})),
 //! Создаем слушателя событий на кнопке HOME:
-u.homeBtn.addEventListener("click",y),
+u.homeBtn.addEventListener("click",x),
 //! Создаем слушателя событий на кнопке Filmoteka:
-u.filmotekaBtn.addEventListener("click",y),
-//! Создаем слушателя событий на кнопке Filmoteka:
+u.filmotekaBtn.addEventListener("click",x),
+//! Создаем слушателя событий на кнопке MY LIBRARY:
 u.myLibraryBtn.addEventListener("click",(function(){
 //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
 u.resultNotSuccessful.hidden=!0,
@@ -106,33 +106,37 @@ u.resultNotSuccessful.hidden=!0,
 u.searchFormAlert.hidden=!0,
 //! ПОКАЗЫВАЕМ блок кнопок WATCHED и QUEUE в header:
 u.watchedQueueHeader.hidden=!1,
+//! Кнопка LOAD MORE => показываем и отключаем
+m.hide(),//! Временно => ПРЯЧЕМ
+m.disable(),
 //! Очищаем контейнер:
-b()})),
+y()})),
 //! Создаем слушателя событий на <section class="section-hero"> ==> на poster_path:
-u.movieDetails.addEventListener("click",(async function(t){if(!t.target.src)return;{
-//! Получаем (id) фильма по клику на карточке фильма
-const e=String(t.target.src).substring(31),n=d.findIndex((t=>t.poster_path===e));h=d[n].id}console.log("idFilms:",h);//! id фильма
+u.movieDetails.addEventListener("click",(async function(t){let n=1;if(!t.target.closest("li"))return;
 //! ==> Делаем запрос-3 полной информации о фильме для МОДАЛКИ.
-try{const t=await p.getMovieDetails(h);
+{const e=t.target.closest("li");n=Number(e.getAttribute("key")),//!!! вот ОН, РОДНОЙ!!!
+console.log("idFilms:",n)}try{const t=await p.getMovieDetails(n);
 //! Очищаем контейнер МОДАЛКИ:
-w(),
+b(),
 //! Перезаписываем в глобальную переменную (films) значение всей (results)
-g=t}catch(t){
+h=t}catch(t){
 //! Очищаем контейнер МОДАЛКИ:
-w(),
+b(),
 //! Очищаем контейнер переменную (films):
-g=null,console.log(t),//!
+h=null,console.log(t),//!
 e(l).Notify.failure(`Ошибка запроса: ${t.message}`,{timeout:3500})}
 //! ==> Открываем модалку
-window.addEventListener("keydown",k),document.body.classList.add("show-modal"),
+window.addEventListener("keydown",v),document.body.classList.add("show-modal"),
 //! Рисование интерфейса 
-n=g,
+i=h,
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 u.InfoMovie.insertAdjacentHTML("afterbegin",
 //! --------------------------------------------------------------------------------------------
-function(t){const{id:e,poster_path:n,title:i,name:o,vote_average:r,vote_count:a,popularity:s,original_title:l,original_name:c,genres:f,overview:u}=t,p=f.map((t=>t.name)).join(", ");let m=i;i&&(m=i.toUpperCase());let d=o;return o&&o.toUpperCase(),`\n                <img src="https://image.tmdb.org/t/p/w300${n}" alt="${i||o}" />\n\n                <div class="modal-сontent">\n                    <h3>${m||d}</h3>\n                    <h5>Vote/Votes ${r}/${a}</h5>\n                    <h5>Popularity ${s}</h5>\n                    <h5>Original Title ${l||c}</h5>\n                    <h5>Genre ${p}</h5>\n                    <h5>ABOUT</h5>\n                    <p>${u}</p>\n                </div>\n                `}(n));
+function(t){const{id:e,poster_path:n,title:i,name:o,vote_average:r,vote_count:a,popularity:s,original_title:l,original_name:c,genres:f,overview:u}=t,p=f.map((t=>t.name)).join(", ");let m=i;i&&(m=i.toUpperCase());let d=o;return o&&o.toUpperCase(),`\n                <img src="https://image.tmdb.org/t/p/w300${n}" alt="${i||o}" />\n\n                <div class="modal-сontent">\n                    <h3>${m||d}</h3>\n                    <h5>Vote/Votes ${r}/${a}</h5>\n                    <h5>Popularity ${s}</h5>\n                    <h5>Original Title ${l||c}</h5>\n                    <h5>Genre ${p}</h5>\n                    <h5>ABOUT</h5>\n                    <p>${u}</p>\n                </div>\n                `}(i));
 //! +++++++++++++++++++++++++++++ Markup infoFilm ++++++++++++++++++++++++++++++++++++++++++++++
-var n})),u.closeModalBtn.addEventListener("click",v),u.backdrop.addEventListener("click",(function(t){t.currentTarget===t.target&&v()})),
+var i}
+//! +++ Запрос полной информации о фильме для МОДАЛКИ +++
+)),u.closeModalBtn.addEventListener("click",w),u.backdrop.addEventListener("click",(function(t){t.currentTarget===t.target&&w()})),
 //! ПОКАЗЫВАЕМ форму со строкой инпута:
 u.searchFormAlert.hidden=!1,//! ПОКАЗЫВАЕМ
 //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
@@ -140,12 +144,12 @@ u.resultNotSuccessful.hidden=!0,
 //! ПРЯЧЕМ блок кнопок WATCHED и QUEUE в header:
 u.watchedQueueHeader.hidden=!0;
 //! Создаем глобальную переменную (films) для хранения значение всей (results)
-let d=[],h=0,g=null,x="";
+let d=[],h=null,g="";
 //! Создаем глобальную переменную (idFilms) для хранения idF одного фильма
 //! +++ Загрузка популярных фильмов на главную (первую) страницу  +++
-async function y(){
+async function x(){
 //! Задаем значение переменной (currentPage = "home-Filmoteka") для определения типа запроса в кнопке LOAD MORE
-x="home-Filmoteka",
+g="home-Filmoteka",
 //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
 u.resultNotSuccessful.hidden=!0,
 //! ПОКАЗЫВАЕМ форму со строкой инпута:
@@ -158,23 +162,23 @@ p.resetPage(),
 //! Кнопка LOAD MORE => показываем и отключаем
 m.show(),m.disable(),
 //! Очищаем контейнер:
-b();
+y();
 //! Делаем fetch-запрос с помощью метода .getTrendingAllDay из класса ThemoviedbApiService
 const t=await p.getTrendingAllDay();
 //! Перезаписываем в глобальную переменную (films) значение всей (results)
 d=t,
 //! Рисование интерфейса 
-N(t),
+k(t),
 //! Кнопка LOAD MORE => включаем
 m.enable()}
 //!  Ф-ция, к-рая очищает контейнер при новом вводе данных в input form:
-function b(){u.moviesCards.innerHTML=""}
+function y(){u.moviesCards.innerHTML=""}
 //!  Ф-ция, к-рая очищает контейнер МОДАЛКИ:
-function w(){u.InfoMovie.innerHTML=""}function v(){window.removeEventListener("keydown",k),document.body.classList.remove("show-modal"),
+function b(){u.InfoMovie.innerHTML=""}function w(){window.removeEventListener("keydown",v),document.body.classList.remove("show-modal"),
 //! Очищаем контейнер МОДАЛКИ:
-w()}function k(t){"Escape"===t.code&&v()}
+b()}function v(t){"Escape"===t.code&&w()}
 //! +++++++++++++++++++++++++++++ Markup Movies ++++++++++++++++++++++++++++++++++++++++++++++
-function N(t){
+function k(t){
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 u.moviesCards.insertAdjacentHTML("beforeend",
 //! --------------------------------------------------------------------------------------------
@@ -182,5 +186,5 @@ function(t){return t.map((({id:t,poster_path:e,title:n,name:i,genre_ids:o,first_
 //! значение года из строки даты:
 let c=n;n&&(c=n.toUpperCase());let u=i;if(i){i.toUpperCase()}return`\n                <li key=${t}>\n                    <img src="https://image.tmdb.org/t/p/w780${e}" alt="${n||i}" />\n\n                    <div>\n                        <br />\n                        <h5>${c||u}</h5>\n                        <h5>${s} | ${l}</h5>\n                    </div>\n                </li>\n                `})).join("")}(t))}
 //!!!!!! Загрузка популярных фильмов на главную (первую) страницу (без нажатия на кнопки HOME или Filmoteka)
-y();
-//# sourceMappingURL=index.3ae4cac6.js.map
+x();
+//# sourceMappingURL=index.6e3001f3.js.map
