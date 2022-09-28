@@ -30,11 +30,12 @@ export default function getRefs() {
     resultNotSuccessful: document.querySelector('.search-alert'),
 
     //! Получаем ссылку на форму со строкой инпута:
-    searchFormAlert: document.querySelector('.search'),
+    // searchFormAlert: document.querySelector('.search'),
+    searchFormAlert: document.querySelector('div[data-action="search-form-alert"]'),
 
     //! Получаем ссылку на блок кнопок WATCHED и QUEUE в header:
-    watchedQueueHeader: document.querySelector('.nav-library-buttons'),
-
+    // watchedQueueHeader: document.querySelector('.nav-library-buttons'),
+    watchedQueueHeader: document.querySelector('[data-action="library-buttons"]'),
   };
 };
 
