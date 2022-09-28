@@ -580,15 +580,41 @@ function createInfoMovieMarkup(infoFilm) {
                 <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
 
                 <div class="modal-сontent">
-                    <h3>${capitalsTitle || capitalsName}</h3>
-                    <h5>Vote/Votes ${vote_average}/${vote_count}</h5>
-                    <h5>Popularity ${popularity}</h5>
-                    <h5>Original Title ${original_title || original_name}</h5>
-                    <h5>Genre ${genresAllOneFilm}</h5>
-                    <h5>ABOUT</h5>
-                    <p>${overview}</p>
+                    <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3>
+                 
+                    <table class="modal-info">
+                        <tbody>
+                            <tr>
+                                <td class="modal-key">Vote/Votes123</td>
+                                <td class="modal-parametr"><span class="modal-parametr-vote">${vote_average}</span>/${vote_count}</td>
+                            </tr>
+                            <tr>
+                                <td class="modal-key">Popularity</td>
+                                <td class="modal-parametr">${popularity}</td>
+                            </tr>
+                            <tr>
+                                <td class="modal-key">Original Title</td>
+                                <td class="modal-parametr">${original_title || original_name}</td>
+                            </tr>
+                            <tr>
+                                <td class="modal-key">Genre</td>
+                                <td class="modal-parametr">${genresAllOneFilm}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="modal-about-film">
+                        <h5 class="modal-about-title">ABOUT</h5>
+                        <span class="modal-about-text">${overview}</span>
+                    </div>
+
+                    <div class="modal-button">
+                        <button type="button" class="modal-watched">ADD TO WATCHED</button>
+                        <button type="button" class="modal-queue">ADD TO QUEUE</button>
+                    </div>
                 </div>
-                `;
+                
+            `;
 };
 
 
