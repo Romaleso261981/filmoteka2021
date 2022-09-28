@@ -49,8 +49,8 @@ refs.homeBtn.addEventListener('click', onHome);
 //! Создаем слушателя событий на кнопке Filmoteka:
 refs.filmotekaBtn.addEventListener('click', onHome);
 
-//! Создаем слушателя событий на кнопке Filmoteka:
-refs.myLibraryBtn.addEventListener('click', onMyLibrary);
+//! Создаем слушателя событий на кнопке MY LIBRARY:
+refs.myLibraryBtn.addEventListener('click', onMyLibraryWatched);
 
 
 //! Создаем слушателя событий на <section class="section-hero"> ==> на poster_path:
@@ -238,23 +238,15 @@ async function onFormMoviesSearch(evt) {
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 async function onMovieDetails(event) {
     // console.log("Вешаю слушателя на onMovieDetails"); //!
-    if (event.target.src) {
-        //! Получаем (id) фильма по клику на карточке фильма
-        // console.log("event.target.src: ", event.target.src); //!
-        const allPosterPath = String(event.target.src);
-        // alert(typeof allPosterPath); // string //!
-        // console.log("allPosterPath:", allPosterPath); //!
-        const posterPath = allPosterPath.substring(31);
-        // console.log("posterPath:", posterPath); //!
-
-        // console.log("films:", films); //!
-
-        const i = films.findIndex(film => film.poster_path === posterPath)
-        // console.log("i:", i); //!
-        idFilms = films[i].id; //! id фильма
+    //? !!!!!!! ПОЛУЧАЕМ (id) фильма по клику на карточке фильма !!!!!!!!!!!!!!!
+    let idFilms = 1;
+    if (event.target.closest("li")) {
+        const itemId = event.target.closest("li");
+        // console.log("itemId:", itemId); //!
+        idFilms = Number(itemId.getAttribute("key")); //!!! вот ОН, РОДНОЙ!!!
+        console.log("idFilms:", idFilms); //!
     } else return;
-
-    console.log("idFilms:", idFilms); //! id фильма
+    //?__________ ПОЛУЧАЕМ (id) фильма по клику на карточке фильма __________
 
     //! ==> Делаем запрос-3 полной информации о фильме для МОДАЛКИ.
     try {
@@ -298,8 +290,26 @@ async function onMovieDetails(event) {
 
 
 
-//* -------------------------- Ф-ция-запрос_4, для работы с MY LIBRARY: ----------------------
-function onMyLibrary() {
+//* -------------------------- Ф-ция_4, добавление просмотренных фильмов в localStorage по кноке WATCHED: ----------------------
+//! +++ Запрос полной информации о фильме для МОДАЛКИ +++
+function onWatchedModal() {
+    console.log("Вешаю слушателя на кнопку WATCHED"); //!
+};
+
+
+
+
+//* -------------------------- Ф-ция_5, добавление просмотренных фильмов в localStorage по кноке QUEUE: ----------------------
+//! +++ Запрос полной информации о фильме для МОДАЛКИ +++
+function onQueueModal() {
+    console.log("Вешаю слушателя на кнопку QUEUE"); //!
+};
+
+
+
+
+//* -------------------------- Ф-ция_6, для работы с MY LIBRARY и кнопкой WATCHED: ----------------------
+function onMyLibraryWatched() {
     // console.log("Вешаю слушателя на кнопку MY LIBRARY"); //!
     //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
     refs.resultNotSuccessful.hidden = true;
@@ -310,10 +320,26 @@ function onMyLibrary() {
     //! ПОКАЗЫВАЕМ блок кнопок WATCHED и QUEUE в header:
     refs.watchedQueueHeader.hidden = false;
 
+    //! Кнопка LOAD MORE => показываем и отключаем
+    // loadMoreBtn.show();
+    loadMoreBtn.hide(); //! Временно => ПРЯЧЕМ
+    loadMoreBtn.disable();
+
+
 
     //! Очищаем контейнер:
     clearMovieContainer();
-}
+
+    //! Перезаписываем в локальную переменную (results) значение всего (localStorage)
+    // const results = 
+    // console.log("results:", results); //!
+
+    //! Рисование интерфейса 
+
+
+    //! Кнопка LOAD MORE => включаем
+    // loadMoreBtn.enable();
+};
 
 
 
