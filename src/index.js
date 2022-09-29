@@ -13,6 +13,9 @@ import LoadMoreBtn from './js/load-more-btn.js';
 //! Импорт массива объектов всех жанров из файла genres.js (ВРЕМЕННО. Надо сделать два запроса)
 import { genres } from './js/genres.js'; //? api-themoviedb
 
+//! імпорт функції для додавання кнопок модалки карточки фільмів
+import  addIventListenerModalBtn  from './js/addIventListenerModalBtn';
+
 
 
 
@@ -33,7 +36,7 @@ const loadMoreBtn = new LoadMoreBtn({
 
 
 
-
+addIventListenerModalBtn()
 
 //* +++++++++++++++++++++++++++++++ Создаем ВСЕХ слушателей +++++++++++++++++++++++++++++++++++++++++
 
@@ -551,7 +554,7 @@ function createMoviesCardsMarkup(results) {
             // const capitalsTitle = title.toUpperCase();
             // console.log("capitalsTitle:", capitalsTitle); //!
             // const capitalsName = name.toUpperCase();
-
+          
             return `
                 <li key=${id}>
                     <img src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name}" />
@@ -574,10 +577,13 @@ function createMoviesCardsMarkup(results) {
 function appendInfoMovieMarkup(infoFilm) {
     //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
     refs.InfoMovie.insertAdjacentHTML('afterbegin', createInfoMovieMarkup(infoFilm));
+    addIventListenerModalBtn()
 };
 
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку ОДНОГО фильма в МОДАЛКЕ:
+
+
 function createInfoMovieMarkup(infoFilm) {
     // console.log("createInfoMovieMarkup ==> infoFilm:", infoFilm); //!
     const {
@@ -610,7 +616,7 @@ function createInfoMovieMarkup(infoFilm) {
         // const name = name.toUpperCase();
         // console.log("capitalsName:", capitalsName); //!
     };
-
+   
     return `
                 <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
 
