@@ -33,7 +33,7 @@ queueModal:document.querySelector('button[data-action="modal-add-queue"]'),
 //! Получаем ссылку на кнопоку WATCHED в header:
 watchedHeader:document.querySelector('[data-action="library-watched"]'),
 //! Получаем ссылку на кнопоку QUEUE в header:
-queueHeader:document.querySelector('[data-action="library-queue"]')},p=new class{
+queueHeader:document.querySelector('[data-action="library-queue"]'),btnlibrary:document.querySelector('[data-action="button-home"]')},p=new class{
 //! 1 - Загрузка популярных фильмов на главную (первую) страницу 
 async getTrendingAllDay(){const t=`https://api.themoviedb.org/3/trending/all/week?api_key=41b230c5977baa736e324532e16fdadb&page=${this.page}`;console.log("url_1: ",t);//!
 const n=await e(c).get(t),{results:i}=n.data;//!
@@ -70,7 +70,7 @@ p.resetPage(),
 //! Кнопка LOAD MORE => показываем и отключаем
 m.show(),m.disable(),
 //! Очищаем контейнер при новом вводе данных в input form:
-y();
+b();
 //! Делаем ОБЩИЙ fetch-запрос с помощью метода .fetchHits из класса ThemoviedbApiService
 const e=await p.getSearchMovies();
 //! Перезаписываем в глобальную переменную (films) значение всей (results)
@@ -81,7 +81,7 @@ function(t){t.length||(
 //! ПОКАЗЫВАЕМ строку предупреждения об отсутствии фильмов:
 u.resultNotSuccessful.hidden=!1,m.hide())}(e),
 //! Рисование интерфейса
-k(e),
+N(e),
 //! Кнопка LOAD MORE => включаем
 m.enable()}
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
@@ -100,10 +100,10 @@ await async function(){if("home-Filmoteka"===g){const t=await p.getTrendingAllDa
 //!  Ф-ция, к-рая получает id жанра и возвращает тип жанра
 (),
 //! Очищаем контейнер:
-y(),
+b(),
 //!  Проверка results на ОКОНЧАНИЕ КОЛЛЕКЦИИИ
 //! Рисование интерфейса
-k(d),
+N(d),
 //! Кнопка LOAD MORE => включаем
 m.enable()})),
 //! Создаем слушателя событий на кнопке HOME:
@@ -122,43 +122,34 @@ u.watchedQueueHeader.hidden=!1,
 m.hide(),//! Временно => ПРЯЧЕМ
 m.disable(),
 //! Очищаем контейнер:
-y()})),
+b()})),
 //! Создаем слушателя событий на <section class="section-hero"> ==> на poster_path:
 u.movieDetails.addEventListener("click",(async function(t){let n=1;if(!t.target.closest("li"))return;
 //! ==> Делаем запрос-3 полной информации о фильме для МОДАЛКИ.
 {const e=t.target.closest("li");n=Number(e.getAttribute("key")),//!!! вот ОН, РОДНОЙ!!!
 console.log("idFilms:",n)}try{const t=await p.getMovieDetails(n);
 //! Очищаем контейнер МОДАЛКИ:
-b(),
+w(),
 //! Перезаписываем в глобальную переменную (films) значение всей (results)
 h=t}catch(t){
 //! Очищаем контейнер МОДАЛКИ:
-b(),
+w(),
 //! Очищаем контейнер переменную (films):
 h=null,console.log(t),//!
 e(l).Notify.failure(`Ошибка запроса: ${t.message}`,{timeout:3500})}
 //! ==> Открываем модалку
-window.addEventListener("keydown",v),document.body.classList.add("show-modal"),
+window.addEventListener("keydown",k),document.body.classList.add("show-modal"),
 //! Рисование интерфейса 
 i=h,
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 u.InfoMovie.insertAdjacentHTML("afterbegin",
 //! --------------------------------------------------------------------------------------------
-function(t){const{id:e,poster_path:n,title:i,name:o,vote_average:r,vote_count:a,popularity:s,original_title:l,original_name:c,genres:f,overview:u}=t,p=f.map((t=>t.name)).join(", ");let m=i;i&&(m=i.toUpperCase());let d=o;return o&&o.toUpperCase(),`\n                <img src="https://image.tmdb.org/t/p/w300${n}" alt="${i||o}" />\n\n                <div class="modal-сontent">\n                    <h3 class="modal-title-film">${m||d}</h3>\n                 \n                    <table class="modal-info">\n                        <tbody>\n                            <tr>\n                                <td class="modal-key">Vote/Votes123</td>\n                                <td class="modal-parametr"><span class="modal-parametr-vote">${r}</span>/${a}</td>\n                            </tr>\n                            <tr>\n                                <td class="modal-key">Popularity</td>\n                                <td class="modal-parametr">${s}</td>\n                            </tr>\n                            <tr>\n                                <td class="modal-key">Original Title</td>\n                                <td class="modal-parametr">${l||c}</td>\n                            </tr>\n                            <tr>\n                                <td class="modal-key">Genre</td>\n                                <td class="modal-parametr">${p}</td>\n                            </tr>\n                        </tbody>\n                    </table>\n\n                    <div class="modal-about-film">\n                        <h5 class="modal-about-title">ABOUT</h5>\n                        <span class="modal-about-text">${u}</span>\n                    </div>\n\n                    <div class="modal-button">\n                        <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>\n                        <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>\n                    </div>\n                </div>\n                \n            `}(i)),function(){const t=document.querySelector('[data-action="modal-add-watched"]');console.log("btnModalWatched:",t);const e=document.querySelector('[data-action="modal-add-queue"]');console.log("btnModalQueue:",e),e.addEventListener("click",(()=>{alert("Добавлено в очередь")})),t.addEventListener("click",(()=>{alert("Добавлено в просмотренные")}))}();
+function(t){const{id:e,poster_path:n,title:i,name:o,vote_average:r,vote_count:a,popularity:s,original_title:l,original_name:c,genres:f,overview:u}=t,p=f.map((t=>t.name)).join(", ");let m=i;i&&(m=i.toUpperCase());let d=o;return o&&o.toUpperCase(),`\n                <img src="https://image.tmdb.org/t/p/w300${n}" alt="${i||o}" />\n\n                <div class="modal-сontent">\n                    <h3 class="modal-title-film">${m||d}</h3>\n                 \n                    <table class="modal-info">\n                        <tbody>\n                            <tr>\n                                <td class="modal-key">Vote/Votes123</td>\n                                <td class="modal-parametr"><span class="modal-parametr-vote">${r}</span>/${a}</td>\n                            </tr>\n                            <tr>\n                                <td class="modal-key">Popularity</td>\n                                <td class="modal-parametr">${s}</td>\n                            </tr>\n                            <tr>\n                                <td class="modal-key">Original Title</td>\n                                <td class="modal-parametr">${l||c}</td>\n                            </tr>\n                            <tr>\n                                <td class="modal-key">Genre</td>\n                                <td class="modal-parametr">${p}</td>\n                            </tr>\n                        </tbody>\n                    </table>\n\n                    <div class="modal-about-film">\n                        <h5 class="modal-about-title">ABOUT</h5>\n                        <span class="modal-about-text">${u}</span>\n                    </div>\n\n                    <div class="modal-button">\n                        <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>\n                        <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>\n                    </div>\n                </div>\n                \n            `}(i)),function(){const t=document.querySelector('[data-action="modal-add-watched"]');console.log("btnModalWatched:",t);const e=document.querySelector('[data-action="modal-add-queue"]');console.log("btnModalQueue:",e),e.addEventListener("click",(()=>{y()})),t.addEventListener("click",(()=>{y()}))}();
 //! +++++++++++++++++++++++++++++ Markup infoFilm ++++++++++++++++++++++++++++++++++++++++++++++
-var i}
-//! +++ Запрос полной информации о фильме для МОДАЛКИ +++
-)),
+var i})),
 //! +++++++++++++++++++ Создаем слушателей для МОДАЛКИ ++++++++++++++++++++++++
-u.closeModalBtn.addEventListener("click",w),u.backdrop.addEventListener("click",(function(t){t.currentTarget===t.target&&w()})),
+u.closeModalBtn.addEventListener("click",v),u.backdrop.addEventListener("click",(function(t){t.currentTarget===t.target&&v()})),
 //! +++++++++++++++ Создаем слушателей для кнопок МОДАЛКИ ++++++++++++++++++++
-u.watchedModal.addEventListener("click",(function(){console.log("Вешаю слушателя на кнопку ADD TO WATCHED в МОДАЛКЕ"),//!
-console.log("infoFilm:",h),//!
-console.log("infoFilm.id:",h.id)}
-//! +++ Запрос полной информации о фильме для МОДАЛКИ +++
-)),u.queueModal.addEventListener("click",(function(){console.log("Вешаю слушателя на кнопку ADD TO QUEUE в МОДАЛКЕ"),//!
-console.log("infoFilm:",h),//!
-console.log("infoFilm.id:",h.id)})),
 //! ПОКАЗЫВАЕМ форму со строкой инпута:
 u.searchFormAlert.hidden=!1,//! ПОКАЗЫВАЕМ
 //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
@@ -184,23 +175,25 @@ p.resetPage(),
 //! Кнопка LOAD MORE => показываем и отключаем
 m.show(),m.disable(),
 //! Очищаем контейнер:
-y();
+b();
 //! Делаем fetch-запрос с помощью метода .getTrendingAllDay из класса ThemoviedbApiService
 const t=await p.getTrendingAllDay();
 //! Перезаписываем в глобальную переменную (films) значение всей (results)
 d=t,
 //! Рисование интерфейса 
-k(t),
+N(t),
 //! Кнопка LOAD MORE => включаем
-m.enable()}
+m.enable()}function y(){console.log("Вешаю слушателя на кнопку ADD TO WATCHED в МОДАЛКЕ"),//!
+console.log("infoFilm:",h),//!
+console.log("infoFilm.id:",h.id)}
 //!  Ф-ция, к-рая очищает контейнер при новом вводе данных в input form:
-function y(){u.moviesCards.innerHTML=""}
+function b(){u.moviesCards.innerHTML=""}
 //!  Ф-ция, к-рая очищает контейнер МОДАЛКИ:
-function b(){u.InfoMovie.innerHTML=""}function w(){window.removeEventListener("keydown",v),document.body.classList.remove("show-modal"),
+function w(){u.InfoMovie.innerHTML=""}function v(){window.removeEventListener("keydown",k),document.body.classList.remove("show-modal"),
 //! Очищаем контейнер МОДАЛКИ:
-b()}function v(t){"Escape"===t.code&&w()}
+w()}function k(t){"Escape"===t.code&&v()}
 //! +++++++++++++++++++++++++++++ Markup Movies ++++++++++++++++++++++++++++++++++++++++++++++
-function k(t){
+function N(t){
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 u.moviesCards.insertAdjacentHTML("beforeend",
 //! --------------------------------------------------------------------------------------------
@@ -209,4 +202,4 @@ function(t){return t.map((({id:t,poster_path:e,title:n,name:i,genre_ids:o,first_
 let c=n;n&&(c=n.toUpperCase());let u=i;if(i){i.toUpperCase()}return`\n                <li key=${t}>\n                    <img src="https://image.tmdb.org/t/p/w780${e}" alt="${n||i}" />\n\n                    <div>\n                        <br />\n                        <h5>${c||u}</h5>\n                        <h5>${s} | ${l}</h5>\n                    </div>\n                </li>\n                `})).join("")}(t))}
 //!!!!!! Загрузка популярных фильмов на главную (первую) страницу (без нажатия на кнопки HOME или Filmoteka)
 x(),(()=>{const t={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:e,closeModalTeamBtn:n,modalTeam:i,body:o}=t;function r(t){i.classList.toggle("is-hidden"),o.classList.toggle("no-scroll"),window.removeEventListener("keydown",a)}function a(t){"Escape"===event.key&&r()}e.addEventListener("click",(function(t){window.addEventListener("keydown",a),i.classList.toggle("is-hidden"),o.classList.toggle("no-scroll")})),n.addEventListener("click",r)})();
-//# sourceMappingURL=index.7b06bfce.js.map
+//# sourceMappingURL=index.3cc599e3.js.map
