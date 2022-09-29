@@ -1,32 +1,80 @@
 <header class="section-header">
-    <!-- ! кнопки Filmoteka, HOME, MY LIBRARY  -->
     <div class="nav-all-buttons">
-        <!--! кнопка Filmoteka -->
-        <button type="button" class="button-filmoteka" data-action="button-filmoteka">
-            <span class="button-filmoteka-label">Filmoteka</span>
-        </button>
-
+        <div>
+            <a href="" class="button-filmoteka">
+                <svg class="icon-header" width="24" height="24">
+                    <use href="./images/icons-header.svg#icon-film-1"></use>
+                </svg>
+                <span class="button-filmoteka-label">Filmoteka</span>
+            </a>
+        </div>
+        
         <div class="nav-main-buttons">
-            <!--! кнопка HOME -->
-            <button type="button" class="button-home" data-action="button-home">
-                <span class="button-home-label">HOME</span>
-            </button>
-
-            <!--! кнопка MY LIBRARY -->
-            <button type="button" class="button-mylibrary" data-action="button-mylibrary">
-                <span class="button-mylibrary-label">MY LIBRARY</span>
-            </button>
+            <ul class="nav-list">
+                <li>
+                    <a href="" class="button-home button-home--active">
+                        <span class="button-home-label text-menu">HOME</span>
+                    </a>
+                </li>
+                <li class="library-item">
+                    <a href="/src/mylibrary.html" class="button-mylibrary"> 
+                        <span class="button-mylibrary-label text-menu">MY LIBRARY</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
+    <div class="search" data-action="search-form-alert">
+            <form class="search-form" id="search-form" data-action="search-form">
+                <input type="text" name="searchQuery" autocomplete="off" placeholder="Movie search" />
+                <button type="submit">Search</button>
+            </form>
+            <p class="search-alert" data-action="search-alert">Search result not successful. Enter the correct movie name and</p>
+    </div>
+    <!-- <div class="nav-library-btn" data-action="library-btn">
+    
+        <button type="button" class="nav-library-watched" data-action="library-watched">
+            WATCHED
+        </button>
+    
+        <button type="button" class="nav-library-queue" data-action="library-queue">
+            QUEUE
+        </button>
+    
+    </div> -->
+</header>
+
+
+
+<!-- <header class="section-header"> -->
+    <!-- ! кнопки Filmoteka, HOME, MY LIBRARY  -->
+    <!-- <div class="nav-all-buttons"> -->
+        <!--! кнопка Filmoteka -->
+        <!-- <button type="button" class="button-filmoteka" data-action="button-filmoteka">
+            <span class="button-filmoteka-label">Filmoteka</span>
+        </button> -->
+
+        <!-- <div class="nav-main-buttons"> -->
+            <!--! кнопка HOME -->
+            <!-- <button type="button" class="button-home" data-action="button-home">
+                <span class="button-home-label">HOME</span>
+            </button> -->
+
+            <!--! кнопка MY LIBRARY -->
+            <!-- <button type="button" class="button-mylibrary" data-action="button-mylibrary">
+                <span class="button-mylibrary-label">MY LIBRARY</span>
+            </button> -->
+        <!-- </div> -->
+    <!-- </div> -->
 
     <!--! input form  + строка "Search result not successful"-->
-    <div class="search" data-action="search-form-alert">
+    <!-- <div class="search" data-action="search-form-alert">
         <form class="search-form" id="search-form" data-action="search-form">
             <input type="text" name="searchQuery" autocomplete="off" placeholder="Movie search" />
             <button type="submit">Search</button>
         </form>
         <p class="search-alert" data-action="search-alert">Search result not successful. Enter the correct movie name and</p>
-    </div>
+    </div> -->
 
     <!-- ! кнопки  WATCHED и QUEUE  -->
     <!-- <div class="nav-library-buttons">
@@ -34,7 +82,7 @@
         <button type="button" class="nav-library-queue">QUEUE</button>
     </div> -->
 
-    <div class="nav-library-btn" data-action="library-btn">
+    <!-- <div class="nav-library-btn" data-action="library-btn">
     
         <button type="button" class="nav-library-watched" data-action="library-watched">
             WATCHED
@@ -45,4 +93,4 @@
         </button>
     
     </div>
-</header>
+</header> -->

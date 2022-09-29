@@ -1,10 +1,14 @@
 
 .section-header {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    color: #ffe8e8;
+   padding: 40px 20px 0px;
+    font-family: var(--primary-font);
     text-align: center;
-    background-color: rgb(121, 0, 0);
+    color: var(--secondary-txt);
+    background-color: var(--header-bg);
+
+    @media screen and (min-width:768px) {
+        padding: 40px 32px 0px;
+    }
 
     // Встановлення фонового зображення
 
@@ -41,40 +45,69 @@
         background-image:url(../images/header/header_bg/header-bg-desk@2x.jpg);
         }
     } 
-
 }
 
-
-
-
-/* ! кнопки Filmoteka,  HOME, MY LIBRARY */
 .nav-all-buttons {
     display: flex;
-    justify-content: space-around;
-    /* margin-left: auto; */
-    /* margin-right: auto; */
+    justify-content: space-between;
+    align-items: center;
 }
 
-.nav-main-buttons {
+.button-filmoteka {
+    color: var(--secondary-txt);
+}
+.button-filmoteka-label {
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.17;
+}
+
+.nav-list {
     display: flex;
-    justify-content: space-around;
-    /* margin-left: auto; */
-    /* margin-right: auto; */
+}
+.library-item {
+    margin-left: 40px;
 }
 
-.button-home {
-    margin-right: 40px;
+.text-menu {
+    font-family: var(--primary-font);
+    color: var(--secondary-txt);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+    text-transform: uppercase;
+}
+
+// .nav-main-buttons {
+//     display: flex;
+//     justify-content: space-around;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+// }
+
+// .button-home {
+//     margin-right: 40px;
     /* display: flex; */
     /* margin-left: auto; */
     /* margin-right: auto; */
-}
+// }
 
 /* ! search-form */
 .search-form {
     display: flex;
     justify-content: center;
-    padding: 8px;
-    margin-bottom: 24px;
+    // padding: 8px;
+    margin-top: 54px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.14;
+
+    @media screen and (min-width:768px) {
+        margin-top: 40px;
+        margin-bottom: 24px;
+    }
 }
 
 .search-form-alert {
