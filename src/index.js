@@ -671,3 +671,38 @@ function createInfoMovieMarkup(infoFilm) {
 //         Notiflix.Notify.success(`Hooray! We found ${totalResults} images.`, { timeout: 3000, },);
 // }
 //todo __________________________________________________________________________
+
+
+
+// --KHARLAMOVA TETIANA----------------МОДАЛЬНЕ ВІКНО З КОМАНДОЮ----------------------------------
+(() => {
+    const refsModalTeam = {
+        openModalTeamLink: document.querySelector('.team-link'),
+        closeModalTeamBtn: document.querySelector('.team-close-btn'),
+        modalTeam: document.querySelector('.backdrop-team'),
+        body: document.querySelector('body'),
+    };
+    const { openModalTeamLink, closeModalTeamBtn, modalTeam, body } = refsModalTeam;
+    openModalTeamLink.addEventListener('click', onOpenModalTeam);
+    closeModalTeamBtn.addEventListener('click', onCloseModalTeam);
+
+    function onCloseModalTeam(e) {
+        modalTeam.classList.toggle('is-hidden');
+        body.classList.toggle('no-scroll');
+        window.removeEventListener('keydown', onEscKeyPress);
+    }
+    
+    function onOpenModalTeam(e) {
+        window.addEventListener('keydown', onEscKeyPress);
+        modalTeam.classList.toggle('is-hidden');
+        body.classList.toggle('no-scroll');
+    }
+    function onEscKeyPress(e) {
+        if(event.key === 'Escape') {
+            onCloseModalTeam();
+        } 
+} 
+
+})();
+
+// -----------------------END OF МОДАЛЬНЕ ВІКНО З КОМАНДОЮ----------------------------
