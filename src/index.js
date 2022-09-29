@@ -63,8 +63,8 @@ refs.movieDetails.addEventListener('click', onMovieDetails);
 refs.closeModalBtn.addEventListener('click', onCloseModal);
 refs.backdrop.addEventListener('click', onBackdropClick);
 //! +++++++++++++++ Создаем слушателей для кнопок МОДАЛКИ ++++++++++++++++++++
-refs.watchedModal.addEventListener('click', onWatchedModal);
-refs.queueModal.addEventListener('click', onQueueModal);
+// refs.watchedModal.addEventListener('click', onWatchedModal);
+// refs.queueModal.addEventListener('click', onQueueModal);
 
 //? ++++++++++++++++++ ПОКАЗЫВАЕМ/ПРЯЧЕМ элементы разметки ++++++++++++++++++++
 //! ПОКАЗЫВАЕМ форму со строкой инпута:
@@ -297,7 +297,7 @@ async function onMovieDetails(event) {
 
 ///* -------------- Ф-ция_4, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO WATCHED: ----------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
-function onWatchedModal() {
+export function onWatchedModal() {
     console.log("Вешаю слушателя на кнопку ADD TO WATCHED в МОДАЛКЕ"); //!
 
     console.log("infoFilm:", infoFilm); //!
@@ -309,7 +309,7 @@ function onWatchedModal() {
 
 //* -------------------------- Ф-ция_5, добавление просмотренных фильмов в localStorage по кноке QUEUE: ----------------------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
-function onQueueModal() {
+export function onQueueModal() {
     console.log("Вешаю слушателя на кнопку ADD TO QUEUE в МОДАЛКЕ"); //!
 
     console.log("infoFilm:", infoFilm); //!

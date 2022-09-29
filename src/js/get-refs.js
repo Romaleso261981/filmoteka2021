@@ -71,6 +71,12 @@ export default function getRefs() {
     //! Получаем ссылку на кнопоку QUEUE в header:
     // queueHeader: document.querySelector('.nav-library-queue'), //todo OLD
     queueHeader: document.querySelector('[data-action="library-queue"]'),
+
+    btnlibrary: document.querySelector('[data-action="button-home"]'),
   };
 };
+
+// getRefs.btnlibrary.addEventListener('click', () => {
+//   console.log('click');
+// });
 
