@@ -33,7 +33,8 @@ export default function getRefs() {
     searchFormAlert: document.querySelector('.search'),
 
     //! Получаем ссылку на блок кнопок WATCHED и QUEUE в header:
-    watchedQueueHeader: document.querySelector('.nav-library-buttons'),
+    // watchedQueueHeader: document.querySelector('.nav-library-buttons'),
+    watchedQueueHeader: document.querySelector('[data-action="library-btn"]'),
 
   };
 };
