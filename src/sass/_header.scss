@@ -1,13 +1,13 @@
 
 .section-header {
-   padding: 40px 20px 0px;
+   padding: 40px 20px 44px;
     font-family: var(--primary-font);
     text-align: center;
     color: var(--secondary-txt);
     background-color: var(--header-bg);
 
     @media screen and (min-width:768px) {
-        padding: 40px 32px 0px;
+        padding: 40px 32px 44px;
     }
 
     // Встановлення фонового зображення
@@ -54,13 +54,19 @@
 }
 
 .button-filmoteka {
-    color: var(--secondary-txt);
+    color: var(--secondary-txt);   
 }
+
 .button-filmoteka-label {
     margin-left: 10px;
     font-weight: 500;
     font-size: 30px;
     line-height: 1.17;
+    visibility: hidden;
+    @media screen and (min-width:768px) {
+        visibility: visible;
+    }
+
 }
 
 .nav-list {
@@ -78,7 +84,9 @@
     line-height: 1.17;
     text-transform: uppercase;
 }
-
+.button-home--active {
+   border-bottom: solid 3px #FF001B;
+}
 // .nav-main-buttons {
 //     display: flex;
 //     justify-content: space-around;
@@ -97,12 +105,12 @@
 .search-form {
     display: flex;
     justify-content: center;
-    // padding: 8px;
     margin-top: 54px;
     margin-bottom: 20px;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.14;
+    
 
     @media screen and (min-width:768px) {
         margin-top: 40px;
@@ -110,8 +118,29 @@
     }
 }
 
+.search-input {
+    width: 280px;
+    border: none;
+    border-bottom: solid 1px var(--secondary-txt);
+    background: none;
+    color: var(--secondary-txt);
+    outline: none;
+    @media screen and (min-width:768px) {
+        width: 336px;
+    }
+    @media screen and (min-width:1280px) {
+        width: 394;
+    }
+}
+
+.search-input::placeholder {
+    color: var(--secondary-txt);
+}
 .search-form-alert {
     color: #ffdddd;
+}
+.search-alert {
+    color: #FF001B;
 }
 
 /* ! кнопки WATCHED и QUEUE  */
