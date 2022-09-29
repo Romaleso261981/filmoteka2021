@@ -19,7 +19,6 @@ import  addIventListenerModalBtn  from './js/addIventListenerModalBtn';
 
 
 
-
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 
 //! Создаем объект всех ссылок refs.*
@@ -36,7 +35,7 @@ const loadMoreBtn = new LoadMoreBtn({
 
 
 
-addIventListenerModalBtn()
+
 
 //* +++++++++++++++++++++++++++++++ Создаем ВСЕХ слушателей +++++++++++++++++++++++++++++++++++++++++
 
@@ -712,3 +711,5 @@ function createInfoMovieMarkup(infoFilm) {
 })();
 
 // -----------------------END OF МОДАЛЬНЕ ВІКНО З КОМАНДОЮ----------------------------
+
+
