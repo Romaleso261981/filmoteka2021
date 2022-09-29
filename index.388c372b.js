@@ -21,7 +21,7 @@ resultNotSuccessful:document.querySelector(".search-alert"),
 //! Получаем ссылку на форму со строкой инпута:
 searchFormAlert:document.querySelector(".search"),
 //! Получаем ссылку на блок кнопок WATCHED и QUEUE в header:
-watchedQueueHeader:document.querySelector(".nav-library-buttons")},p=new class{
+watchedQueueHeader:document.querySelector('[data-action="library-btn"]')},p=new class{
 //! 1 - Загрузка популярных фильмов на главную (первую) страницу 
 async getTrendingAllDay(){const t=`https://api.themoviedb.org/3/trending/all/week?api_key=41b230c5977baa736e324532e16fdadb&page=${this.page}`;console.log("url_1: ",t);//!
 const n=await e(c).get(t),{results:i}=n.data;//!
@@ -187,4 +187,4 @@ function(t){return t.map((({id:t,poster_path:e,title:n,name:i,genre_ids:o,first_
 let c=n;n&&(c=n.toUpperCase());let u=i;if(i){i.toUpperCase()}return`\n                <li key=${t}>\n                    <img src="https://image.tmdb.org/t/p/w780${e}" alt="${n||i}" />\n\n                    <div>\n                        <br />\n                        <h5>${c||u}</h5>\n                        <h5>${s} | ${l}</h5>\n                    </div>\n                </li>\n                `})).join("")}(t))}
 //!!!!!! Загрузка популярных фильмов на главную (первую) страницу (без нажатия на кнопки HOME или Filmoteka)
 x();
-//# sourceMappingURL=index.8ef79a24.js.map
+//# sourceMappingURL=index.388c372b.js.map
