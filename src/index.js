@@ -56,10 +56,13 @@ refs.myLibraryBtn.addEventListener('click', onMyLibraryWatched);
 //! Создаем слушателя событий на <section class="section-hero"> ==> на poster_path:
 refs.movieDetails.addEventListener('click', onMovieDetails);
 
-//? +++++++++++++++++++ Создаем слушателей для МОДАЛКИ ++++++++++++++++++++++++
+//! +++++++++++++++++++ Создаем слушателей для МОДАЛКИ ++++++++++++++++++++++++
 // refs.openModalBtn.addEventListener('click', onOpenModal); //? ----- для тестирования
 refs.closeModalBtn.addEventListener('click', onCloseModal);
 refs.backdrop.addEventListener('click', onBackdropClick);
+//! +++++++++++++++ Создаем слушателей для кнопок МОДАЛКИ ++++++++++++++++++++
+refs.watchedModal.addEventListener('click', onWatchedModal);
+refs.queueModal.addEventListener('click', onQueueModal);
 
 //? ++++++++++++++++++ ПОКАЗЫВАЕМ/ПРЯЧЕМ элементы разметки ++++++++++++++++++++
 //! ПОКАЗЫВАЕМ форму со строкой инпута:
@@ -290,10 +293,13 @@ async function onMovieDetails(event) {
 
 
 
-//* -------------------------- Ф-ция_4, добавление просмотренных фильмов в localStorage по кноке WATCHED: ----------------------
+///* -------------- Ф-ция_4, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO WATCHED: ----------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 function onWatchedModal() {
-    console.log("Вешаю слушателя на кнопку WATCHED"); //!
+    console.log("Вешаю слушателя на кнопку ADD TO WATCHED в МОДАЛКЕ"); //!
+
+    console.log("infoFilm:", infoFilm); //!
+    console.log("infoFilm.id:", infoFilm.id); //!
 };
 
 
@@ -302,7 +308,10 @@ function onWatchedModal() {
 //* -------------------------- Ф-ция_5, добавление просмотренных фильмов в localStorage по кноке QUEUE: ----------------------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 function onQueueModal() {
-    console.log("Вешаю слушателя на кнопку QUEUE"); //!
+    console.log("Вешаю слушателя на кнопку ADD TO QUEUE в МОДАЛКЕ"); //!
+
+    console.log("infoFilm:", infoFilm); //!
+    console.log("infoFilm.id:", infoFilm.id); //!
 };
 
 
@@ -635,13 +644,14 @@ function createInfoMovieMarkup(infoFilm) {
                     </div>
 
                     <div class="modal-button">
-                        <button type="button" class="modal-watched">ADD TO WATCHED</button>
-                        <button type="button" class="modal-queue">ADD TO QUEUE</button>
+                        <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+                        <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
                     </div>
                 </div>
                 
             `;
 };
+
 
 
 
