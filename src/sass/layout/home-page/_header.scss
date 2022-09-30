@@ -14,7 +14,8 @@
 
     background-image: 
     
-    url(../images/header/header_bg/header-bg-mob.jpg);
+    url(../../../images/header/header_bg/header-bg-mob.jpg);
+    // url(../images/header/header_bg/header-bg-mob.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -24,25 +25,39 @@
         (min-resolution: 2dppx) {
         background-image: 
         
-        url(../images/header/header_bg/header-bg-mob@2x.jpg);
+        url(../../../images/header/header_bg/header-bg-mob@2x.jpg);    
+        // url(../images/header/header_bg/header-bg-mob@2x.jpg);
      }
 
-
     @media screen and (min-width: 768px) {
-        background-image: url(../images/header/header_bg/header-bg-tab.jpg);
+        background-image: 
+        
+        url(../../../images/header/header_bg/header-bg-tab.jpg);  
+        // url(../images/header/header_bg/header-bg-tab.jpg);   
+       
         @media (min-device-pixel-ratio: 2),
         (min-resolution: 192dpi),
         (min-resolution: 2dppx) {
-        background-image:url(../images/header/header_bg/header-bg-tab@2x.jpg);
+        background-image:
+        
+        url(../../../images/header/header_bg/header-bg-tab@2x.jpg);     
+        // url(../images/header/header_bg/header-bg-tab@2x.jpg);
         }
-     }   
+    }   
 
     @media screen and (min-width: 1280px) {
-        background-image: url(../images/header/header_bg/header-bg-desk.jpg);
+        background-image: 
+        
+        url(../../../images/header/header_bg/header-bg-desk.jpg);  
+        // url(../images/header/header_bg/header-bg-desk.jpg);
+        
         @media (min-device-pixel-ratio: 2),
         (min-resolution: 192dpi),
         (min-resolution: 2dppx) {
-        background-image:url(../images/header/header_bg/header-bg-desk@2x.jpg);
+        background-image: 
+        
+        url(../../../images/header/header_bg/header-bg-desk@2x.jpg);  
+        // url(../images/header/header_bg/header-bg-desk@2x.jpg);
         }
     } 
 }
@@ -85,25 +100,17 @@
     text-transform: uppercase;
 }
 .button-home--active {
-   border-bottom: solid 3px var(--body-second-txt);
+   border-bottom: solid 3px var(--header-active);
 }
 .button-home-label:hover,
 .button-home-label:focus,
 .button-mylibrary-label:hover,
 .button-mylibrary-label:focus  {
-    color: var(--body-second-txt);
+    color: var(--header-active);
 }
 
-
-// .button-home {
-// //     margin-right: 40px;
-//     /* display: flex; */
-//     /* margin-left: auto; */
-//     /* margin-right: auto; */
-// }
-
-/* ! search-form */
 .search-form {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 280px;
@@ -125,6 +132,7 @@
 
 .search-input {
     width: 100%;
+    height: 20px;
     border: none;
     border-bottom: solid 1px var(--secondary-txt);
     background: transparent;
@@ -135,33 +143,69 @@
 .search-input::placeholder {
     color: var(--secondary-txt);
 }
-.search-form-alert {
-    color: #ffdddd;
-}
+
 .search-alert {
-    color: #FF001B;
+    color: var(--header-active);
 }
+
+.search-button {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;         
+    outline: none;        
+    background: transparent;
+    color: var(--secondary-txt);
+    cursor: pointer;
+}
+   
+.search-button:before {
+  content: "\f002";
+  font-family: FontAwesome;
+  font-size: 12px;
+  color: var(--secondary-txt);
+  }
+
+.search-button:hover:before,
+.search-button:focus:before {
+        color: var(--header-active);
+    }
+
+// .button-home {
+// //     margin-right: 40px;
+//     /* display: flex; */
+//     /* margin-left: auto; */
+//     /* margin-right: auto; */
+// }
+
+/* ! search-form */
+
+// .search-form-alert {
+//     color: #ffdddd;
+// }
 
 /* ! кнопки WATCHED и QUEUE  */
-.nav-library-buttons {
-    display: flex;
-    justify-content: center;
+// .nav-library-buttons {
+//     display: flex;
+//     justify-content: center;
     /* margin-left: auto; */
     /* margin-right: auto; */
-}
+// }
 
-.nav-library-watched {
-    margin-right: 200px;
-}
+// .nav-library-watched {
+//     margin-right: 200px;
+// }
 
 /* .nav-library-watched.nav-library-queue {
   padding: 15px 40px;
 } */
 
-.nav-library-watched {
-    padding: 15px 40px;
-}
+// .nav-library-watched {
+//     padding: 15px 40px;
+// }
 
-.nav-library-queue {
-    padding: 15px 40px;
-}
+// .nav-library-queue {
+//     padding: 15px 40px;
+// }
