@@ -20,8 +20,6 @@ import  addIventListenerModalBtn  from './js/addIventListenerModalBtn';
 import spinner from './js/preLoader'
 
 
-spinner.startSpinner();
-spinner.removeSpinner();
 
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
@@ -518,7 +516,9 @@ function onEscKeyPress(event) {
 //*  Ф-ция-then, к-рая отрисовывает интерфейс ВСЕХ карточек на странице:
 function appendHitsMarkup(results) {
     //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
+    spinner.startSpinner();
     refs.moviesCards.insertAdjacentHTML('beforeend', createMoviesCardsMarkup(results));
+    spinner.removeSpinner();
 }
 
 //! --------------------------------------------------------------------------------------------
