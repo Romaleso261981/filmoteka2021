@@ -271,7 +271,9 @@ async function onMovieDetails(event) {
   document.body.classList.add('show-modal');
 
   //! Рисование интерфейса
+  spinner.startSpinner();
   appendInfoMovieMarkup(infoFilm);
+  spinner.removeSpinner();
 }
 
 ///* -------------- Ф-ция_4, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO WATCHED: ----------
