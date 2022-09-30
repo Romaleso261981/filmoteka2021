@@ -1,12 +1,14 @@
-@import './common';
-@import './footer';
-@import './header';
-@import './main-page';
-@import './modal-team';
-@import './modal-header';
+@import './utils/variables';
+
+@import './base/common';
+
+@import './components/home-page/container';
+
+@import './layout/home-page/footer';
+@import './layout/home-page/header';
+@import './layout/home-page/main-page';
+@import './layout/modal-header';
+@import './layout/modal-team';
+
 @import './pagination';
 @import './scroll-up';
-@import './utils/container';
-@import './utils/variables';
-@import './main-page-libreru';
-
