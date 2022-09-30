@@ -36,7 +36,7 @@ const END_POINTS_3 = "movie" //!  /movies/get-movie-details ==> запрос п�
 
 
 
-
+import{renderPagination} from './pagination'
 
 export default class ThemoviedbApiService {
     constructor() {
@@ -52,7 +52,8 @@ export default class ThemoviedbApiService {
         const url_1 = `${BASE_URL}/${END_POINTS_1}?api_key=${API_KEY}&page=${this.page}`;
         console.log("url_1: ", url_1); //!
         const response = await axios.get(url_1) //! 1 
-        const { results } = response.data;
+        const { results, total_results} = response.data;
+        renderPagination (total_results)
         this.incrementPage();
         console.log("getTrendingAllDay ==> this.page: ", this.page); //!
         return results;
@@ -63,7 +64,8 @@ export default class ThemoviedbApiService {
         const url_2 = `${BASE_URL}/${END_POINTS_2}?api_key=${API_KEY}&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
         console.log("url_2: ", url_2); //!
         const response = await axios.get(url_2) //!
-        const { results } = response.data
+        const { results, total_results} = response.data;
+        renderPagination (total_results)
         this.incrementPage();
         console.log("getSearchMovies ==> this.page: ", this.page); //!
         return results;
@@ -94,5 +96,8 @@ export default class ThemoviedbApiService {
 
     set query(newQuery) {
         this.searchQuery = newQuery;
+    }
+    changePage(newPage){
+        this.page=newPage
     }
 }

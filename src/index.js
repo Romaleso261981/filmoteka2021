@@ -16,8 +16,12 @@ import { genres } from './js/genres.js'; //? api-themoviedb
 //! імпорт функції для додавання кнопок модалки карточки фільмів
 import  addIventListenerModalBtn  from './js/addIventListenerModalBtn';
 
+//!  Ф-ция, яка загружає
+import spinner from './js/preLoader'
 
 
+spinner.startSpinner();
+spinner.removeSpinner();
 
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
@@ -26,7 +30,7 @@ import  addIventListenerModalBtn  from './js/addIventListenerModalBtn';
 const refs = getRefs();
 
 //! Создаем экземпляр класса ThemoviedbApiService
-const themoviedbApiService = new ThemoviedbApiService();
+export const themoviedbApiService = new ThemoviedbApiService();
 
 //! Создаем экземпляр класса LoadMoreBtn = Кнопка LOAD MORE
 const loadMoreBtn = new LoadMoreBtn({
@@ -36,7 +40,6 @@ const loadMoreBtn = new LoadMoreBtn({
 
 
 
-addIventListenerModalBtn()
 
 //* +++++++++++++++++++++++++++++++ Создаем ВСЕХ слушателей +++++++++++++++++++++++++++++++++++++++++
 
@@ -64,8 +67,8 @@ refs.movieDetails.addEventListener('click', onMovieDetails);
 refs.closeModalBtn.addEventListener('click', onCloseModal);
 refs.backdrop.addEventListener('click', onBackdropClick);
 //! +++++++++++++++ Создаем слушателей для кнопок МОДАЛКИ ++++++++++++++++++++
-refs.watchedModal.addEventListener('click', onWatchedModal);
-refs.queueModal.addEventListener('click', onQueueModal);
+// refs.watchedModal.addEventListener('click', onWatchedModal);
+// refs.queueModal.addEventListener('click', onQueueModal);
 
 //? ++++++++++++++++++ ПОКАЗЫВАЕМ/ПРЯЧЕМ элементы разметки ++++++++++++++++++++
 //! ПОКАЗЫВАЕМ форму со строкой инпута:
@@ -76,7 +79,7 @@ refs.searchFormAlert.hidden = false; //! ПОКАЗЫВАЕМ
 refs.resultNotSuccessful.hidden = true;
 
 //! ПРЯЧЕМ блок кнопок WATCHED и QUEUE в header:
-refs.watchedQueueHeader.hidden = true;
+// refs.watchedQueueHeader.hidden = true;
 
 
 
@@ -131,7 +134,7 @@ async function onHome() {
     refs.searchFormAlert.hidden = false; //! ПОКАЗЫВАЕМ
 
     //! ПРЯЧЕМ блок кнопок WATCHED и QUEUE в header:
-    refs.watchedQueueHeader.hidden = true;
+    // refs.watchedQueueHeader.hidden = true;
 
     //! Делаем сброс значения page = 1 после submit form 
     //! с помощью метода resetPage из класса ThemoviedbApiService
@@ -298,7 +301,7 @@ async function onMovieDetails(event) {
 
 ///* -------------- Ф-ция_4, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO WATCHED: ----------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
-function onWatchedModal() {
+export function onWatchedModal() {
     console.log("Вешаю слушателя на кнопку ADD TO WATCHED в МОДАЛКЕ"); //!
 
     console.log("infoFilm:", infoFilm); //!
@@ -310,7 +313,7 @@ function onWatchedModal() {
 
 //* -------------------------- Ф-ция_5, добавление просмотренных фильмов в localStorage по кноке QUEUE: ----------------------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
-function onQueueModal() {
+export function onQueueModal() {
     console.log("Вешаю слушателя на кнопку ADD TO QUEUE в МОДАЛКЕ"); //!
 
     console.log("infoFilm:", infoFilm); //!
@@ -652,7 +655,7 @@ function createInfoMovieMarkup(infoFilm) {
                         <span class="modal-about-text">${overview}</span>
                     </div>
 
-                    <div class="modal-button">
+                    <div class="modal-button" data-action="library-btn">
                         <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
                         <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
                     </div>
@@ -694,6 +697,7 @@ function createInfoMovieMarkup(infoFilm) {
     const { openModalTeamLink, closeModalTeamBtn, modalTeam, body } = refsModalTeam;
     openModalTeamLink.addEventListener('click', onOpenModalTeam);
     closeModalTeamBtn.addEventListener('click', onCloseModalTeam);
+    modalTeam.addEventListener('click', onBackdropTeamClick);
 
     function onCloseModalTeam(e) {
         modalTeam.classList.toggle('is-hidden');
@@ -707,11 +711,19 @@ function createInfoMovieMarkup(infoFilm) {
         body.classList.toggle('no-scroll');
     }
     function onEscKeyPress(e) {
-        if(event.key === 'Escape') {
+        if(e.key === 'Escape') {
             onCloseModalTeam();
         } 
 } 
 
+function onBackdropTeamClick(e) {
+    if (e.currentTarget === e.target) {
+        onCloseModalTeam();
+    }
+};
+
 })();
 
 // -----------------------END OF МОДАЛЬНЕ ВІКНО З КОМАНДОЮ----------------------------
+
+
