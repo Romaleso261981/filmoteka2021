@@ -694,6 +694,7 @@ function createInfoMovieMarkup(infoFilm) {
     const { openModalTeamLink, closeModalTeamBtn, modalTeam, body } = refsModalTeam;
     openModalTeamLink.addEventListener('click', onOpenModalTeam);
     closeModalTeamBtn.addEventListener('click', onCloseModalTeam);
+    modalTeam.addEventListener('click', onBackdropTeamClick);
 
     function onCloseModalTeam(e) {
         modalTeam.classList.toggle('is-hidden');
@@ -707,10 +708,16 @@ function createInfoMovieMarkup(infoFilm) {
         body.classList.toggle('no-scroll');
     }
     function onEscKeyPress(e) {
-        if(event.key === 'Escape') {
+        if(e.key === 'Escape') {
             onCloseModalTeam();
         } 
 } 
+
+function onBackdropTeamClick(e) {
+    if (e.currentTarget === e.target) {
+        onCloseModalTeam();
+    }
+};
 
 })();
 
