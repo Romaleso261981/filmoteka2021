@@ -8,6 +8,7 @@ p {
     margin-top: 0;
     margin-bottom: 0;
 }
+
 ul,
 ol {
     list-style: none;
@@ -16,13 +17,10 @@ ol {
     margin-bottom: 0;
 }
 
-img {
-    display: block;
-}
-
 a {
     text-decoration: none;
 }
+
 // ______________________________________________
 body.show-modal .backdrop {
     opacity: 1;
@@ -38,13 +36,13 @@ body.show-modal .modal {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    
+
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 999;
 
@@ -52,12 +50,17 @@ body.show-modal .modal {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+    // transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+    transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1), visibility 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.no-scroll {
+    overflow: hidden;
 }
 
 .modal-film {
-    width: 100vw;
-    min-height: 558px;
+    width: 100%;
+    // min-height: 558px;
     // position: fixed;
     padding: 48px 20px 40px 20px;
     margin: auto;
@@ -65,55 +68,93 @@ body.show-modal .modal {
     background-color: #fff;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
         0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
+    border-radius: 5px;
 
-    transform: scale(1.1);
-    transition: transform 200ms ease-in-out;
+    // transform: scale(1.1);
+    // transition: transform 200ms ease-in-out;
+    transition: transform 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: rotate(0deg);
 }
 
-@media screen and (min-width: 320px) and (max-width: 479px) {
+.backdrop.show-modal .modal-film {
+    transform: rotate(180deg);
+}
+
+@media screen and (min-width: 320px) {
     .modal-film {
         width: 280px;
     }
 }
-@media screen and (min-width: 480px) {
-    .modal-film {
-        width: 416px;
-    }
-}
+
+// @media screen and (min-width: 321px) and (max-width: 479px) {
+//     .modal-film {
+//         width: 100%;
+//     }
+// }
+
+// @media screen and (min-width: 480px) {
+//     .modal-film {
+//         width: 416px;
+//     }
+// }
+
 @media screen and (min-width: 768px) {
     .modal-film {
         width: 704px;
         height: 552px;
+
+        padding: 40px 72px 40px 36px;
     }
 }
-@media screen and (min-width: 1024px) {
+
+@media screen and (min-width: 1280px) {
     .modal-film {
         width: 806px;
         height: 558px;
+
+        padding: 40px 12px 40px 12px;
     }
 }
 
 /* ! кнопка X (close-modal) */
 .modal-close {
     position: absolute;
+    
     top: 8px;
     right: 8px;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+
     cursor: pointer;
 }
 
+.modal-close:hover, .modal-close:focus {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    background-color: #D3D3D3;    
+}
+
 .modal__btn-x {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     stroke: #000;
 }
 
-
+img {
+    margin: 0 auto;
+    border-radius: 5px;
+}
 
 /* ! весь контейнер модалки */
 @media screen and (min-width: 768px) {
-    .modal-markup {
+    .modal-markup1 {
         display: flex;
+        // align-items: flex-start;
+        // justify-content: flex-start;
     }
 
     .modal-сontent {
@@ -121,136 +162,171 @@ body.show-modal .modal {
     }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
     .modal-сontent {
         margin-left: 16px;
     }
 }
 
+// .modal-img {
+//     overflow: hidden
+// }
+
+
 .modal-title-film {
-    margin-top: 20px;
     margin-bottom: 20px;
-    // font-family: 'Roboto';
-    // font-style: normal;
+        
     font-weight: 500;
     font-size: 20px;
-    line-height: 23px;
+    line-height: 1.15;
 }
 
 @media screen and (max-width: 767px) {
-    .modal-title {
-        
+    .modal-title-film {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .modal-title-film {
+        font-size: 30px;
+        line-height: 1.17;
     }
 }
 
 .modal-info {
     margin-bottom: 20px;
+    border-spacing: 0;
     
 }
 
 .modal-key {
     font-weight: 500;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 1.33;
     color: #8C8C8C;
-    padding: 0 40px 8px 0;
+    padding: 4px 40px 4px 0;
 }
 
-.modal-parametr {   
+// .modal-key:not(:last-child) {
+//     padding-bottom: 8px;
+// }
+
+.modal-parametr {
     font-weight: 500;
     font-size: 12px;
-    line-height: 14px;  
-    padding: 0 40px 8px 0;
+    line-height: 1.17;
+    padding: 4px 40px 4px 0;
 }
+
+// .modal-parametr:not(:last-child) {
+//     padding-bottom: 8px;
+// }
 
 .modal-parametr-vote {
-    color: pink;
-    
+    color: #fff;
+    padding: 1px 9px;
+    width: 36px;
+    height: 16px;
+    background-color: #FF6B01;
+    border-radius: 5px;
 }
-// width: 36px;
-// height: 16px;
-// border-radius: 5px;
-// background-color: #FF6B01;
-
 
 .modal-about-film {
     margin-bottom: 20px;
 }
+
 .modal-about-title {
     margin-bottom: 8px;
 
     font-weight: 500;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 1.33;
 }
 
 .modal-about-text {
-    
     font-weight: 500;
     font-size: 12px;
-    line-height: 20px;
+    line-height: 1.67;
 }
 
 /* ! кнопки ADD TO WATCHED и ADD TO QUEUE (modal-library) */
 .modal-button {
+    // position: relative;
+    // top: 0px;
+    // left: 0px;
     display: flex;
-    // justify-content: space-between;
     align-items: center;
+    justify-content: center;
 }
 
-.modal-watched {
-    display: block;
-    margin-right: 20px;
-    // padding: 6px 27px;
+@media screen and (min-width: 768px) {
+    .modal-button {
+        justify-content: flex-start;
+    }
+}
+// @media screen and (min-width: 768px) {
+//     .modal-button {
+//         top: -25px;
+//         left: 368px;
+//     }
+// }
 
+// @media screen and (min-width: 1024px) {
+//     .modal-button {
+//         top: -100px;
+//         left: 325px;
+//     }
+// }
+
+
+.modal-watched,
+.modal-queue {
+    display: block;
     width: 110px;
     height: 44px;
 
-    background-color: #FF6B01;
     border-radius: 5px;
-    border: none;
 
-    color: #FFFFFF;
     align-items: center;
     text-align: center;
     text-transform: uppercase;
+
     font-weight: 500;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 1.33;
 
     cursor: pointer;
 }
 
 .modal-queue {
-    display: block;
-    // padding: 13px;
-    width: 110px;
-    height: 44px;
-
-    background-color: transparent;
-    border-radius: 5px;
-    border: 1px solid #000;
-
     color: #000;
-    align-items: center;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
+    background-color: transparent;
+    border: 1px solid #000;
 }
 
-// .modal-library {
-//     // display: flex;
-//     // justify-content: flex-end;
-//     /* margin-left: auto; */
-//     /* margin-right: auto; */
-// }
+.modal-watched {
+    margin-right: 20px;
 
-/* ! кнопка ADD TO WATCHED  */
-// .modal-watched {
-//     margin-right: 20px;
-//     /* display: flex; */
-//     /* margin-left: auto; */
-//     /* margin-right: auto; */
-// }
+    color: #FFFFFF;
+    background-color: #FF6B01;
+    border: none;
+}
+
+@media screen and (min-width: 768px) {
+
+    .modal-queue,
+    .modal-watched {
+        width: 125px;
+        height: 44px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+
+    .modal-queue,
+    .modal-watched {
+        width: 136px;
+        height: 44px;
+    }
+}
