@@ -24,6 +24,7 @@ import spinner from './js/preLoader';
 //! Создаем объект всех ссылок refs.*
 const refs = getRefs();
 
+
 //! Создаем экземпляр класса ThemoviedbApiService
 export const themoviedbApiService = new ThemoviedbApiService();
 
