@@ -12,19 +12,33 @@ import LoadMoreBtn from './js/load-more-btn.js';
 //! Импорт массива объектов всех жанров из файла genres.js (ВРЕМЕННО. Надо сделать два запроса)
 import { genres } from './js/genres.js'; //? api-themoviedb
 
+//! імпорт функції для додавання кнопок модалки карточки фільмів
+import  addIventListenerModalBtn  from './js/addIventListenerModalBtn';
+
+//!  Ф-ция, яка загружає
+import spinner from './js/preLoader'
+
+
+spinner.startSpinner();
+spinner.removeSpinner();
+
+
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 
 //! Создаем объект всех ссылок refs.*
 const refs = getRefs();
 
 //! Создаем экземпляр класса ThemoviedbApiService
-const themoviedbApiService = new ThemoviedbApiService();
+export const themoviedbApiService = new ThemoviedbApiService();
 
 //! Создаем экземпляр класса LoadMoreBtn = Кнопка LOAD MORE
 const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more1"]',
   hidden: true,
 });
+
+
+
 
 //* +++++++++++++++++++++++++++++++ Создаем ВСЕХ слушателей +++++++++++++++++++++++++++++++++++++++++
 
@@ -50,6 +64,9 @@ refs.movieDetails.addEventListener('click', onMovieDetails);
 // refs.openModalBtn.addEventListener('click', onOpenModal); //? ----- для тестирования
 refs.closeModalBtn.addEventListener('click', onCloseModal);
 refs.backdrop.addEventListener('click', onBackdropClick);
+//! +++++++++++++++ Создаем слушателей для кнопок МОДАЛКИ ++++++++++++++++++++
+// refs.watchedModal.addEventListener('click', onWatchedModal);
+// refs.queueModal.addEventListener('click', onQueueModal);
 
 //? ++++++++++++++++++ ПОКАЗЫВАЕМ/ПРЯЧЕМ элементы разметки ++++++++++++++++++++
 //! ПОКАЗЫВАЕМ форму со строкой инпута:
@@ -60,7 +77,7 @@ refs.searchFormAlert.hidden = false; //! ПОКАЗЫВАЕМ
 refs.resultNotSuccessful.hidden = true;
 
 //! ПРЯЧЕМ блок кнопок WATCHED и QUEUE в header:
-refs.watchedQueueHeader.hidden = true;
+// refs.watchedQueueHeader.hidden = true;
 
 //* +++++++++++++++++++++++++++++++ Создаем ГЛОБАЛЬНЫЕ переменные +++++++++++++++++++++++++++++++++++++++++
 
@@ -100,8 +117,8 @@ async function onHome() {
   //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
   refs.resultNotSuccessful.hidden = true;
 
-  //! ПОКАЗЫВАЕМ форму со строкой инпута:
-  refs.searchFormAlert.hidden = false; //! ПОКАЗЫВАЕМ
+    //! ПРЯЧЕМ блок кнопок WATCHED и QUEUE в header:
+    // refs.watchedQueueHeader.hidden = true;
 
   //! ПРЯЧЕМ блок кнопок WATCHED и QUEUE в header:
   refs.watchedQueueHeader.hidden = true;
@@ -266,15 +283,27 @@ async function onMovieDetails(event) {
 
 //* -------------------------- Ф-ция_4, добавление просмотренных фильмов в localStorage по кноке WATCHED: ----------------------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
-function onWatchedModal() {
-  console.log('Вешаю слушателя на кнопку WATCHED'); //!
-}
+export function onWatchedModal() {
+    console.log("Вешаю слушателя на кнопку ADD TO WATCHED в МОДАЛКЕ"); //!
+
+    console.log("infoFilm:", infoFilm); //!
+    console.log("infoFilm.id:", infoFilm.id); //!
+};
+
+
+
 
 //* -------------------------- Ф-ция_5, добавление просмотренных фильмов в localStorage по кноке QUEUE: ----------------------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
-function onQueueModal() {
-  console.log('Вешаю слушателя на кнопку QUEUE'); //!
-}
+export function onQueueModal() {
+    console.log("Вешаю слушателя на кнопку ADD TO QUEUE в МОДАЛКЕ"); //!
+
+    console.log("infoFilm:", infoFilm); //!
+    console.log("infoFilm.id:", infoFilm.id); //!
+};
+
+
+
 
 //* -------------------------- Ф-ция_6, для работы с MY LIBRARY и кнопкой WATCHED: ----------------------
 function onMyLibraryWatched() {
@@ -452,38 +481,56 @@ function appendHitsMarkup(results) {
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку для ОДНОЙ карточки из ВСЕХ карточек:
 function createMoviesCardsMarkup(results) {
-  return results
-    .map(
-      ({
-        id,
-        poster_path,
-        title,
-        name,
-        genre_ids,
-        first_air_date,
-        release_date,
-      }) => {
-        //? Получаем массив жанров для каждого фильма и строку всех жанров:
-        const genresAllOneFilmArray = genre_ids.map(id =>
-          convertingIdToGenre(id)
-        ); //! массив жанров для каждого фильма
-        // console.log("genresOneFilm:", genresAllOneFilmArray); //!
-        const genresAllOneFilm = genresAllOneFilmArray.join(', '); //! строка всех жанров
-        // console.log("genresAllOneFilm:", genresAllOneFilm); //!
+    return results
+        .map(({ id, poster_path, title, name, genre_ids, first_air_date, release_date }) => {
 
-        //? Получаем значение года из строки даты:
-        const date = first_air_date || release_date || '???? - ?? - ??';
-        // console.log("date:", date); //!
-        const yearDate = date.substr(0, 4); //! значение года из строки даты:
-        // console.log("yearDate:", yearDate); //!
+            //? Получаем массив жанров для каждого фильма и строку всех жанров:
+            const genresAllOneFilmArray = genre_ids.map(id => convertingIdToGenre(id)); //! массив жанров для каждого фильма
+            // console.log("genresOneFilm:", genresAllOneFilmArray); //!
+            const genresAllOneFilm = genresAllOneFilmArray.join(", "); //! строка всех жанров
+            // console.log("genresAllOneFilm:", genresAllOneFilm); //!
 
-        //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
-        let capitalsTitle = title;
-        if (title) {
-          capitalsTitle = title.toUpperCase();
-          // const title = title.toUpperCase();
-          // console.log("capitalsTitle:", capitalsTitle); //!
-        }
+            //? Получаем значение года из строки даты:
+            const date = first_air_date || release_date || "???? - ?? - ??";
+            // console.log("date:", date); //!
+            const yearDate = date.substr(0, 4); //! значение года из строки даты:
+            // console.log("yearDate:", yearDate); //!
+
+            //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
+            let capitalsTitle = title;
+            if (title) {
+                capitalsTitle = title.toUpperCase();
+                // const title = title.toUpperCase();
+                // console.log("capitalsTitle:", capitalsTitle); //!
+            };
+
+            let capitalsName = name;
+            if (name) {
+                const capitalsName = name.toUpperCase();
+                // const name = name.toUpperCase();
+                // console.log("capitalsName:", capitalsName); //!
+            };
+            // console.log(typeof title); //!
+            // const capitalsTitle = title.toLocaleUpperCase();
+            // const capitalsTitle = title.toUpperCase();
+            // console.log("capitalsTitle:", capitalsTitle); //!
+            // const capitalsName = name.toUpperCase();
+          
+            return `
+                <li key=${id}>
+                    <img src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name}" />
+
+                    <div>
+                        <br />
+                        <h5>${capitalsTitle || capitalsName}</h5>
+                        <h5>${genresAllOneFilm} | ${yearDate}</h5>
+                    </div>
+                </li>
+                `;
+        })
+        .join('');
+};
+
 
         let capitalsName = name;
         if (name) {
@@ -519,53 +566,50 @@ function createMoviesCardsMarkup(results) {
 //! +++++++++++++++++++++++++++++ Markup infoFilm ++++++++++++++++++++++++++++++++++++++++++++++
 //*  Ф-ция-then, к-рая отрисовывает интерфейс ОДНОГО фильма в МОДАЛКЕ:
 function appendInfoMovieMarkup(infoFilm) {
-  //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
-  refs.InfoMovie.insertAdjacentHTML(
-    'afterbegin',
-    createInfoMovieMarkup(infoFilm)
-  );
-}
+    //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
+    refs.InfoMovie.insertAdjacentHTML('afterbegin', createInfoMovieMarkup(infoFilm));
+    addIventListenerModalBtn()
+};
 
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку ОДНОГО фильма в МОДАЛКЕ:
+
+
 function createInfoMovieMarkup(infoFilm) {
-  // console.log("createInfoMovieMarkup ==> infoFilm:", infoFilm); //!
-  const {
-    id,
-    poster_path,
-    title,
-    name,
-    vote_average,
-    vote_count,
-    popularity,
-    original_title,
-    original_name,
-    genres,
-    overview,
-  } = infoFilm;
+    // console.log("createInfoMovieMarkup ==> infoFilm:", infoFilm); //!
+    const {
+        id,
+        poster_path,
+        title, name,
+        vote_average,
+        vote_count,
+        popularity,
+        original_title,
+        original_name,
+        genres,
+        overview
+    } = infoFilm
 
-  //? Получаем строку со всеми жанрами
-  const genresAllOneFilm = genres.map(item => item.name).join(', ');
+    //? Получаем строку со всеми жанрами
+    const genresAllOneFilm = genres.map(item => item.name).join(", ");
 
-  //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
-  let capitalsTitle = title;
-  if (title) {
-    capitalsTitle = title.toUpperCase();
-    // const title = title.toUpperCase();
-    // console.log("capitalsTitle:", capitalsTitle); //!
-  }
+    //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
+    let capitalsTitle = title;
+    if (title) {
+        capitalsTitle = title.toUpperCase();
+        // const title = title.toUpperCase();
+        // console.log("capitalsTitle:", capitalsTitle); //!
+    };
 
-  let capitalsName = name;
-  if (name) {
-    const capitalsName = name.toUpperCase();
-    // const name = name.toUpperCase();
-    // console.log("capitalsName:", capitalsName); //!
-  }
-
-  return `
-                <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${
-    title || name
-  }" />
+    let capitalsName = name;
+    if (name) {
+        const capitalsName = name.toUpperCase();
+        // const name = name.toUpperCase();
+        // console.log("capitalsName:", capitalsName); //!
+    };
+   
+    return `
+                <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
 
                 <div class="modal-сontent">
                     <h3 class="modal-title-film">${
@@ -600,9 +644,9 @@ function createInfoMovieMarkup(infoFilm) {
                         <span class="modal-about-text">${overview}</span>
                     </div>
 
-                    <div class="modal-button">
-                        <button type="button" class="modal-watched">ADD TO WATCHED</button>
-                        <button type="button" class="modal-queue">ADD TO QUEUE</button>
+                    <div class="modal-button" data-action="library-btn">
+                        <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+                        <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
                     </div>
                 </div>
                 
@@ -624,3 +668,47 @@ function createInfoMovieMarkup(infoFilm) {
 //         Notiflix.Notify.success(`Hooray! We found ${totalResults} images.`, { timeout: 3000, },);
 // }
 //todo __________________________________________________________________________
+
+
+
+// --KHARLAMOVA TETIANA----------------МОДАЛЬНЕ ВІКНО З КОМАНДОЮ----------------------------------
+(() => {
+    const refsModalTeam = {
+        openModalTeamLink: document.querySelector('.team-link'),
+        closeModalTeamBtn: document.querySelector('.team-close-btn'),
+        modalTeam: document.querySelector('.backdrop-team'),
+        body: document.querySelector('body'),
+    };
+    const { openModalTeamLink, closeModalTeamBtn, modalTeam, body } = refsModalTeam;
+    openModalTeamLink.addEventListener('click', onOpenModalTeam);
+    closeModalTeamBtn.addEventListener('click', onCloseModalTeam);
+    modalTeam.addEventListener('click', onBackdropTeamClick);
+
+    function onCloseModalTeam(e) {
+        modalTeam.classList.toggle('is-hidden');
+        body.classList.toggle('no-scroll');
+        window.removeEventListener('keydown', onEscKeyPress);
+    }
+    
+    function onOpenModalTeam(e) {
+        window.addEventListener('keydown', onEscKeyPress);
+        modalTeam.classList.toggle('is-hidden');
+        body.classList.toggle('no-scroll');
+    }
+    function onEscKeyPress(e) {
+        if(e.key === 'Escape') {
+            onCloseModalTeam();
+        } 
+} 
+
+function onBackdropTeamClick(e) {
+    if (e.currentTarget === e.target) {
+        onCloseModalTeam();
+    }
+};
+
+})();
+
+// -----------------------END OF МОДАЛЬНЕ ВІКНО З КОМАНДОЮ----------------------------
+
+
