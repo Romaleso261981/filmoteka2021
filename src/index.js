@@ -18,8 +18,6 @@ import addIventListenerModalBtn from './js/addIventListenerModalBtn';
 //!  Ф-ция, яка загружає
 import spinner from './js/preLoader';
 
-spinner.startSpinner();
-spinner.removeSpinner();
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -455,16 +453,17 @@ function onEscKeyPress(event) {
     onCloseModal();
   }
 }
+
 //?_____________________________________________________________________
 
 //! +++++++++++++++++++++++++++++ Markup Movies ++++++++++++++++++++++++++++++++++++++++++++++
 //*  Ф-ция-then, к-рая отрисовывает интерфейс ВСЕХ карточек на странице:
 function appendHitsMarkup(results) {
-  //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
-  refs.moviesCards.insertAdjacentHTML(
-    'beforeend',
-    createMoviesCardsMarkup(results)
-  );
+    //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
+    spinner.startSpinner();
+    refs.moviesCards.insertAdjacentHTML('beforeend', createMoviesCardsMarkup(results));
+    spinner.removeSpinner();
+
 }
 
 //! --------------------------------------------------------------------------------------------
@@ -550,44 +549,42 @@ function appendInfoMovieMarkup(infoFilm) {
 //*   Ф-ция, к-рая создает новую разметку ОДНОГО фильма в МОДАЛКЕ:
 
 function createInfoMovieMarkup(infoFilm) {
-  // console.log("createInfoMovieMarkup ==> infoFilm:", infoFilm); //!
-  const {
-    id,
-    poster_path,
-    title,
-    name,
-    vote_average,
-    vote_count,
-    popularity,
-    original_title,
-    original_name,
-    genres,
-    overview,
-  } = infoFilm;
+    // console.log("createInfoMovieMarkup ==> infoFilm:", infoFilm); //!
+    const {
+        id,
+        poster_path,
+        title, name,
+        vote_average,
+        vote_count,
+        popularity,
+        original_title,
+        original_name,
+        genres,
+        overview
+    } = infoFilm
 
-  //? Получаем строку со всеми жанрами
-  const genresAllOneFilm = genres.map(item => item.name).join(', ');
+    //? Получаем строку со всеми жанрами
+    const genresAllOneFilm = genres.map(item => item.name).join(", ");
 
-  //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
-  let capitalsTitle = title;
-  if (title) {
-    capitalsTitle = title.toUpperCase();
-    // const title = title.toUpperCase();
-    // console.log("capitalsTitle:", capitalsTitle); //!
-  }
+    //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
+    let capitalsTitle = title;
+    if (title) {
+        capitalsTitle = title.toUpperCase();
+        // const title = title.toUpperCase();
+        // console.log("capitalsTitle:", capitalsTitle); //!
+    };
 
-  let capitalsName = name;
-  if (name) {
-    const capitalsName = name.toUpperCase();
-    // const name = name.toUpperCase();
-    // console.log("capitalsName:", capitalsName); //!
-  }
-
-  return `
-                <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${
-    title || name
-  }" />
-
+    let capitalsName = name;
+    if (name) {
+        const capitalsName = name.toUpperCase();
+        // const name = name.toUpperCase();
+        // console.log("capitalsName:", capitalsName); //!
+    };
+   
+    return `
+                
+                <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
+                
                 <div class="modal-сontent">
                     <h3 class="modal-title-film">${
                       capitalsTitle || capitalsName
@@ -596,8 +593,8 @@ function createInfoMovieMarkup(infoFilm) {
                     <table class="modal-info">
                         <tbody>
                             <tr>
-                                <td class="modal-key">Vote/Votes123</td>
-                                <td class="modal-parametr"><span class="modal-parametr-vote">${vote_average}</span>/${vote_count}</td>
+                                <td class="modal-key">Vote/Votes</td>
+                                <td class="modal-parametr"><span class="modal-parametr-vote">${vote_average}</span> / ${vote_count}</td>
                             </tr>
                             <tr>
                                 <td class="modal-key">Popularity</td>
