@@ -502,6 +502,13 @@ function onEscKeyPress(event) {
         onCloseModal();
     }
 }
+
+// моя модалка - відкривання її
+(() => {
+    const refsModalFilmOne = {
+        openModalFilmBtn: document.querySelector('')
+    }
+})
 //?_____________________________________________________________________
 
 
@@ -618,7 +625,9 @@ function createInfoMovieMarkup(infoFilm) {
     };
    
     return `
+                
                 <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
+                
 
                 <div class="modal-сontent">
                     <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3>
@@ -626,8 +635,8 @@ function createInfoMovieMarkup(infoFilm) {
                     <table class="modal-info">
                         <tbody>
                             <tr>
-                                <td class="modal-key">Vote/Votes123</td>
-                                <td class="modal-parametr"><span class="modal-parametr-vote">${vote_average}</span>/${vote_count}</td>
+                                <td class="modal-key">Vote/Votes</td>
+                                <td class="modal-parametr"><span class="modal-parametr-vote">${vote_average}</span> / ${vote_count}</td>
                             </tr>
                             <tr>
                                 <td class="modal-key">Popularity</td>
