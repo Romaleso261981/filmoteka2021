@@ -14,17 +14,17 @@ export default function getRefs() {
 
     //! Получаем ссылку на кнопку HOME:
     // homeBtn: document.querySelector('.button-home'), //todo OLD
-    homeBtn: document.querySelector('button[data-action="button-home"]'),
+    homeBtn: document.querySelector('a[data-action="button-home"]'),
 
     //! Получаем ссылку на кнопку Filmoteka:
     // filmotekaBtn: document.querySelector('.button-filmoteka'), //todo OLD
-    filmotekaBtn: document.querySelector('button[data-action="button-filmoteka"]'),
+    filmotekaBtn: document.querySelector('a[data-action="button-filmoteka"]'),
     // filmotekaBtn: document.querySelector('div[data-action="filmoteka"]'), //!+-+-+-
     // filmotekaBtn: document.querySelectorAll('div[data-action="filmoteka"]'), //!+-+-+-
 
     //! Получаем ссылку на кнопку MY LIBRARY:
     // myLibraryBtn: document.querySelector('.button-mylibrary'), //todo OLD
-    myLibraryBtn: document.querySelector('button[data-action="button-mylibrary"]'),
+    myLibraryBtn: document.querySelector('a[data-action="button-mylibrary"]'),
 
     //! Получаем ссылку на <section class="section-hero"> ==> на poster_path:
     // movieDetails: document.querySelector('.section-hero'), //todo OLD
@@ -75,6 +75,7 @@ export default function getRefs() {
     btnlibrary: document.querySelector('[data-action="button-home"]'),
   };
 };
+console.log(getRefs.homeBtn);
 
 // getRefs.btnlibrary.addEventListener('click', () => {
 //   console.log('click');

@@ -16,7 +16,12 @@ import { genres } from './js/genres.js'; //? api-themoviedb
 //! імпорт функції для додавання кнопок модалки карточки фільмів
 import  addIventListenerModalBtn  from './js/addIventListenerModalBtn';
 
+//!  Ф-ция, яка загружає
+import spinner from './js/preLoader'
 
+
+spinner.startSpinner();
+spinner.removeSpinner();
 
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
@@ -32,7 +37,6 @@ const loadMoreBtn = new LoadMoreBtn({
     selector: '[data-action="load-more1"]',
     hidden: true,
 });
-
 
 
 
@@ -75,7 +79,7 @@ refs.searchFormAlert.hidden = false; //! ПОКАЗЫВАЕМ
 refs.resultNotSuccessful.hidden = true;
 
 //! ПРЯЧЕМ блок кнопок WATCHED и QUEUE в header:
-refs.watchedQueueHeader.hidden = true;
+// refs.watchedQueueHeader.hidden = true;
 
 
 
@@ -130,7 +134,7 @@ async function onHome() {
     refs.searchFormAlert.hidden = false; //! ПОКАЗЫВАЕМ
 
     //! ПРЯЧЕМ блок кнопок WATCHED и QUEUE в header:
-    refs.watchedQueueHeader.hidden = true;
+    // refs.watchedQueueHeader.hidden = true;
 
     //! Делаем сброс значения page = 1 после submit form 
     //! с помощью метода resetPage из класса ThemoviedbApiService
@@ -648,7 +652,7 @@ function createInfoMovieMarkup(infoFilm) {
                         <span class="modal-about-text">${overview}</span>
                     </div>
 
-                    <div class="modal-button">
+                    <div class="modal-button" data-action="library-btn">
                         <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
                         <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
                     </div>
