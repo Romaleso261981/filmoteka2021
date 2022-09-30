@@ -24,24 +24,63 @@
 .modal-team {
     position: absolute;
     top: 10px;
-    background-image: url("../images/team-photo/bgimage-team-modal.jpg");
-    height: 95vh;
+    background-image: url("../images/team-photo/img-bg-team.jpg");
+    height: 90%;    
+    max-width: 100vw;
 }
 
 .team-close-btn {
     display: block;
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    text-align: center;
     margin-left: auto;
+    margin-top: 32px;
+    border: transparent;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    top: -20px;
+    right: 8px;
+}
+
+.team-close-btn:hover {
+    background-color: #fafafa;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);;
+}
+
+.modal__icon--close {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
 }
 
 .modal-team__title {
     color:#ffffff;
     text-align: center;
+    margin-bottom: 50px;
+    @media screen and (min-width: 1024px) {
+            font-size: 50px;
+            margin-bottom: 50px;
+        }
+    @media screen and (min-width: 1280px) {
+        margin-bottom: 133px;
+    }   
 }
 
 .team-gallery-wrap {
     overflow-y: auto;
-    height: 85%;
+    height: 246px;
     max-width: 100%;
+    @media screen and (min-width: 768px) {
+        height: 74%;
+    }
+    @media screen and (min-width: 1024px) {
+        height: 71%;
+    }
     @media screen and (min-width: 1280px){
         overflow-y: hidden;
         height: 100%;
@@ -50,17 +89,18 @@
 
 .team-gallery {
     display: grid;
-    max-width: 90vh;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    max-width: 90%;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     grid-auto-rows: 245px;
     grid-gap: 10px;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
-    height: 100%;
-    @media screen and (min-width: 1280px) {
-        max-width: 100vh;
+    height: 70%;
+    @media screen and (min-width: 768px) {
+        height: 80%;
+        width: 100%;
     }
 }
 
@@ -97,6 +137,9 @@ li {
     list-style: none;
 }
 
+.team-title-surname {
+    display: block;
+}
 .team-title {
     font-family: 'Roboto';
     font-weight: bold;
