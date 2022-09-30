@@ -1,0 +1,189 @@
+.section-header {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: #ffe8e8;
+  text-align: center;
+  background-color: rgb(121, 0, 0);
+  background-image: url('../images/header/library_bg/library-bg-mob.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media screen and (min-width: 768px) {
+    padding: 40px 32px 44px;
+  }
+
+  // Встановлення фонового зображення
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url('../images/header/library_bg/library-bg-mob@2x.jpg');
+  }
+
+  @media screen and (min-width: 768px) {
+    background-image: url('../images/header/library_bg/library-bg-tab.jpg');
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('../images/header/library_bg/library-bg-tab@2x.jpg');
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    background-image: url('../images/header/library_bg/library-bg-desk.jpg');
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('../images/header/library_bg/library-bg-desk@2x.jpg');
+    }
+  }
+}
+
+/* ! кнопки Filmoteka,  HOME, MY LIBRARY */
+.nav-all-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 41px;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+
+.button-filmoteka {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+
+  text-decoration: none;
+
+  &:hover {
+    color: #ff6b01;
+  }
+}
+
+.button-filmoteka-label {
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.17;
+  visibility: hidden;
+  @media screen and (min-width: 768px) {
+    visibility: visible;
+  }
+}
+
+.nav-main-buttons {
+  display: flex;
+  justify-content: space-around;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+
+.nav-list {
+  display: flex;
+}
+
+.button-mylibrary--active {
+  border-bottom: solid 3px #ff001b;
+}
+
+.button-home {
+  margin-right: 40px;
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    color: #ff6b01;
+  }
+  /* display: flex; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+
+.button-mylibrary {
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    color: #ff6b01;
+  }
+}
+
+/* ! search-form */
+.search-form {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  margin-bottom: 80px;
+}
+
+.search-form__input {
+  color: #fff;
+  border: none;
+  border-bottom: 1px solid #fff;
+  background-color: transparent;
+
+  &::placeholder {
+    color: #fff;
+  }
+}
+
+.search-form__btn {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1 solid #fff;
+}
+
+.search-form-alert {
+  color: #ffdddd;
+}
+
+/* ! кнопки WATCHED и QUEUE  */
+.nav-library-buttons {
+  display: flex;
+  justify-content: center;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+
+.nav-library-watched {
+  margin-right: 200px;
+}
+
+/* .nav-library-watched.nav-library-queue {
+  padding: 15px 40px;
+} */
+
+.nav-library-watched {
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 15px 40px;
+
+  &:hover {
+    background: #ff6b01;
+  }
+}
+
+.nav-library-queue {
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 15px 40px;
+
+  &:hover {
+    background: #ff6b01;
+  }
+}
