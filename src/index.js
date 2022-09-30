@@ -503,12 +503,6 @@ function onEscKeyPress(event) {
     }
 }
 
-// моя модалка - відкривання її
-(() => {
-    const refsModalFilmOne = {
-        openModalFilmBtn: document.querySelector('')
-    }
-})
 //?_____________________________________________________________________
 
 
