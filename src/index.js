@@ -25,7 +25,7 @@ import  addIventListenerModalBtn  from './js/addIventListenerModalBtn';
 const refs = getRefs();
 
 //! Создаем экземпляр класса ThemoviedbApiService
-const themoviedbApiService = new ThemoviedbApiService();
+export const themoviedbApiService = new ThemoviedbApiService();
 
 //! Создаем экземпляр класса LoadMoreBtn = Кнопка LOAD MORE
 const loadMoreBtn = new LoadMoreBtn({

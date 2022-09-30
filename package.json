@@ -23,6 +23,7 @@
     "normalize": "^0.3.1",
     "normalize-css": "^2.3.1",
     "notiflix": "^3.2.5",
+    "tui-pagination": "^3.4.1",
     "vanilla-back-to-top": "^7.2.1"
   },
   "devDependencies": {
