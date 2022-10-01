@@ -58,6 +58,11 @@ export default class ThemoviedbApiService {
         console.log("getTrendingAllDay ==> this.page: ", this.page); //!
         return results;
     }
+    async getTrendingAllDayPaginationClick() {
+        const url_1 = `${BASE_URL}/${END_POINTS_1}?api_key=${API_KEY}&page=${this.page}`;
+        const response = await axios.get(url_1)
+        return response.data.results;
+    }
 
     //! 2 - Поиск кинофильма по ключевому слову из input form
     async getSearchMovies() {
@@ -70,6 +75,12 @@ export default class ThemoviedbApiService {
         console.log("getSearchMovies ==> this.page: ", this.page); //!
         return results;
     }
+    async getSearchMoviesPaginationClick() {
+        const url_2 = `${BASE_URL}/${END_POINTS_2}?api_key=${API_KEY}&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
+        const response = await axios.get(url_2) //!
+         return response.data.results;
+    } 
+
 
     //! 3 - Запрос полной информации о фильме для МОДАЛКИ.
     async getMovieDetails(idFilms) {
