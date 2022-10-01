@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "https://Romaleso261981/filmoteka2021",
   "scripts": {
-    "start": "parcel src/*.html --open",
+    "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /filmoteka2021/"
   },
   "repository": {
