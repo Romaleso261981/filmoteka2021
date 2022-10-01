@@ -10,8 +10,6 @@ window.onload = function() {
   addLoginToHeader();
 };
 
-// const loginEl = document.querySelector('a.button-login');
-// loginEl.addEventListener('click', openModalLogin);
 function addLoginToHeader() {
   const markup = `
     <li>
@@ -28,9 +26,6 @@ function addLoginToHeader() {
     .querySelector('a.button-login')
     .addEventListener('click', openModalLogin);
 }
-
-// createModalLogin('Registration &amp; Authentication', getModalLogin());//debug
-// console.log('test');//debug
 
 function openModalLogin(event) {
   event.preventDefault();
