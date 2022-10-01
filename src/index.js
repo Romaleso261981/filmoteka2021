@@ -100,7 +100,7 @@ let infoFilm = null;
 
 //! Переменная для определения типа запроса в кнопке LOAD MORE
 //! и типа станиц WATCHED и QUEUE
-let currentPage = "";
+export let currentPage = "";
 
 //! Переменные для хранения массива объектов фильмов для станиц WATCHED и QUEUE
 let localStorageWatched = JSON.parse(localStorage.getItem("watched")) ?? [];
@@ -561,7 +561,7 @@ function convertingIdToGenre(id) {
 }
 
 //!  Ф-ция, к-рая очищает контейнер при новом вводе данных в input form:
-function clearMovieContainer() {
+export function clearMovieContainer() {
     refs.moviesCards.innerHTML = '';
 }
 
@@ -698,7 +698,7 @@ function operationLogicWatchedQueue() {
 //* --------------------------------------- Функции-разметки ---------------------------------------------------------
 //! +++++++++++++++++++++++++++++ Markup Movies ++++++++++++++++++++++++++++++++++++++++++++++
 //*  Ф-ция-then, к-рая отрисовывает интерфейс ВСЕХ карточек на странице:
-function appendHitsMarkup(results) {
+export function appendHitsMarkup(results) {
     //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
     refs.moviesCards.insertAdjacentHTML('beforeend', createMoviesCardsMarkup(results));
 }
