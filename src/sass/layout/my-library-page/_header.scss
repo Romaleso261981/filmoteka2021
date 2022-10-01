@@ -30,7 +30,7 @@
     }
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1024px) {
     background-image: url('../images/header/library_bg/library-bg-desk.jpg');
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -44,9 +44,12 @@
 .nav-all-buttons {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px;
-  /* margin-left: auto; */
-  /* margin-right: auto; */
+  margin-bottom: 60px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 40px;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+  }
 }
 
 .icon-header {
@@ -55,7 +58,7 @@
   transition: stroke 200ms;
 
   .button-filmoteka:hover & {
-    stroke: var(--header-active);
+    stroke: var(--btn-rating-bg);
   }
 }
 
@@ -78,17 +81,19 @@
   transition: color 200ms;
 
   &:hover {
-    color: var(--header-active);
+    color: var(--btn-rating-bg);
   }
 }
 
 .button-filmoteka-label {
+  display: none;
   margin-left: 10px;
   font-weight: 500;
   font-size: 30px;
   line-height: 1.17;
   visibility: hidden;
   @media screen and (min-width: 768px) {
+    display: block;
     visibility: visible;
   }
 }
@@ -104,10 +109,6 @@
   display: flex;
 }
 
-.library-item {
-  margin-left: 40px;
-}
-
 .text-menu {
   font-family: var(--primary-font);
   color: var(--secondary-txt);
@@ -119,12 +120,12 @@
   transition: color 200ms;
 
   &:hover {
-    color: var(--header-active);
+    color: var(--btn-rating-bg);
   }
 }
 
 .button-mylibrary--active {
-  border-bottom: solid 3px #ff001b;
+  border-bottom: solid 3px var(--btn-rating-bg);
 }
 
 .button-home {
@@ -133,7 +134,7 @@
   text-decoration: none;
 
   &:hover {
-    color: var(--header-active);
+    color: var(--btn-rating-bg);
   }
   /* display: flex; */
   /* margin-left: auto; */
@@ -145,7 +146,7 @@
   text-decoration: none;
 
   &:hover {
-    color: var(--header-active);
+    color: var(--btn-rating-bg);
   }
 }
 
@@ -203,7 +204,7 @@
   transition: background 200ms;
 
   &:hover {
-    background: var(--header-active);
+    background: var(--btn-rating-bg);
   }
 }
 
@@ -222,6 +223,6 @@
   transition: background 200ms;
 
   &:hover {
-    background: var(--header-active);
+    background: var(--btn-rating-bg);
   }
 }
