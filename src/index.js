@@ -18,6 +18,7 @@ import { genres } from './js/genres.js'; //? api-themoviedb
 //!  Ф-ция, яка загружає
 import spinner from './js/preLoader';
 
+import './js/login-modal';
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 
