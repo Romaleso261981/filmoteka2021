@@ -61,7 +61,22 @@
 }
 
 .button-filmoteka {
-    color: var(--secondary-txt);   
+    color: var(--secondary-txt);  
+    transition: color var(--animation-hover); 
+}
+.button-filmoteka:hover,
+.button-filmoteka:focus {
+    color: var(--btn-rating-bg);
+}
+
+.icon-header {
+  stroke: #fff;
+
+  transition: stroke var(--animation-hover);
+
+  .button-filmoteka:hover & {
+    stroke: var(--btn-rating-bg);
+  }
 }
 // ---------------------------------------
 .button-filmoteka-label {
@@ -90,10 +105,12 @@
     font-size: 12px;
     line-height: 1.17;
     text-transform: uppercase;
+    transition: color var(--animation-hover);
 }
 .button-home--active {
    border-bottom: solid 3px var(--btn-rating-bg);
 }
+
 .button-home-label:hover,
 .button-home-label:focus,
 .button-mylibrary-label:hover,
@@ -154,6 +171,7 @@
   font-family: FontAwesome;
   font-size: 12px;
   color: var(--secondary-txt);
+  transition: color var(--animation-hover);
   }
 
 .search-button:hover:before,
