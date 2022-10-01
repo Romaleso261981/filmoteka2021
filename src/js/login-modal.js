@@ -10,12 +10,10 @@ window.onload = function() {
   addLoginToHeader();
 };
 
-// const loginEl = document.querySelector('a.button-login');
-// loginEl.addEventListener('click', openModalLogin);
 function addLoginToHeader() {
   const markup = `
     <li>
-      <a href="" class="button-login" data-action="button-login">
+      <a href="./" class="button-login" data-action="button-login">
         <span class="button-login-label text-menu">LOGIN</span>
       </a>
     </li>
@@ -26,11 +24,8 @@ function addLoginToHeader() {
 
   document
     .querySelector('a.button-login')
-    .addEventListener('click', openModalLogin, { once: true });
+    .addEventListener('click', openModalLogin);
 }
-
-// createModalLogin('Registration &amp; Authentication', getModalLogin());//debug
-// console.log('test');//debug
 
 function openModalLogin(event) {
   event.preventDefault();
@@ -38,12 +33,31 @@ function openModalLogin(event) {
   document
     .querySelector('.modal-login-button-close')
     .addEventListener('click', closeModalLogin, { once: true });
-  
+  document
+    .querySelector('.modal-login-backdrop')
+    .addEventListener('click', closeModalLoginOnBackdropClick);
+  document.body.classList.add('no-scroll');
+  window.addEventListener('keydown', closeModalLoginOnEscKeyPress);
+
   initLoginApp();
 }
 
 function closeModalLogin() {
   document.querySelector('.modal-login-backdrop').remove();
+  document.body.classList.remove('no-scroll');
+  window.removeEventListener('keydown', closeModalLoginOnEscKeyPress);
+}
+
+function closeModalLoginOnEscKeyPress(event) {
+  if (event.code === 'Escape') {
+    closeModalLogin();
+  }
+}
+
+function closeModalLoginOnBackdropClick(event) {
+  if (event.currentTarget === event.target) {
+    closeModalLogin();
+  }
 }
 
 function createModalLogin(tittle, content) {
