@@ -14,11 +14,11 @@ window.onload = function() {
 // loginEl.addEventListener('click', openModalLogin);
 function addLoginToHeader() {
   const markup = `
-            <li>
-            <a href="./index.html" class="button-login" data-action="button-login">
-              <span class="button-login-label text-menu">LOGIN</span>
-            </a>
-          </li>
+    <li>
+      <a href="" class="button-login" data-action="button-login">
+        <span class="button-login-label text-menu">LOGIN</span>
+      </a>
+    </li>
   `;
   document
     .querySelector('ul.nav-list')
