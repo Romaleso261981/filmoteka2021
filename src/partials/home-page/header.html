@@ -1,54 +1,56 @@
 <header class="section-header">
-  <div class="nav-all-buttons">
-    <div>
-      <a
-        href="./index.html"
-        class="button-filmoteka"
-        data-action="button-filmoteka"
-      >
-        <svg class="icon-header" width="24" height="24">
-          <use href="./images/icons-header.svg#icon-film-1"></use>
-        </svg>
-        <span class="button-filmoteka-label">Filmoteka</span>
-      </a>
-    </div>
+  <div class="container">
+    <div class="nav-all-buttons">
+      <div>
+        <a
+          href="./index.html"
+          class="button-filmoteka"
+          data-action="button-filmoteka"
+        >
+          <svg class="icon-header" width="24" height="24">
+            <use href="./images/icons-header.svg#icon-film-1"></use>
+          </svg>
+          <span class="button-filmoteka-label">Filmoteka</span>
+        </a>
+      </div>
 
-    <div class="nav-main-buttons">
-      <ul class="nav-list">
-        <li>
-          <a
-            href="./index.html"
-            class="button-home button-home--active"
-            data-action="button-home"
-          >
-            <span class="button-home-label text-menu">HOME</span>
-          </a>
-        </li>
-        <li class="library-item">
-          <a
-            href="./my-library.html"
-            class="button-mylibrary"
-            data-action="button-mylibrary"
-          >
-            <span class="button-mylibrary-label text-menu">MY LIBRARY</span>
-          </a>
-        </li>
-      </ul>
+      <div class="nav-main-buttons">
+        <ul class="nav-list">
+          <li>
+            <a
+              href="./index.html"
+              class="button-home button-home--active"
+              data-action="button-home"
+            >
+              <span class="button-home-label text-menu">HOME</span>
+            </a>
+          </li>
+          <li class="library-item">
+            <a
+              href="./my-library.html"
+              class="button-mylibrary"
+              data-action="button-mylibrary"
+            >
+              <span class="button-mylibrary-label text-menu">MY LIBRARY</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="search" data-action="search-form-alert">
-    <form class="search-form" id="search-form" data-action="search-form">
-      <input
-        class="search-input"
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Movie search"
-      />
-      <button type="submit" class="search-button"></button>
-    </form>
-    <p class="search-alert" data-action="search-alert">
-      Search result not successful. Enter the correct movie name and
-    </p>
+    <div class="search" data-action="search-form-alert">
+      <form class="search-form" id="search-form" data-action="search-form">
+        <input
+          class="search-input"
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Movie search"
+        />
+        <button type="submit" class="search-button"></button>
+      </form>
+      <p class="search-alert" data-action="search-alert">
+        Search result not successful. Enter the correct movie name and
+      </p>
+    </div>
   </div>
 </header>

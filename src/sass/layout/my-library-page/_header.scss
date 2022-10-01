@@ -44,9 +44,19 @@
 .nav-all-buttons {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 41px;
+  margin-bottom: 40px;
   /* margin-left: auto; */
   /* margin-right: auto; */
+}
+
+.icon-header {
+  stroke: #fff;
+
+  transition: stroke 200ms;
+
+  .button-filmoteka:hover & {
+    stroke: var(--header-active);
+  }
 }
 
 .button-filmoteka {
@@ -65,8 +75,10 @@
 
   text-decoration: none;
 
+  transition: color 200ms;
+
   &:hover {
-    color: #ff6b01;
+    color: var(--header-active);
   }
 }
 
@@ -92,6 +104,25 @@
   display: flex;
 }
 
+.library-item {
+  margin-left: 40px;
+}
+
+.text-menu {
+  font-family: var(--primary-font);
+  color: var(--secondary-txt);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  text-transform: uppercase;
+
+  transition: color 200ms;
+
+  &:hover {
+    color: var(--header-active);
+  }
+}
+
 .button-mylibrary--active {
   border-bottom: solid 3px #ff001b;
 }
@@ -102,7 +133,7 @@
   text-decoration: none;
 
   &:hover {
-    color: #ff6b01;
+    color: var(--header-active);
   }
   /* display: flex; */
   /* margin-left: auto; */
@@ -114,7 +145,7 @@
   text-decoration: none;
 
   &:hover {
-    color: #ff6b01;
+    color: var(--header-active);
   }
 }
 
@@ -157,33 +188,40 @@
 }
 
 .nav-library-watched {
-  margin-right: 200px;
-}
+  padding: 13px 41px 11px;
+  margin-right: 16px;
 
-/* .nav-library-watched.nav-library-queue {
-  padding: 15px 40px;
-} */
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
 
-.nav-library-watched {
   color: #fff;
   background-color: transparent;
   border: 1px solid #fff;
   border-radius: 5px;
-  padding: 15px 40px;
+
+  transition: background 200ms;
 
   &:hover {
-    background: #ff6b01;
+    background: var(--header-active);
   }
 }
 
 .nav-library-queue {
+  padding: 13px 41px 11px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+
   color: #fff;
   background-color: transparent;
   border: 1px solid #fff;
   border-radius: 5px;
-  padding: 15px 40px;
+
+  transition: background 200ms;
 
   &:hover {
-    background: #ff6b01;
+    background: var(--header-active);
   }
 }
