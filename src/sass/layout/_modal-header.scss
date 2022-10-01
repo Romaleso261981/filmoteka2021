@@ -307,7 +307,6 @@ img {
 
 .modal-watched {
     margin-right: 20px;
-
     color: #FFFFFF;
     background-color: #FF6B01;
     border: none;
@@ -328,5 +327,27 @@ img {
     .modal-watched {
         width: 136px;
         height: 44px;
+    }
+}
+
+
+//! Руслан
+.colorGreen {
+    color: white;
+    background-color: #006100;
+
+    &:hover,
+    &:focus {
+        background-color: #00a300;
+    }
+}
+
+.colorRed {
+    color: white;
+    background-color: #810000;
+
+    &:hover,
+    &:focus {
+        background-color: #da0000;
     }
 }
