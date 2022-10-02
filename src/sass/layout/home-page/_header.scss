@@ -6,7 +6,7 @@
   background-color: var(--header-bg);
 
   @media screen and (min-width: 768px) {
-    padding: 40px 71px 59px;
+    padding: 40px 0 80px;
   }
 
   // Встановлення фонового зображення
@@ -88,7 +88,7 @@
 }
 
 .nav-item {
-margin-left: 40px;
+  margin-left: 40px;
 }
 
 .text-menu {
@@ -116,7 +116,7 @@ margin-left: 40px;
   display: flex;
   justify-content: center;
   width: 280px;
-  margin: 54px auto 20px;
+  margin: 54px auto 0;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.17;
@@ -124,7 +124,7 @@ margin-left: 40px;
 
   @media screen and (min-width: 768px) {
     width: 336px;
-    margin: 40px auto 24px;
+    margin: 40px auto 0;
   }
 }
 
