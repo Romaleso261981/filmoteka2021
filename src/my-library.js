@@ -2,6 +2,8 @@ import Notiflix from 'notiflix';
 //?  Импорт spinner (Loader ==> isLoadin)
 import spinner from './js/preLoader';
 
+// import ThemoviedbApiService from './js/api-themoviedb.js';
+
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 
 export default function getRefs() {
@@ -65,6 +67,8 @@ function getRefsLibrary() {
 //! Создаем объект всех ссылок refs.*
 const refs = getRefsLibrary();
 // console.log("refs:", refs); //!
+
+// export const themoviedbApiService = new ThemoviedbApiService();
 //* +++++++++++++++++++++++++++++++ Создаем ВСЕХ слушателей +++++++++++++++++++++++++++++++++++++++++
 
 //!  Создаем слушателя событий на поле ввода данных - input form:
