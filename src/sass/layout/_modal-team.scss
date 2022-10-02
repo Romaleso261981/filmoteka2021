@@ -24,10 +24,24 @@
 .modal-team {
     position: absolute;
     top: 10px;
-    background-image: url("../images/team-photo/img-bg-team.jpg");
+    background-image: 
+        linear-gradient(rgba(58, 56, 47, 0.4), rgba(47, 48, 58, 0.4)),
+        url("../images/team-photo/img-bg-team.jpg");
     height: 90%;    
-    max-width: 100vw;
+    width: 320px;
     padding: 10px;
+    @media screen and (min-width: 480px) {
+        width:480px;
+    }
+    @media screen and (min-width: 768px) {
+        width: 768px;
+    }
+    @media screen and (min-width: 1024px) {
+        width: 1024px;
+    }
+    @media screen and (min-width: 1280px) {
+        width: 1280px;
+    }
 }
 
 .team-close-btn {
@@ -86,9 +100,9 @@
     }
     @media screen and (min-width: 1024px) {
         height: 90%;
+        overflow-y: hidden;
     }
     @media screen and (min-width: 1280px){
-        overflow-y: hidden;
         height: 100%;
     }
 }
@@ -109,7 +123,7 @@
         width: 100%;
     }
     @media screen and (min-width: 1024px) and (max-width: 1279px) {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
         grid-auto-rows: 225px;
     }
 }
@@ -136,8 +150,8 @@
     margin: 0 auto;
     margin-bottom: 10px;
     @media screen and (min-width: 1024px) and (max-width: 1279px) {
-        width: 140px;
-        height: 150px;
+        width: 130px;
+        height: 140px;
     }
     
 }
@@ -155,6 +169,7 @@ li {
 .team-title-surname {
     display: block;
 }
+
 .team-title {
     font-weight: bold;
     font-size: 15px;
@@ -165,11 +180,11 @@ li {
     margin-bottom: 5px;
     @media screen and (min-width: 1024px) and (max-width: 1279px) {
         font-size: 13px;
+        margin-bottom: 10px;
     }
 }
 
 .team-text {
-    font-weight: 400;
     font-size: 15px;
     line-height: 1.2;
     color: #FF6B08;

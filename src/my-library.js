@@ -725,8 +725,44 @@ function createInfoMovieMarkup(infoFilm) {
     `;
 };
 
+// --KHARLAMOVA TETIANA----------------МОДАЛЬНЕ ВІКНО З КОМАНДОЮ----------------------------------
+(() => {
+    const refsModalTeam = {
+        openModalTeamLink: document.querySelector('.team-link'),
+        closeModalTeamBtn: document.querySelector('.team-close-btn'),
+        modalTeam: document.querySelector('.backdrop-team'),
+        body: document.querySelector('body'),
+    };
+    const { openModalTeamLink, closeModalTeamBtn, modalTeam, body } =
+        refsModalTeam;
+    openModalTeamLink.addEventListener('click', onOpenModalTeam);
+    closeModalTeamBtn.addEventListener('click', onCloseModalTeam);
+    modalTeam.addEventListener('click', onBackdropTeamClick);
 
+    function onCloseModalTeam(e) {
+        modalTeam.classList.toggle('is-hidden');
+        body.classList.toggle('no-scroll');
+        window.removeEventListener('keydown', onEscKeyPress);
+    }
 
+    function onOpenModalTeam(e) {
+        window.addEventListener('keydown', onEscKeyPress);
+        modalTeam.classList.toggle('is-hidden');
+        body.classList.toggle('no-scroll');
+    }
+    function onEscKeyPress(e) {
+        if (e.key === 'Escape') {
+            onCloseModalTeam();
+        }
+    }
+
+    function onBackdropTeamClick(e) {
+        if (e.currentTarget === e.target) {
+            onCloseModalTeam();
+        }
+    }
+})();
+// -----------------------END OF МОДАЛЬНЕ ВІКНО З КОМАНДОЮ----------------------------
 
 
 
