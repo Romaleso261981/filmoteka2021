@@ -1,0 +1,15 @@
+html,
+body,
+.page-library {
+    height: 100%;
+}
+
+.page-library {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.section-hero {
+    flex-grow: 1;
+}
