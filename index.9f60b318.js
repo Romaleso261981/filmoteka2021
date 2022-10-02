@@ -4646,9 +4646,7 @@ watchedHeader:document.querySelector('[data-action="library-watched"]'),
 //! Получаем ссылку на кнопоку QUEUE в header:
 queueHeader:document.querySelector('[data-action="library-queue"]'),btnlibrary:document.querySelector('[data-action="button-home"]')},LI=new class{
 //! 1 - Загрузка популярных фильмов на главную (первую) страницу 
-async getTrendingAllDay(){const e=`https://api.themoviedb.org/3/trending/all/week?api_key=41b230c5977baa736e324532e16fdadb&page=${this.page}`;console.log("url_1: ",e);//!
-const n=await t(o).get(e),{results:r,total_results:i}=n.data;//!
-return d(i),this.incrementPage(),console.log("getTrendingAllDay ==> this.page: ",this.page),r}async getTrendingAllDayPaginationClick(){const e=`https://api.themoviedb.org/3/trending/all/week?api_key=41b230c5977baa736e324532e16fdadb&page=${this.page}`;return(await t(o).get(e)).data.results}
+async getTrendingAllDay(){const e=`https://api.themoviedb.org/3/trending/all/week?api_key=41b230c5977baa736e324532e16fdadb&page=${this.page}`,n=await t(o).get(e),{results:r,total_results:i}=n.data;return d(i),this.incrementPage(),r}async getTrendingAllDayPaginationClick(){const e=`https://api.themoviedb.org/3/trending/all/week?api_key=41b230c5977baa736e324532e16fdadb&page=${this.page}`;return(await t(o).get(e)).data.results}
 //! 2 - Поиск кинофильма по ключевому слову из input form
 async getSearchMovies(){const e=`https://api.themoviedb.org/3/search/movie?api_key=41b230c5977baa736e324532e16fdadb&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;console.log("url_2: ",e);//!
 const n=await t(o).get(e),{results:r,total_results:i}=n.data;//!
@@ -4769,8 +4767,6 @@ var n})),
 //! +++++++++++++++++++ Создаем слушателей для МОДАЛКИ ++++++++++++++++++++++++
 OI.closeModalBtn.addEventListener("click",zI),OI.backdrop.addEventListener("click",(function(e){e.currentTarget===e.target&&zI()})),
 //! +++++++++ Создаем слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ ++++++++++++++
-console.log("Слушатели_refs.watchedModal:",OI.watchedModal),//!
-console.log("Слушатели_refs.queueModal:",OI.queueModal),//!
 //! Импортируем ГОТОВЫХ слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ 
 //! ++++ Создаем слушателей на кнопках WATCHED и QUEUE для страницы MY LIBRARY +++++++
 //! ++++++++++++++++++ ПОКАЗЫВАЕМ/ПРЯЧЕМ элементы разметки ++++++++++++++++++++
@@ -4852,4 +4848,4 @@ let u=n;n&&(u=n.toUpperCase());let l=r;if(r){r.toUpperCase();//!!! тут оши
 }return`\n                <li key=${e} class="gallery__item">\n                <div class="gallery__img-box">\n                    <img src="https://image.tmdb.org/t/p/w780${t}" alt="${n||r}" class="gallery__img" /></div>\n\n                    <div class="gallery__box">\n                        <h5 class="gallery__title">${u||l}</h5>\n                        <h5 class="gallery__title--color">${a} | ${c}</h5>\n                    </div>\n                </li>\n                `})).join("")}(e))}
 //!!!!!! Загрузка популярных фильмов на главную (первую) страницу (без нажатия на кнопки HOME или Filmoteka)
 qI(),(()=>{const e={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:t,closeModalTeamBtn:n,modalTeam:r,body:i}=e;function s(e){r.classList.toggle("is-hidden"),i.classList.toggle("no-scroll"),window.removeEventListener("keydown",o)}function o(e){"Escape"===e.key&&s()}t.addEventListener("click",(function(e){window.addEventListener("keydown",o),r.classList.toggle("is-hidden"),i.classList.toggle("no-scroll")})),n.addEventListener("click",s),r.addEventListener("click",(function(e){e.currentTarget===e.target&&s()}))})();
-//# sourceMappingURL=index.d8672953.js.map
+//# sourceMappingURL=index.9f60b318.js.map
