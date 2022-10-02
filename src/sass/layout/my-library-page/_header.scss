@@ -127,9 +127,11 @@
 .button-mylibrary--active {
   border-bottom: solid 3px var(--btn-rating-bg);
 }
-
+.nav-item {
+margin-left: 40px;
+}
 .button-home {
-  margin-right: 40px;
+  // margin-right: 40px;
   color: #fff;
   text-decoration: none;
 
