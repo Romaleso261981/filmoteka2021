@@ -2,6 +2,8 @@ import Notiflix from 'notiflix';
 //?  Импорт spinner (Loader ==> isLoadin)
 import spinner from './js/preLoader';
 
+import './js/login-modal';
+
 // import ThemoviedbApiService from './js/api-themoviedb.js';
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
