@@ -206,7 +206,7 @@ async function onMovieDetails(event) {
   document.body.classList.add('show-modal');
 
   //! Прячем Spinner
-  // spinner.removeSpinner();
+  spinner.removeSpinner();
 
   //! Рисование интерфейса
   // appendInfoMovieMarkup(infoFilm);
