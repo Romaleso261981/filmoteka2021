@@ -1,51 +1,34 @@
 import Notiflix from 'notiflix';
+
 //?  Импорт spinner (Loader ==> isLoadin)
 import spinner from './js/preLoader';
 
-// import ThemoviedbApiService from './js/api-themoviedb.js';
+// import ThemoviedbApiService from './js/api-themoviedb.js'; //todo ==> уже не надо
+
+//! Импорт БЛОКА ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE> ./js/get-refs.js
+import operationLogicWatchedQueue from './js/operationLogicWatchedQueue.js';
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
-
-export default function getRefs() {
-  return {
-    //! Получаем ссылку на div-контейнер для разметки карточек изображений:
-    moviesCards: document.querySelector('ul[data-action="movies-cards"]'),
-    //! Получаем ссылку на div-контейнер для разметки карточек изображений:
-    InfoMovie: document.querySelector('div[data-action="modal-markup"]'),
-    //! Получаем ссылку на кнопку HOME:
-    homeBtn: document.querySelector('a[data-action="button-home"]'),
-    //! Получаем ссылку на кнопку Filmoteka:
-    filmotekaBtn: document.querySelector('a[data-action="button-filmoteka"]'),
-    //! Получаем ссылку на кнопку MY LIBRARY:
-    myLibraryBtn: document.querySelector('a[data-action="button-mylibrary"]'),
-    //! Получаем ссылки для модалки:
-    closeModalBtn: document.querySelector('[data-action="close-modal"]'),
-    backdrop: document.querySelector('.js-backdrop'),
-
-    //! Получаем ссылку на строку предупреждения об отсутствии фильмов:
-    resultNotSuccessful: document.querySelector('[data-action="search-alert"]'),
-    //! Получаем ссылку на блок кнопок WATCHED и QUEUE в header:
-    watchedQueueHeader: document.querySelector('[data-action="library-btn"]'),
-    //! Получаем ссылку на кнопоку WATCHED в header:
-    watchedHeader: document.querySelector('[data-action="library-watched"]'),
-    //! Получаем ссылку на кнопоку QUEUE в header:
-    queueHeader: document.querySelector('[data-action="library-queue"]'),
-  };
-}
 function getRefsLibrary() {
   return {
     //! Получаем ссылку на div-контейнер для разметки карточек изображений:
     moviesCards: document.querySelector('ul[data-action="movies-cards"]'),
+
     //! Получаем ссылку на div-контейнер для разметки карточек изображений:
     InfoMovie: document.querySelector('div[data-action="modal-markup"]'),
+
     //! Получаем ссылку на кнопку HOME:
     homeBtn: document.querySelector('a[data-action="button-home"]'),
+
     //! Получаем ссылку на кнопку Filmoteka:
     filmotekaBtn: document.querySelector('a[data-action="button-filmoteka"]'),
+
     //! Получаем ссылку на кнопку MY LIBRARY:
     myLibraryBtn: document.querySelector('a[data-action="button-mylibrary"]'),
+
     //! Получаем ссылку на <section class="section-hero"> ==> на poster_path:
     movieDetails: document.querySelector('section[data-action="section-hero"]'),
+
 
     //! Получаем ссылки для модалки:
     // openModalBtn: document.querySelector('[data-action="open-modal"]'), //! ----- для тестирования
@@ -54,8 +37,10 @@ function getRefsLibrary() {
 
     //! Получаем ссылку на строку предупреждения об отсутствии фильмов:
     resultNotSuccessful: document.querySelector('[data-action="search-alert"]'),
+
     //! Получаем ссылку на блок кнопок WATCHED и QUEUE в header:
     watchedQueueHeader: document.querySelector('[data-action="library-btn"]'),
+
     //! Получаем ссылку на кнопоку WATCHED в header:
     watchedHeader: document.querySelector('[data-action="library-watched"]'),
 
@@ -63,12 +48,17 @@ function getRefsLibrary() {
     queueHeader: document.querySelector('[data-action="library-queue"]'),
   };
 }
+
 //! Создаем объект всех ссылок refs.*
 const refs = getRefsLibrary();
 
 // console.log("refs:", refs); //!
 
 // export const themoviedbApiService = new ThemoviedbApiService();
+
+
+
+
 //* +++++++++++++++++++++++++++++++ Создаем ВСЕХ слушателей +++++++++++++++++++++++++++++++++++++++++
 
 //!  Создаем слушателя событий на поле ввода данных - input form:
@@ -136,15 +126,14 @@ let currentPage = '';
 let localStorageWatched = JSON.parse(localStorage.getItem('watched')) ?? [];
 let localStorageQueue = JSON.parse(localStorage.getItem('queue')) ?? [];
 
+
+
+
 //* +++++++++++++++++++++++++++++++++++++++ Блок Функций  +++++++++++++++++++++++++++++++++++++++++++++++++
 
-//? Тестируем-консолим тип жанра по его id
-// console.log("genres:", genres); //!
-// const genreName = convertingIdToGenre(10770);
-// console.log("genreName:", genreName); //!
 
-//!!!!!! Загрузка популярных фильмов на главную (первую) страницу (без нажатия на кнопки HOME или Filmoteka)
-// onHome();
+//!!!!!! Загрузка популярных фильмов на страницу MY LIDRARY
+onMyLibraryWatched();
 
 //* -------------------------- Ф-ция-запрос_1, к-рая прослушивает события на кнопке HOME: ----------------------
 
@@ -185,6 +174,18 @@ async function onMovieDetails(event) {
   //     timeout: 3500,
   //   });
   // }
+
+  //! Достаем из localStorage полную информации о фильме для МОДАЛКИ.
+  //! + проверяем на какой странице находимся (т.е. в каком localStorage искать) 
+  if (currentPage === 'watched') {
+    infoFilm = localStorageWatched.find(option => option.id === idFilms);
+  };
+
+  if (currentPage === 'queue') {
+    infoFilm = localStorageQueue.find(option => option.id === idFilms);
+  };
+
+
   //? ------- Получаем и консолим все данные для рендера разметки главной страницы -------
   // console.log("getMovieDetails ==> infoFilm:", infoFilm); //!
   // const titleOrName = infoFilm.title || infoFilm.name;
@@ -209,13 +210,13 @@ async function onMovieDetails(event) {
   spinner.removeSpinner();
 
   //! Рисование интерфейса
-  // appendInfoMovieMarkup(infoFilm);
+  appendInfoMovieMarkup(infoFilm);
 
   //! Добавляем ГОТОВЫХ слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ
-  // addIventListenerModalBtn();
+  addIventListenerModalBtn();
 
   //! Вызываем БЛОК ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE>
-  // operationLogicWatchedQueue();
+  operationLogicWatchedQueue(currentPage, refs, infoFilm, localStorageWatched, localStorageQueue);
 }
 
 //* -------------- Ф-ция_4, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO WATCHED: ----------
@@ -344,6 +345,7 @@ function onQueueModal() {
         refs.queueModal.classList.remove('colorRed');
       if (!refs.queueModal.classList.contains('colorGreen'))
         refs.queueModal.classList.add('colorGreen');
+
       if (currentPage === 'queue') {
         console.log('currentPage', currentPage); //!
         onCloseModal();
@@ -354,7 +356,7 @@ function onQueueModal() {
     }
   }
 }
-onMyLibraryWatched();
+
 //* -------------------------- Ф-ция_6, для работы с MY LIBRARY или кнопкой WATCHED: ----------------------
 function onMyLibraryWatched() {
   console.log('Вешаю слушателя на кнопку my-library.js==>WATCHED'); //!
@@ -426,32 +428,34 @@ function onQueue() {
   // loadMoreBtn.enable();
 }
 
-//* ++++++++++++++++++++++++++++++++ Кнопка LOAD MORE (для Ф-ции-запрос ==> ОБЩАЯ - для 1 и 2) ++++++++++++++++++++++++++++++++++++++++++++
+//todo ++++++++++++++++++++++++++++++++ Кнопка LOAD MORE (для Ф-ции-запрос ==> ОБЩАЯ - для 1 и 2) ++++++++++++++++++++++++++++++++++++++++++++
 //!  Ф-ция, к-рая прослушивает события на кнопке LOAD MORE:
-async function onLoadMore() {
-  //! Кнопка LOAD MORE => ВЫключаем
-  // loadMoreBtn.disable()
+// async function onLoadMore() {
+//   //! Кнопка LOAD MORE => ВЫключаем
+//   // loadMoreBtn.disable()
 
-  //! проверяеm значения переменной (currentPage)
-  //! и СРАЗУ получаем в переменной films нужный массив объектов
-  //! для отрисовки следующих 20 фильмов
-  await checkResults();
+//   //! проверяеm значения переменной (currentPage)
+//   //! и СРАЗУ получаем в переменной films нужный массив объектов
+//   //! для отрисовки следующих 20 фильмов
+//   await checkResults();
 
-  // console.log("onLoadMore ==> films:", films); //!
+//   // console.log("onLoadMore ==> films:", films); //!
 
-  //! Очищаем контейнер:
-  clearMovieContainer();
+//   //! Очищаем контейнер:
+//   clearMovieContainer();
 
-  //!  Проверка results на ОКОНЧАНИЕ КОЛЛЕКЦИИИ
-  // checkResultsForEnd(endOfCollection);
+//   //!  Проверка results на ОКОНЧАНИЕ КОЛЛЕКЦИИИ
+//   // checkResultsForEnd(endOfCollection);
 
-  //! Рисование интерфейса
-  appendMoviesMarkup(films);
+//   //! Рисование интерфейса
+//   appendMoviesMarkup(films);
 
-  //! Кнопка LOAD MORE => включаем
-  // loadMoreBtn.enable();
-}
-//* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//   //! Кнопка LOAD MORE => включаем
+//   // loadMoreBtn.enable();
+// }
+//todo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 
 //* ---------------------------------------------- Функции-вызывалки ;-) ----------------------------------------------
 //! ++++++++++++++ Ф-ция, к-рая проверяет значения переменной (currentPage) для определения типа запроса в кнопке LOAD MORE ++++++++++++++
@@ -545,37 +549,43 @@ function addIventListenerModalBtn() {
 }
 
 //!+++++++++++++ БЛОК ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE> ++++++++++++++++++
-function operationLogicWatchedQueue() {
-  console.log('БЛОК ЛОГИКИ_refs.watchedModal ==>:', refs.watchedModal); //!
-  console.log('БЛОК ЛОГИКИ_refs.queueModal ==>:', refs.queueModal); //!
-  //! Устанвливаем начальные значения textContent для кнопок WATCHED и QUEUE в модалке
-  //! в зависимости от того, на какой странице находится пользователь
-  refs.watchedModal.textContent = 'ADD TO WATCHED';
-  if (refs.watchedModal.classList.contains('colorRed'))
-    refs.watchedModal.classList.remove('colorRed');
-  if (!refs.watchedModal.classList.contains('colorGreen'))
-    refs.watchedModal.classList.add('colorGreen');
-  if (currentPage === 'watched') {
-    refs.watchedModal.textContent = 'DELETE FROM WATCHED';
-    if (refs.watchedModal.classList.contains('colorGreen'))
-      refs.watchedModal.classList.remove('colorGreen');
-    if (!refs.watchedModal.classList.contains('colorRed'))
-      refs.watchedModal.classList.add('colorRed');
-  }
-  refs.queueModal.textContent = 'ADD TO QUEUE';
-  if (refs.queueModal.classList.contains('colorRed'))
-    refs.queueModal.classList.remove('colorRed');
-  if (!refs.queueModal.classList.contains('colorGreen'))
-    refs.queueModal.classList.add('colorGreen');
-  refs.queueModal.classList.add('colorGreen');
-  if (currentPage === 'queue') {
-    refs.queueModal.textContent = 'DELETE FROM QUEUE';
-    if (refs.queueModal.classList.contains('colorGreen'))
-      refs.queueModal.classList.remove('colorGreen');
-    if (!refs.queueModal.classList.contains('colorRed'))
-      refs.queueModal.classList.add('colorRed');
-  }
-}
+// ?  Теперь импортируем из файла './js/operationLogicWatchedQueue.js';
+//----------------------------------------------------------------------------------------------------
+// function operationLogicWatchedQueue() {
+//   console.log('БЛОК ЛОГИКИ_refs.watchedModal ==>:', refs.watchedModal); //!
+//   console.log('БЛОК ЛОГИКИ_refs.queueModal ==>:', refs.queueModal); //!
+//   //! Устанвливаем начальные значения textContent для кнопок WATCHED и QUEUE в модалке
+//   //! в зависимости от того, на какой странице находится пользователь
+//   refs.watchedModal.textContent = 'ADD TO WATCHED';
+//   if (refs.watchedModal.classList.contains('colorRed'))
+//     refs.watchedModal.classList.remove('colorRed');
+//   if (!refs.watchedModal.classList.contains('colorGreen'))
+//     refs.watchedModal.classList.add('colorGreen');
+//   if (currentPage === 'watched') {
+//     refs.watchedModal.textContent = 'DELETE FROM WATCHED';
+//     if (refs.watchedModal.classList.contains('colorGreen'))
+//       refs.watchedModal.classList.remove('colorGreen');
+//     if (!refs.watchedModal.classList.contains('colorRed'))
+//       refs.watchedModal.classList.add('colorRed');
+//   }
+//   refs.queueModal.textContent = 'ADD TO QUEUE';
+//   if (refs.queueModal.classList.contains('colorRed'))
+//     refs.queueModal.classList.remove('colorRed');
+//   if (!refs.queueModal.classList.contains('colorGreen'))
+//     refs.queueModal.classList.add('colorGreen');
+//   refs.queueModal.classList.add('colorGreen');
+//   if (currentPage === 'queue') {
+//     refs.queueModal.textContent = 'DELETE FROM QUEUE';
+//     if (refs.queueModal.classList.contains('colorGreen'))
+//       refs.queueModal.classList.remove('colorGreen');
+//     if (!refs.queueModal.classList.contains('colorRed'))
+//       refs.queueModal.classList.add('colorRed');
+//   }
+// };
+//! __________________________________________________________________________________________________________________
+
+
+
 
 //* --------------------------------------- Функции-разметки ---------------------------------------------------------
 //! +++++++++++++++++++++++++++++ Markup WATCHED и QUEUE ++++++++++++++++++++++++++++++++++++++++++++++
@@ -635,14 +645,11 @@ function createWatchedQueueCardsMarkup(results) {
 
         return `
                 <li class="gallery__item" key=${id}>
-                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${
-          title || name
-        }" />
+                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name
+          }" />
 
                     <div class="gallery__thumb">
-                        <h2 class="gallery__title">${
-                          capitalsTitle || capitalsName
-                        }</h2>
+                        <h2 class="gallery__title">${capitalsTitle || capitalsName}</h2>
                         <p class="gallery__text">${genresAllOneFilm} &nbsp|&nbsp ${yearDate}&nbsp &nbsp${voteAverage}</p>
                     </div>
                 </li>
@@ -702,9 +709,8 @@ function createInfoMovieMarkup(infoFilm) {
   }
 
   return `
-        <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${
-    title || name
-  }" />
+        <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name
+    }" />
         
         <div class="modal-сontent">
             <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3>
@@ -720,9 +726,8 @@ function createInfoMovieMarkup(infoFilm) {
                     </tr>
                     <tr>
                         <td class="modal-key">Original Title</td>
-                        <td class="modal-parametr">${
-                          original_title || original_name
-                        }</td>
+                        <td class="modal-parametr">${original_title || original_name
+    }</td>
                     </tr>
                     <tr>
                         <td class="modal-key">Genre</td>
@@ -736,8 +741,8 @@ function createInfoMovieMarkup(infoFilm) {
             </div>
         
             <div class="modal-button" data-action="library-btn">
-                <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
-                <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
+                <button type="button" class="modal-button-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+                <button type="button" class="modal-button-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
             </div>
         </div>
     `;
