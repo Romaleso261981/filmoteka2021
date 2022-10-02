@@ -541,6 +541,19 @@ function operationLogicWatchedQueue() {
   refs.watchedModal.classList.add("modal-button-add-watched");
   // if (refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.remove("colorRed");
   // if (!refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.add("colorGreen");
+
+  //! Замена "ADD TO WATCHED" на "DELETE FROM WATCHED" если фильм уже есть в localStorage
+  if (currentPage === "queue") {
+    // console.log("currentPage = home-Filmoteka && Movie search"); //!
+    if (localStorageWatched.find(option => option.id === infoFilm.id)) {
+      refs.watchedModal.textContent = "DELETE FROM WATCHED";
+      refs.watchedModal.classList.remove("modal-button-add-watched");
+      refs.watchedModal.classList.add("modal-button-delete");
+      // if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
+      // if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
+    };
+  };
+
   if (currentPage === "watched") {
     refs.watchedModal.textContent = "DELETE FROM WATCHED";
     refs.watchedModal.classList.remove("modal-button-add-watched");
@@ -554,7 +567,19 @@ function operationLogicWatchedQueue() {
   refs.queueModal.classList.add("modal-button-add-queue");
   // if (refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.remove("colorRed");
   // if (!refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.add("colorGreen");
-  refs.queueModal.classList.add("colorGreen");
+  //refs.queueModal.classList.add("colorGreen");
+
+  //! Замена "ADD TO QUEUE" на "DELETE FROM QUEUE" если фильм уже есть в localStorage
+  if (currentPage === "watched") {
+    // console.log("currentPage = home-Filmoteka && Movie search"); //!
+    if (localStorageQueue.find(option => option.id === infoFilm.id)) {
+      refs.queueModal.textContent = "DELETE FROM QUEUE";
+      refs.queueModal.classList.remove("modal-button-add-queue");
+      refs.queueModal.classList.add("modal-button-delete");
+      // if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
+      // if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
+    };
+  };
   if (currentPage === "queue") {
     refs.queueModal.textContent = "DELETE FROM QUEUE";
     refs.queueModal.classList.remove("modal-button-add-queue");

@@ -345,7 +345,6 @@ export function onWatchedModal() {
     if (textWatchedModal === "ADD TO WATCHED") {
         //! Блокировка повторной записи фильма в localStorage 
         if (localStorageWatched.find(option => option.id === infoFilm.id)) {
-            Notiflix.Notify.warning(`Фильм ${infoFilm.title || infoFilm.name} уже есть в WATCHED`, { timeout: 3500, },);
             refs.watchedModal.textContent = "DELETE FROM WATCHED";
             refs.watchedModal.classList.remove("modal-button-add-watched");
             refs.watchedModal.classList.add("modal-button-delete");
@@ -698,7 +697,7 @@ function operationLogicWatchedQueue() {
     };
 
     //! Замена "ADD TO QUEUE" на "DELETE FROM QUEUE" если пользователь на странице MY LIBRARY==>QUEUE
-    refs.queueModal.classList.add("colorGreen");
+    //refs.queueModal.classList.add("colorGreen");
     if (currentPage === "queue") {
         refs.queueModal.textContent = "DELETE FROM QUEUE";
         refs.queueModal.classList.remove("modal-button-add-queue");
