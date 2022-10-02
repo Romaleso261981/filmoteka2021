@@ -312,7 +312,7 @@ async function onMovieDetails(event) {
     //! ==> Открываем модалку
     window.addEventListener('keydown', onEscKeyPress);
     document.body.classList.add('show-modal');
-
+    document.body.classList.add('no-scroll');
     //! Прячем Spinner
     spinner.removeSpinner();
 
@@ -591,6 +591,7 @@ function checkMovieForEmpty(results) {
 function onCloseModal() {
     window.removeEventListener('keydown', onEscKeyPress);
     document.body.classList.remove('show-modal');
+    document.body.classList.remove('no-scroll');
     //! Очищаем контейнер МОДАЛКИ:
     clearModalContainer();
 }
@@ -817,7 +818,8 @@ function createInfoMovieMarkup(infoFilm) {
         <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
         
         <div class="modal-сontent">
-            <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3
+            <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3>
+          
             <table class="modal-info">
                 <tbody>
                     <tr>
@@ -837,29 +839,19 @@ function createInfoMovieMarkup(infoFilm) {
                         <td class="modal-parametr">${genresAllOneFilm}</td>
                     </tr>
                 </tbody>
-            </table
+            </table>
+
             <div class="modal-about-film">
                 <h5 class="modal-about-title">ABOUT</h5>
                 <span class="modal-about-text">${overview}</span>
-            </div
-        </div>
-            <div class="modal-button" data-action="library-btn">
-                <button 
-                    type="button" 
-                    class="modal-watched" 
-                    data-action="modal-add-watched"
-                    >
-                    ADD TO WATCHED
-                </button>
-                <button 
-                    type="button" 
-                    class="modal-queue" 
-                    data-action="modal-add-queue"
-                    >
-                    ADD TO QUEUE
-                </button>
             </div>
-        
+
+            <div class="modal-button" data-action="library-btn">
+                <button type="button" class="modal-button-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+                <button type="button" class="modal-button-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
+            </div>
+        </div>
+               
     `;
 }
 

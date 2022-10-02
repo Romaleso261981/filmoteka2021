@@ -25,7 +25,7 @@ export default function getRefs() {
     // openModalBtn: document.querySelector('[data-action="open-modal"]'), //! ----- для тестирования
     closeModalBtn: document.querySelector('[data-action="close-modal"]'),
     backdrop: document.querySelector('.js-backdrop'),
-
+    body: document.querySelector("body"),
     //! Получаем ссылку на строку предупреждения об отсутствии фильмов:
     resultNotSuccessful: document.querySelector('[data-action="search-alert"]'),
 
