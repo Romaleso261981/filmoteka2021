@@ -64,8 +64,8 @@ refs.backdrop.addEventListener('click', onBackdropClick);
 //! +++++++++ Создаем слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ ++++++++++++++
 // refs.watchedModal.addEventListener('click', onWatchedModal); //!!! +-+-+-+-
 // refs.queueModal.addEventListener('click', onQueueModal); //!!! +-+-+-+-
-console.log("Слушатели_refs.watchedModal:", refs.watchedModal); //!
-console.log("Слушатели_refs.queueModal:", refs.queueModal); //!
+// console.log("Слушатели_refs.watchedModal:", refs.watchedModal); //!
+// console.log("Слушатели_refs.queueModal:", refs.queueModal); //!
 //! Импортируем ГОТОВЫХ слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ 
 // import addIventListenerModalBtn from './js/addIventListenerModalBtn.js'; //! пока не надо, поключена ЛОКАЛЬНО
 

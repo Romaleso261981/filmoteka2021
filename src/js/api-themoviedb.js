@@ -50,12 +50,12 @@ export default class ThemoviedbApiService {
     //! 1 - Загрузка популярных фильмов на главную (первую) страницу 
     async getTrendingAllDay() {
         const url_1 = `${BASE_URL}/${END_POINTS_1}?api_key=${API_KEY}&page=${this.page}`;
-        console.log("url_1: ", url_1); //!
+        // console.log("url_1: ", url_1); //!
         const response = await axios.get(url_1) //! 1 
         const { results, total_results} = response.data;
         renderPagination (total_results)
         this.incrementPage();
-        console.log("getTrendingAllDay ==> this.page: ", this.page); //!
+        // console.log("getTrendingAllDay ==> this.page: ", this.page); //!
         return results;
     }
     async getTrendingAllDayPaginationClick() {

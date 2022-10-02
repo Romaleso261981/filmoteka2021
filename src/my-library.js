@@ -97,8 +97,8 @@ refs.backdrop.addEventListener('click', onBackdropClick);
 //! +++++++++ Создаем слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ ++++++++++++++
 // refs.watchedModal.addEventListener('click', onWatchedModal); //!!! +-+-+-+-
 // refs.queueModal.addEventListener('click', onQueueModal); //!!! +-+-+-+-
-console.log('Слушатели_refs.watchedModal:', refs.watchedModal); //!
-console.log('Слушатели_refs.queueModal:', refs.queueModal); //!
+// console.log('Слушатели_refs.watchedModal:', refs.watchedModal); //!
+// console.log('Слушатели_refs.queueModal:', refs.queueModal); //!
 //! Импортируем ГОТОВЫХ слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ
 // import addIventListenerModalBtn from './js/addIventListenerModalBtn.js'; //! пока не надо, поключена ЛОКАЛЬНО
 
@@ -167,24 +167,24 @@ async function onMovieDetails(event) {
   spinner.startSpinner();
 
   //! ==> Делаем запрос-3 полной информации о фильме для МОДАЛКИ.
-  try {
-    const results = await themoviedbApiService.getMovieDetails(idFilms);
-    //! Очищаем контейнер МОДАЛКИ:
-    clearModalContainer();
-    //! Перезаписываем в глобальную переменную (films) значение всей (results)
-    infoFilm = results;
-  } catch (error) {
-    //! Очищаем контейнер МОДАЛКИ:
-    clearModalContainer();
-    //! Прячем Spinner
-    spinner.removeSpinner();
-    //! Очищаем контейнер переменную (films):
-    infoFilm = null;
-    console.log(error); //!
-    Notiflix.Notify.failure(`Ошибка запроса: ${error.message}`, {
-      timeout: 3500,
-    });
-  }
+  // try {
+  //   const results = await themoviedbApiService.getMovieDetails(idFilms);
+  //   //! Очищаем контейнер МОДАЛКИ:
+  //   clearModalContainer();
+  //   //! Перезаписываем в глобальную переменную (films) значение всей (results)
+  //   infoFilm = results;
+  // } catch (error) {
+  //   //! Очищаем контейнер МОДАЛКИ:
+  //   clearModalContainer();
+  //   //! Прячем Spinner
+  //   spinner.removeSpinner();
+  //   //! Очищаем контейнер переменную (films):
+  //   infoFilm = null;
+  //   console.log(error); //!
+  //   Notiflix.Notify.failure(`Ошибка запроса: ${error.message}`, {
+  //     timeout: 3500,
+  //   });
+  // }
   //? ------- Получаем и консолим все данные для рендера разметки главной страницы -------
   // console.log("getMovieDetails ==> infoFilm:", infoFilm); //!
   // const titleOrName = infoFilm.title || infoFilm.name;
@@ -206,16 +206,16 @@ async function onMovieDetails(event) {
   document.body.classList.add('show-modal');
 
   //! Прячем Spinner
-  spinner.removeSpinner();
+  // spinner.removeSpinner();
 
   //! Рисование интерфейса
-  appendInfoMovieMarkup(infoFilm);
+  // appendInfoMovieMarkup(infoFilm);
 
   //! Добавляем ГОТОВЫХ слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ
-  addIventListenerModalBtn();
+  // addIventListenerModalBtn();
 
   //! Вызываем БЛОК ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE>
-  operationLogicWatchedQueue();
+  // operationLogicWatchedQueue();
 }
 
 //* -------------- Ф-ция_4, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO WATCHED: ----------
