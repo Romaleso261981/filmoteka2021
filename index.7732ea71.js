@@ -4630,7 +4630,7 @@ myLibraryBtn:document.querySelector('a[data-action="button-mylibrary"]'),
 //! Получаем ссылку на <section class="section-hero"> ==> на poster_path:
 movieDetails:document.querySelector('section[data-action="section-hero"]'),
 //! Получаем ссылки для модалки:
-closeModalBtn:document.querySelector('[data-action="close-modal"]'),backdrop:document.querySelector(".js-backdrop"),
+closeModalBtn:document.querySelector('[data-action="close-modal"]'),backdrop:document.querySelector(".js-backdrop"),body:document.querySelector("body"),
 //! Получаем ссылку на строку предупреждения об отсутствии фильмов:
 resultNotSuccessful:document.querySelector('[data-action="search-alert"]'),
 //! Получаем ссылку на форму со строкой инпута:
@@ -4735,7 +4735,7 @@ l.default.removeSpinner(),
 UI=null,console.log(e),//!
 t(a).Notify.failure(`Ошибка запроса: ${e.message}`,{timeout:3500})}
 //! ==> Открываем модалку
-window.addEventListener("keydown",HI),document.body.classList.add("show-modal"),
+window.addEventListener("keydown",HI),document.body.classList.add("show-modal"),document.body.classList.add("no-scroll"),
 //! Прячем Spinner
 l.default.removeSpinner(),
 //! Рисование интерфейса
@@ -4743,7 +4743,7 @@ n=UI,
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 OI.InfoMovie.insertAdjacentHTML("afterbegin",
 //! --------------------------------------------------------------------------------------------
-function(e){const{id:t,poster_path:n,title:r,name:i,vote_average:s,vote_count:o,popularity:a,original_title:c,original_name:u,genres:l,overview:h}=e,d=l.map((e=>e.name)).join(", ");let f=r;r&&(f=r.toUpperCase());let p=i;return i&&i.toUpperCase(),`\n        <img src="https://image.tmdb.org/t/p/w300${n}" alt="${r||i}" />\n        \n        <div class="modal-сontent">\n            <h3 class="modal-title-film">${f||p}</h3\n            <table class="modal-info">\n                <tbody>\n                    <tr>\n                        <td class="modal-key">Vote/Votes</td>\n                        <td class="modal-parametr"><span class="modal-parametr-vote">${s}</span> / ${o}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Popularity</td>\n                        <td class="modal-parametr">${a}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Original Title</td>\n                        <td class="modal-parametr">${c||u}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Genre</td>\n                        <td class="modal-parametr">${d}</td>\n                    </tr>\n                </tbody>\n            </table\n            <div class="modal-about-film">\n                <h5 class="modal-about-title">ABOUT</h5>\n                <span class="modal-about-text">${h}</span>\n            </div\n        </div>\n            <div class="modal-button" data-action="library-btn">\n                <button \n                    type="button" \n                    class="modal-watched" \n                    data-action="modal-add-watched"\n                    >\n                    ADD TO WATCHED\n                </button>\n                <button \n                    type="button" \n                    class="modal-queue" \n                    data-action="modal-add-queue"\n                    >\n                    ADD TO QUEUE\n                </button>\n            </div>\n        \n    `}(n)),OI.watchedModal=document.querySelector('button[data-action="modal-add-watched"]'),OI.queueModal=document.querySelector('button[data-action="modal-add-queue"]'),console.log("addIventListenerModalBtn_refs.watchedModal:",OI.watchedModal),//!
+function(e){const{id:t,poster_path:n,title:r,name:i,vote_average:s,vote_count:o,popularity:a,original_title:c,original_name:u,genres:l,overview:h}=e,d=l.map((e=>e.name)).join(", ");let f=r;r&&(f=r.toUpperCase());let p=i;return i&&i.toUpperCase(),`\n        <img src="https://image.tmdb.org/t/p/w300${n}" alt="${r||i}" />\n        \n        <div class="modal-сontent">\n            <h3 class="modal-title-film">${f||p}</h3>\n          \n            <table class="modal-info">\n                <tbody>\n                    <tr>\n                        <td class="modal-key">Vote/Votes</td>\n                        <td class="modal-parametr"><span class="modal-parametr-vote">${s}</span> / ${o}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Popularity</td>\n                        <td class="modal-parametr">${a}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Original Title</td>\n                        <td class="modal-parametr">${c||u}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Genre</td>\n                        <td class="modal-parametr">${d}</td>\n                    </tr>\n                </tbody>\n            </table>\n\n            <div class="modal-about-film">\n                <h5 class="modal-about-title">ABOUT</h5>\n                <span class="modal-about-text">${h}</span>\n            </div>\n\n            <div class="modal-button" data-action="library-btn">\n                <button type="button" class="modal-button-watched" data-action="modal-add-watched">ADD TO WATCHED</button>\n                <button type="button" class="modal-button-queue" data-action="modal-add-queue">ADD TO QUEUE</button>\n            </div>\n        </div>\n               \n    `}(n)),OI.watchedModal=document.querySelector('button[data-action="modal-add-watched"]'),OI.queueModal=document.querySelector('button[data-action="modal-add-queue"]'),console.log("addIventListenerModalBtn_refs.watchedModal:",OI.watchedModal),//!
 console.log("addIventListenerModalBtn_refs.queueModal:",OI.queueModal),//!
 OI.watchedModal.addEventListener("click",jI),OI.queueModal.addEventListener("click",GI),
 //! Вызываем БЛОК ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE> 
@@ -4831,7 +4831,7 @@ zI(),
 //! Очищаем контейнер:
 $I(),appendWatchedQueueMarkup(VI)))}function $I(){OI.moviesCards.innerHTML=""}
 //!  Ф-ция, к-рая очищает контейнер МОДАЛКИ:
-function KI(){OI.InfoMovie.innerHTML=""}function zI(){window.removeEventListener("keydown",HI),document.body.classList.remove("show-modal"),
+function KI(){OI.InfoMovie.innerHTML=""}function zI(){window.removeEventListener("keydown",HI),document.body.classList.remove("show-modal"),document.body.classList.remove("no-scroll"),
 //! Очищаем контейнер МОДАЛКИ:
 KI()}function HI(e){"Escape"===e.code&&zI()}
 //!_____________________________________________________________________
@@ -4848,4 +4848,4 @@ let u=n;n&&(u=n.toUpperCase());let l=r;if(r){r.toUpperCase();//!!! тут оши
 }return`\n                <li key=${e} class="gallery__item">\n                <div class="gallery__img-box">\n                    <img src="https://image.tmdb.org/t/p/w780${t}" alt="${n||r}" class="gallery__img" /></div>\n\n                    <div class="gallery__box">\n                        <h5 class="gallery__title">${u||l}</h5>\n                        <h5 class="gallery__title--color">${a} | ${c}</h5>\n                    </div>\n                </li>\n                `})).join("")}(e))}
 //!!!!!! Загрузка популярных фильмов на главную (первую) страницу (без нажатия на кнопки HOME или Filmoteka)
 qI(),(()=>{const e={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:t,closeModalTeamBtn:n,modalTeam:r,body:i}=e;function s(e){r.classList.toggle("is-hidden"),i.classList.toggle("no-scroll"),window.removeEventListener("keydown",o)}function o(e){"Escape"===e.key&&s()}t.addEventListener("click",(function(e){window.addEventListener("keydown",o),r.classList.toggle("is-hidden"),i.classList.toggle("no-scroll")})),n.addEventListener("click",s),r.addEventListener("click",(function(e){e.currentTarget===e.target&&s()}))})();
-//# sourceMappingURL=index.9f60b318.js.map
+//# sourceMappingURL=index.7732ea71.js.map
