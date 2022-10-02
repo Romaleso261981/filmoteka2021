@@ -3,6 +3,33 @@ import Notiflix from 'notiflix';
 import spinner from './js/preLoader';
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
+
+export default function getRefs() {
+  return {
+    //! Получаем ссылку на div-контейнер для разметки карточек изображений:
+    moviesCards: document.querySelector('ul[data-action="movies-cards"]'),
+    //! Получаем ссылку на div-контейнер для разметки карточек изображений:
+    InfoMovie: document.querySelector('div[data-action="modal-markup"]'),
+    //! Получаем ссылку на кнопку HOME:
+    homeBtn: document.querySelector('a[data-action="button-home"]'),
+    //! Получаем ссылку на кнопку Filmoteka:
+    filmotekaBtn: document.querySelector('a[data-action="button-filmoteka"]'),
+    //! Получаем ссылку на кнопку MY LIBRARY:
+    myLibraryBtn: document.querySelector('a[data-action="button-mylibrary"]'),
+    //! Получаем ссылки для модалки:
+    closeModalBtn: document.querySelector('[data-action="close-modal"]'),
+    backdrop: document.querySelector('.js-backdrop'),
+
+    //! Получаем ссылку на строку предупреждения об отсутствии фильмов:
+    resultNotSuccessful: document.querySelector('[data-action="search-alert"]'),
+    //! Получаем ссылку на блок кнопок WATCHED и QUEUE в header:
+    watchedQueueHeader: document.querySelector('[data-action="library-btn"]'),
+    //! Получаем ссылку на кнопоку WATCHED в header:
+    watchedHeader: document.querySelector('[data-action="library-watched"]'),
+    //! Получаем ссылку на кнопоку QUEUE в header:
+    queueHeader: document.querySelector('[data-action="library-queue"]'),
+  };
+};
 function getRefsLibrary() {
   return {
 
