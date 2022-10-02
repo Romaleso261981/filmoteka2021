@@ -1,5 +1,4 @@
 .tui-page-btn {
-    
     border: none;
     margin: 8px;
     border-radius: 5px;}
@@ -7,3 +6,16 @@
         background-color: #ff6b08!important;
         border-color: #ff6b08!important;
     }
+    .container-pagination{
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    
+    @media screen  and (max-width: 479px){
+        .tui-first,
+        .tui-last,
+        .tui-prev,
+        .tui-next{
+            opacity: 0;
+        } 
+        }
