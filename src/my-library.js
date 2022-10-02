@@ -223,39 +223,40 @@ function onWatchedModal() {
   if (textWatchedModal === "ADD TO WATCHED") {
     //! Блокировка повторной записи фильма в localStorage (ВРЕМЕННО)
     if (localStorageWatched.find(option => option.id === infoFilm.id)) {
-      Notiflix.Notify.warning(`Фильм ${infoFilm.title || infoFilm.name} уже есть в WATCHED`, { timeout: 3500, },);
       refs.watchedModal.textContent = "DELETE FROM WATCHED";
-      if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
-      if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
+      refs.watchedModal.classList.remove("modal-button-add-watched");
+      refs.watchedModal.classList.add("modal-button-delete");
+      // if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
+      // if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
       return;
     };
     //! Запись фильма в localStorage
     localStorageWatched = [...localStorageWatched, infoFilm];
     console.log("localStorageWatched:", localStorageWatched); //!
     localStorage.setItem("watched", JSON.stringify(localStorageWatched));
-    Notiflix.Notify.success(`Фильм ${infoFilm.title || infoFilm.name} добавлен в WATCHED`, { timeout: 3500, },);
     //! Смена названия (textContent) кнопки на "DELETE FROM WATCHED"
     refs.watchedModal.textContent = "DELETE FROM WATCHED";
-    if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
-    if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
+    refs.watchedModal.classList.remove("modal-button-add-watched");
+    refs.watchedModal.classList.add("modal-button-delete");
+    // if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
+    // if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
     console.log("textWatchedModal ==> конец:", textWatchedModal); //!
-  } else {
-    if (textWatchedModal === "DELETE FROM WATCHED") {
-      localStorageWatched = localStorageWatched.filter(item => item.id !== infoFilm.id);
-      localStorage.setItem("watched", JSON.stringify(localStorageWatched));
-      console.log("Фильм удален из WATCHED"); //!
-      Notiflix.Notify.info(`Фильм ${infoFilm.title || infoFilm.name} удален из WATCHED`, { timeout: 3500, },);
-      refs.watchedModal.textContent = "ADD TO WATCHED";
-      if (refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.remove("colorRed");
-      if (!refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.add("colorGreen");
+  } else if (textWatchedModal === "DELETE FROM WATCHED") {
+    localStorageWatched = localStorageWatched.filter(item => item.id !== infoFilm.id);
+    localStorage.setItem("watched", JSON.stringify(localStorageWatched));
+    console.log("Фильм удален из WATCHED"); //!
+    refs.watchedModal.textContent = "ADD TO WATCHED";
+    refs.watchedModal.classList.remove("modal-button-delete");
+    refs.watchedModal.classList.add("modal-button-add-watched");
+    // if (refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.remove("colorRed");
+    // if (!refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.add("colorGreen");
 
-      if (currentPage === "watched") {
-        console.log("currentPage", currentPage); //!
-        onCloseModal();
-        //! Очищаем контейнер:
-        clearMovieContainer();
-        appendWatchedQueueMarkup(localStorageWatched);
-      };
+    if (currentPage === "watched") {
+      console.log("currentPage", currentPage); //!
+      onCloseModal();
+      //! Очищаем контейнер:
+      clearMovieContainer();
+      appendWatchedQueueMarkup(localStorageWatched);
     };
   };
 };
@@ -277,38 +278,39 @@ function onQueueModal() {
   if (textQueuedModal === "ADD TO QUEUE") {
     //! Блокировка повторной записи фильма в localStorage (ВРЕМЕННО)
     if (localStorageQueue.find(option => option.id === infoFilm.id)) {
-      Notiflix.Notify.warning(`Фильм ${infoFilm.title || infoFilm.name} уже есть в QUEUE`, { timeout: 3500, },);
       refs.queueModal.textContent = "DELETE FROM QUEUE";
-      if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
-      if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
+      refs.queueModal.classList.remove("modal-button-add-queue");
+      refs.queueModal.classList.add("modal-button-delete");
+      // if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
+      // if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
       return;
     };
     //! Запись фильма в localStorage
     localStorageQueue = [...localStorageQueue, infoFilm];
     console.log("localStorageQueue:", localStorageQueue); //!
     localStorage.setItem("queue", JSON.stringify(localStorageQueue));
-    Notiflix.Notify.success(`Фильм ${infoFilm.title || infoFilm.name} добавлен в QUEUE`, { timeout: 3500, },);
     //! Смена названия (textContent) кнопки на "DELETE FROM QUEUE"
     refs.queueModal.textContent = "DELETE FROM QUEUE";
-    if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
-    if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
+    refs.queueModal.classList.remove("modal-button-add-queue");
+    refs.queueModal.classList.add("modal-button-delete");
+    // if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
+    // if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
     console.log("textQueuedModal ==> конец:", textQueuedModal); //!
-  } else {
-    if (textQueuedModal === "DELETE FROM QUEUE") {
-      localStorageQueue = localStorageQueue.filter(item => item.id !== infoFilm.id);
-      localStorage.setItem("queue", JSON.stringify(localStorageQueue));
-      console.log("Фильм удален из QUEUE");
-      Notiflix.Notify.info(`Фильм ${infoFilm.title || infoFilm.name} удален из QUEUE`, { timeout: 3500, },);
-      refs.queueModal.textContent = "ADD TO QUEUE";
-      if (refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.remove("colorRed");
-      if (!refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.add("colorGreen");
-      if (currentPage === "queue") {
-        console.log("currentPage", currentPage); //!
-        onCloseModal();
-        //! Очищаем контейнер:
-        clearMovieContainer();
-        appendWatchedQueueMarkup(localStorageQueue);
-      };
+  } else if (textQueuedModal === "DELETE FROM QUEUE") {
+    localStorageQueue = localStorageQueue.filter(item => item.id !== infoFilm.id);
+    localStorage.setItem("queue", JSON.stringify(localStorageQueue));
+    console.log("Фильм удален из QUEUE");
+    refs.queueModal.textContent = "ADD TO QUEUE";
+    refs.queueModal.classList.remove("modal-button-delete");
+    refs.queueModal.classList.add("modal-button-add-queue");
+    // if (refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.remove("colorRed");
+    // if (!refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.add("colorGreen");
+    if (currentPage === "queue") {
+      console.log("currentPage", currentPage); //!
+      onCloseModal();
+      //! Очищаем контейнер:
+      clearMovieContainer();
+      appendWatchedQueueMarkup(localStorageQueue);
     };
   };
 };
@@ -535,22 +537,30 @@ function operationLogicWatchedQueue() {
   //! Устанвливаем начальные значения textContent для кнопок WATCHED и QUEUE в модалке
   //! в зависимости от того, на какой странице находится пользователь
   refs.watchedModal.textContent = "ADD TO WATCHED";
-  if (refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.remove("colorRed");
-  if (!refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.add("colorGreen");
+  refs.watchedModal.classList.remove("modal-button-delete");
+  refs.watchedModal.classList.add("modal-button-add-watched");
+  // if (refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.remove("colorRed");
+  // if (!refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.add("colorGreen");
   if (currentPage === "watched") {
     refs.watchedModal.textContent = "DELETE FROM WATCHED";
-    if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
-    if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
+    refs.watchedModal.classList.remove("modal-button-add-watched");
+    refs.watchedModal.classList.add("modal-button-delete");
+    // if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
+    // if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
 
   };
   refs.queueModal.textContent = "ADD TO QUEUE";
-  if (refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.remove("colorRed");
-  if (!refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.add("colorGreen");
+  refs.queueModal.classList.remove("modal-button-delete");
+  refs.queueModal.classList.add("modal-button-add-queue");
+  // if (refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.remove("colorRed");
+  // if (!refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.add("colorGreen");
   refs.queueModal.classList.add("colorGreen");
   if (currentPage === "queue") {
     refs.queueModal.textContent = "DELETE FROM QUEUE";
-    if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
-    if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
+    refs.queueModal.classList.remove("modal-button-add-queue");
+    refs.queueModal.classList.add("modal-button-delete");
+    // if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
+    // if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
   };
 }
 
@@ -706,8 +716,8 @@ function createInfoMovieMarkup(infoFilm) {
             </div>
         
             <div class="modal-button" data-action="library-btn">
-                <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
-                <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
+                <button type="button" class="modal-button-add-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+                <button type="button" class="modal-button-add-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
             </div>
         </div>
     `;
