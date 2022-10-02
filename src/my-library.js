@@ -31,10 +31,9 @@ export default function getRefs() {
     //! Получаем ссылку на кнопоку QUEUE в header:
     queueHeader: document.querySelector('[data-action="library-queue"]'),
   };
-};
+}
 function getRefsLibrary() {
   return {
-
     //! Получаем ссылку на div-контейнер для разметки карточек изображений:
     moviesCards: document.querySelector('ul[data-action="movies-cards"]'),
     //! Получаем ссылку на div-контейнер для разметки карточек изображений:
@@ -66,6 +65,7 @@ function getRefsLibrary() {
 }
 //! Создаем объект всех ссылок refs.*
 const refs = getRefsLibrary();
+
 // console.log("refs:", refs); //!
 
 // export const themoviedbApiService = new ThemoviedbApiService();
@@ -354,7 +354,7 @@ function onQueueModal() {
     }
   }
 }
-
+onMyLibraryWatched();
 //* -------------------------- Ф-ция_6, для работы с MY LIBRARY или кнопкой WATCHED: ----------------------
 function onMyLibraryWatched() {
   console.log('Вешаю слушателя на кнопку my-library.js==>WATCHED'); //!
@@ -634,14 +634,16 @@ function createWatchedQueueCardsMarkup(results) {
         }
 
         return `
-                <li key=${id}>
-                    <img src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${
+                <li class="gallery__item" key=${id}>
+                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${
           title || name
         }" />
 
-                    <div>
-                        <h2>${capitalsTitle || capitalsName}</h2>
-                        <h3>${genresAllOneFilm} &nbsp|&nbsp ${yearDate}&nbsp &nbsp${voteAverage}</h3>
+                    <div class="gallery__thumb">
+                        <h2 class="gallery__title">${
+                          capitalsTitle || capitalsName
+                        }</h2>
+                        <p class="gallery__text">${genresAllOneFilm} &nbsp|&nbsp ${yearDate}&nbsp &nbsp${voteAverage}</p>
                     </div>
                 </li>
                 `;
