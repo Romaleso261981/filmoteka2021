@@ -3,9 +3,6 @@ import Notiflix from 'notiflix';
 
 // ! +++++++++++++++++++++++ БЛОК ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE> +++++++++++++++++++++++
 export default function operationLogicWatchedQueue(currentPage, refs, infoFilm, localStorageWatched, localStorageQueue) {
-    console.log("БЛОК ЛОГИКИ_currentPage ==>:", currentPage); //!
-    console.log("БЛОК ЛОГИКИ_refs.watchedModal ==>:", refs.watchedModal); //!
-    console.log("БЛОК ЛОГИКИ_refs.queueModal ==>:", refs.queueModal); //!
     //? ------------------------------------------- кнопки WATCHED и QUEUE -------------------------------------------
     //! Устанвливаем начальные значения textContent для кнопки WATCHED в модалке
     refs.watchedModal.textContent = "ADD TO WATCHED";

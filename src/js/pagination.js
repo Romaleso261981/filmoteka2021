@@ -22,7 +22,6 @@ async function callBack (e) {
 spinner.startSpinner()
    const dataFilms = await checkRequest(); 
    clearMovieContainer()
-   console.log(dataFilms);
    spinner.removeSpinner() 
    handleScrollUp  ()
    appendHitsMarkup(dataFilms)
