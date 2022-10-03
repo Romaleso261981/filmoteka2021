@@ -1,4 +1,4 @@
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 
 //?  Импорт spinner (Loader ==> isLoadin)
 import spinner from './js/preLoader';
@@ -210,7 +210,6 @@ async function onFormMoviesSearch(evt) {
     //! записывается с помощью сетера класса ThemoviedbApiService в переменную searchQuery
     themoviedbApiService.query =
         evt.currentTarget.elements.searchQuery.value.trim(); //! + убираем пробелы
-    console.log('searchQuery: ', themoviedbApiService.query); //!
     // console.log("evt.currentTarget.elements.searchQuery.value: ", evt.currentTarget.elements.searchQuery.value); //!
     evt.currentTarget.elements.searchQuery.value = '';
     // console.log("evt.currentTarget.elements.searchQuery.value: ", evt.currentTarget.elements.searchQuery.value); //!
@@ -270,8 +269,7 @@ async function onMovieDetails(event) {
     if (event.target.closest('li')) {
         const itemId = event.target.closest('li');
         // console.log("itemId:", itemId); //!
-        idFilms = Number(itemId.getAttribute('key')); //!!! вот ОН, РОДНОЙ!!!
-        console.log('idFilms:', idFilms); //!
+        idFilms = Number(itemId.getAttribute('key'));
     } else return;
     //?__________ ПОЛУЧАЕМ (id) фильма по клику на карточке фильма __________
 
@@ -298,6 +296,7 @@ async function onMovieDetails(event) {
             clickToClose: true,
             timeout: 2500,
         });
+
     }
     //? ------- Получаем и консолим все данные для рендера разметки главной страницы -------
     // console.log("getMovieDetails ==> infoFilm:", infoFilm); //!
@@ -338,13 +337,6 @@ async function onMovieDetails(event) {
 ///* -------------- Ф-ция_4, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO WATCHED: ----------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 export function onWatchedModal() {
-    console.log('Вешаю слушателя на кнопку ADD TO WATCHED в МОДАЛКЕ'); //!
-
-    console.log('infoFilm:', infoFilm); //!
-    console.log('infoFilm.id:', infoFilm.id); //!
-
-    console.log("Ф-ция_4_refs.watchedModal ==>:", refs.watchedModal); //!
-
     const textWatchedModal = refs.watchedModal.textContent;
     console.log("textWatchedModal ==> начало:", textWatchedModal); //!
 
@@ -359,14 +351,14 @@ export function onWatchedModal() {
                 timeout: 2500,
               }
             );
+
             refs.watchedModal.textContent = "DELETE FROM WATCHED";
-            if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
-            if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
+            if (refs.watchedModal.classList.contains("modal-button-add-watched")) refs.watchedModal.classList.remove("modal-button-add-watched");
+            if (!refs.watchedModal.classList.contains("modal-button-delete")) refs.watchedModal.classList.add("modal-button-delete");
             return;
         };
         //! Запись фильма в localStorage
         localStorageWatched = [...localStorageWatched, infoFilm];
-        console.log("localStorageWatched:", localStorageWatched); //!
         localStorage.setItem("watched", JSON.stringify(localStorageWatched));
         Notiflix.Notify.success(
           `Фильм ${infoFilm.title || infoFilm.name} добавлен в WATCHED`,
@@ -376,11 +368,11 @@ export function onWatchedModal() {
             timeout: 2500,
           }
         );
+
         //! Смена названия (textContent) кнопки на "DELETE FROM WATCHED"
         refs.watchedModal.textContent = "DELETE FROM WATCHED";
-        if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
-        if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
-        console.log("textWatchedModal ==> конец:", textWatchedModal); //!
+        if (refs.watchedModal.classList.contains("modal-button-add-watched")) refs.watchedModal.classList.remove("modal-button-add-watched");
+        if (!refs.watchedModal.classList.contains("modal-button-delete")) refs.watchedModal.classList.add("modal-button-delete");
     } else {
         if (textWatchedModal === "DELETE FROM WATCHED") {
             localStorageWatched = localStorageWatched.filter(item => item.id !== infoFilm.id);
@@ -394,12 +386,12 @@ export function onWatchedModal() {
                 timeout: 2500,
               }
             );
+
             refs.watchedModal.textContent = "ADD TO WATCHED";
-            if (refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.remove("colorRed");
-            if (!refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.add("colorGreen");
+            if (refs.watchedModal.classList.contains("modal-button-delete")) refs.watchedModal.classList.remove("modal-button-delete");
+            if (!refs.watchedModal.classList.contains("modal-button-add-watched")) refs.watchedModal.classList.add("modal-button-add-watched");
 
             if (currentPage === "watched") {
-                console.log("currentPage", currentPage); //!
                 onCloseModal();
                 //! Очищаем контейнер:
                 clearMovieContainer();
@@ -412,13 +404,7 @@ export function onWatchedModal() {
 //* -------------------------- Ф-ция_5, добавление просмотренных фильмов в localStorage по кноке QUEUE: ----------------------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 export function onQueueModal() {
-    console.log('Вешаю слушателя на кнопку ADD TO QUEUE в МОДАЛКЕ'); //!
-
-    console.log('infoFilm:', infoFilm); //!
-    console.log('infoFilm.id:', infoFilm.id); //!
-
     const textQueuedModal = refs.queueModal.textContent;
-    console.log("textQueuedModal ==> начало:", textQueuedModal); //!
 
     if (textQueuedModal === "ADD TO QUEUE") {
         //! Блокировка повторной записи фильма в localStorage 
@@ -431,14 +417,14 @@ export function onQueueModal() {
                 timeout: 2500,
               }
             );
+
             refs.queueModal.textContent = "DELETE FROM QUEUE";
-            if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
-            if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
+            if (refs.queueModal.classList.contains("modal-button-add-queue")) refs.queueModal.classList.remove("modal-button-add-queue");
+            if (!refs.queueModal.classList.contains("modal-button-delete")) refs.queueModal.classList.add("modal-button-delete");
             return;
         };
         //! Запись фильма в localStorage
         localStorageQueue = [...localStorageQueue, infoFilm];
-        console.log("localStorageQueue:", localStorageQueue); //!
         localStorage.setItem("queue", JSON.stringify(localStorageQueue));
         Notiflix.Notify.success(
           `Фильм ${infoFilm.title || infoFilm.name} добавлен в QUEUE`,
@@ -448,11 +434,11 @@ export function onQueueModal() {
             timeout: 2500,
           }
         );
+
         //! Смена названия (textContent) кнопки на "DELETE FROM QUEUE"
         refs.queueModal.textContent = "DELETE FROM QUEUE";
-        if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
-        if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
-        console.log("textQueuedModal ==> конец:", textQueuedModal); //!
+        if (refs.queueModal.classList.contains("modal-button-add-queue")) refs.queueModal.classList.remove("modal-button-add-queue");
+        if (!refs.queueModal.classList.contains("modal-button-delete")) refs.queueModal.classList.add("modal-button-delete");
     } else {
         if (textQueuedModal === "DELETE FROM QUEUE") {
             localStorageQueue = localStorageQueue.filter(item => item.id !== infoFilm.id);
@@ -467,10 +453,9 @@ export function onQueueModal() {
               }
             );
             refs.queueModal.textContent = "ADD TO QUEUE";
-            if (refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.remove("colorRed");
-            if (!refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.add("colorGreen");
+            if (refs.queueModal.classList.contains("modal-button-delete")) refs.queueModal.classList.remove("modal-button-delete");
+            if (!refs.queueModal.classList.contains("modal-button-add-queue")) refs.queueModal.classList.add("modal-button-add-queue");
             if (currentPage === "queue") {
-                console.log("currentPage", currentPage); //!
                 onCloseModal();
                 //! Очищаем контейнер:
                 clearMovieContainer();
@@ -506,7 +491,6 @@ function onMyLibraryWatched() {
 
     //! Перезаписываем в локальную переменную (results) значение всего (localStorage)
     const results = JSON.parse(localStorage.getItem("watched")) ?? [];
-    console.log("results:", results); //!
 
     //! Рисование интерфейса 
     appendWatchedQueueMarkup(results);
@@ -519,7 +503,6 @@ function onMyLibraryWatched() {
 
 //* -------------------------- Ф-ция_7, для работы с кнопкой QUEUE в MY LIBRARY : ----------------------
 function onQueue() {
-    console.log("Вешаю слушателя на кнопку MY LIBRARY==>QUEUE"); //!
 
     //! Назначаем тип станицы QUEUE для логики работы кнопок МОДАЛКИ
     currentPage = "queue";
@@ -532,24 +515,14 @@ function onQueue() {
 
     //! ПОКАЗЫВАЕМ блок кнопок WATCHED и QUEUE в header:
     refs.watchedQueueHeader.hidden = false;
-
-    //! Кнопка LOAD MORE => показываем и отключаем
-    // loadMoreBtn.show();
-    loadMoreBtn.hide(); //! Временно => ПРЯЧЕМ
-    loadMoreBtn.disable();
-
     //! Очищаем контейнер:
     clearMovieContainer();
 
     //! Перезаписываем в локальную переменную (results) значение всего (localStorage)
     const results = JSON.parse(localStorage.getItem("queue")) ?? [];
-    console.log("results:", results); //!
 
     //! Рисование интерфейса 
     appendWatchedQueueMarkup(results);
-
-    //! Кнопка LOAD MORE => включаем
-    // loadMoreBtn.enable();
 };
 
 
@@ -559,27 +532,14 @@ function onQueue() {
 //* ++++++++++++++++++++++++++++++++ Кнопка LOAD MORE (для Ф-ции-запрос ==> ОБЩАЯ - для 1 и 2) ++++++++++++++++++++++++++++++++++++++++++++
 //!  Ф-ция, к-рая прослушивает события на кнопке LOAD MORE:
 async function onLoadMore() {
-    //! Кнопка LOAD MORE => ВЫключаем
-    loadMoreBtn.disable(); //? LoadMoreBtn--
-
     //! проверяеm значения переменной (currentPage)
     //! и СРАЗУ получаем в переменной films нужный массив объектов
     //! для отрисовки следующих 20 фильмов
     await checkResults();
-
-    // console.log("onLoadMore ==> films:", films); //!
-
     //! Очищаем контейнер:
     clearMovieContainer();
-
-    //!  Проверка results на ОКОНЧАНИЕ КОЛЛЕКЦИИИ
-    // checkResultsForEnd(endOfCollection);
-
     //! Рисование интерфейса
     appendHitsMarkup(films);
-
-    //! Кнопка LOAD MORE => включаем
-    //   loadMoreBtn.enable(); //? LoadMoreBtn--
 }
 //* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -604,8 +564,6 @@ async function checkResults() {
 //!  Ф-ция, к-рая получает id жанра и возвращает тип жанра
 function convertingIdToGenre(id) {
     const genre = genres.filter(genre => genre.id === id);
-    // console.log("genre:", genre); //!
-    // console.log("genre[0].name:", genre[0].name); //!
     return genre[0].name;
 }
 
@@ -624,17 +582,10 @@ function checkMovieForEmpty(results) {
     if (!results.length) {
         //! ПОКАЗЫВАЕМ строку предупреждения об отсутствии фильмов:
         refs.resultNotSuccessful.hidden = false;
-        // Notiflix.Notify.failure(`Search result not successful. Enter the correct movie name and`, { timeout: 3000, },);
-        //   loadMoreBtn.hide(); //? LoadMoreBtn-- //! Кнопка LOAD MORE => ПРЯЧЕМ
     }
 }
 
 //! +++++++++++++++++++++++ Функции для МОДАЛКИ +++++++++++++++++++++++++++
-//? ----- для тестирования открытия модалки по кнопке
-// function onOpenModal() {
-//     window.addEventListener('keydown', onEscKeyPress);
-//     document.body.classList.add('show-modal');
-// }
 
 function onCloseModal() {
     window.removeEventListener('keydown', onEscKeyPress);
@@ -645,19 +596,12 @@ function onCloseModal() {
 }
 
 function onBackdropClick(event) {
-    // console.log(event.currentTarget); //!
-    // console.log(event.target); //!
     if (event.currentTarget === event.target) {
-        // console.log('Кликнули именно в бекдроп!!!!'); //!
         onCloseModal();
     }
 }
 
 function onEscKeyPress(event) {
-    // console.log(event.code); //!
-    // const ESC_KEY_CODE = 'Escape';
-    // const isEscKey = event.code === ESC_KEY_CODE;
-    // if (isEscKey) {
     if (event.code === 'Escape') {
         onCloseModal();
     }
@@ -668,85 +612,9 @@ function onEscKeyPress(event) {
 function addIventListenerModalBtn() {
     refs.watchedModal = document.querySelector('button[data-action="modal-add-watched"]');
     refs.queueModal = document.querySelector('button[data-action="modal-add-queue"]');
-
-    console.log("addIventListenerModalBtn_refs.watchedModal:", refs.watchedModal); //!
-    console.log("addIventListenerModalBtn_refs.queueModal:", refs.queueModal); //!
-
     refs.watchedModal.addEventListener('click', onWatchedModal);
     refs.queueModal.addEventListener('click', onQueueModal);
-
-    //! -----------------------------------------------------------------------------
-    // refs.watchedModal.addEventListener('click', () => {
-    //     console.log("Вешаю ГОТОВОГО слушателя на кнопку ADD TO WATCHED в МОДАЛКЕ"); //!
-    // });
-
-    // refs.queueModal.addEventListener('click', () => {
-    //     console.log("Вешаю ГОТОВОГО слушателя на кнопку ADD TO QUEUE в МОДАЛКЕ"); //!
-    // });
 };
-
-
-
-
-// ! +++++++++++++++++++++++ БЛОК ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE> +++++++++++++++++++++++
-// ?  Теперь импортируем из файла './js/operationLogicWatchedQueue.js';
-//----------------------------------------------------------------------------------------------------
-// function operationLogicWatchedQueue() {
-//     console.log("БЛОК ЛОГИКИ_refs.watchedModal ==>:", refs.watchedModal); //!
-//     console.log("БЛОК ЛОГИКИ_refs.queueModal ==>:", refs.queueModal); //!
-
-//     //? ------------------------------------------- кнопка WATCHED -------------------------------------------
-//     //! Устанвливаем начальные значения textContent для кнопки WATCHED в модалке
-//     refs.watchedModal.textContent = "ADD TO WATCHED";
-//     if (refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.remove("colorRed");
-//     if (!refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.add("colorGreen");
-
-//     //! ИЛИ: в зависимости от того, на какой странице находится пользователь:
-
-//     //! Замена "ADD TO WATCHED" на "DELETE FROM WATCHED" если фильм уже есть в localStorage
-//     if (currentPage === "home-Filmoteka" || currentPage === "Movie search") {
-//         // console.log("currentPage = home-Filmoteka && Movie search"); //!
-//         if (localStorageWatched.find(option => option.id === infoFilm.id)) {
-//             Notiflix.Notify.warning(`Фильм ${infoFilm.title || infoFilm.name} уже есть в WATCHED`, { timeout: 3500, },);
-//             refs.watchedModal.textContent = "DELETE FROM WATCHED";
-//             if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
-//             if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
-//         };
-//     };
-
-//     //! Замена "ADD TO WATCHED" на "DELETE FROM WATCHED" если пользователь на странице MY LIBRARY==>WATCHED
-//     if (currentPage === "watched") {
-//         refs.watchedModal.textContent = "DELETE FROM WATCHED";
-//         if (refs.watchedModal.classList.contains("colorGreen")) refs.watchedModal.classList.remove("colorGreen");
-//         if (!refs.watchedModal.classList.contains("colorRed")) refs.watchedModal.classList.add("colorRed");
-//     };
-
-//     //? ------------------------------------------- кнопка QUEUE -------------------------------------------
-//     //! Устанвливаем начальные значения textContent для кнопки QUEUE в модалке
-//     refs.queueModal.textContent = "ADD TO QUEUE";
-//     if (refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.remove("colorRed");
-//     if (!refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.add("colorGreen");
-
-//     //! Замена "ADD TO QUEUE" на "DELETE FROM QUEUE" если фильм уже есть в localStorage
-//     if (currentPage === "home-Filmoteka" || currentPage === "Movie search") {
-//         // console.log("currentPage = home-Filmoteka && Movie search"); //!
-//         if (localStorageQueue.find(option => option.id === infoFilm.id)) {
-//             Notiflix.Notify.warning(`Фильм ${infoFilm.title || infoFilm.name} уже есть в QUEUE`, { timeout: 3500, },);
-//             refs.queueModal.textContent = "DELETE FROM QUEUE";
-//             if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
-//             if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
-//         };
-//     };
-
-//     //! Замена "ADD TO QUEUE" на "DELETE FROM QUEUE" если пользователь на странице MY LIBRARY==>QUEUE
-//     refs.queueModal.classList.add("colorGreen");
-//     if (currentPage === "queue") {
-//         refs.queueModal.textContent = "DELETE FROM QUEUE";
-//         if (refs.queueModal.classList.contains("colorGreen")) refs.queueModal.classList.remove("colorGreen");
-//         if (!refs.queueModal.classList.contains("colorRed")) refs.queueModal.classList.add("colorRed");
-//     };
-// };
-//! __________________________________________________________________________________________________________________
 
 
 
@@ -778,36 +646,23 @@ function createMoviesCardsMarkup(results) {
                 const genresAllOneFilmArray = genre_ids.map(id =>
                     convertingIdToGenre(id)
                 ); //! массив жанров для каждого фильма
-                // console.log("genresOneFilm:", genresAllOneFilmArray); //!
-                const genresAllOneFilm = genresAllOneFilmArray.join(', '); //! строка всех жанров
-                // console.log("genresAllOneFilm:", genresAllOneFilm); //!
+                const genresAllOneFilm = genresAllOneFilmArray.join(', ');
 
                 //? Получаем значение года из строки даты:
                 const date = first_air_date || release_date || '???? - ?? - ??';
-                // console.log("date:", date); //!
-                const yearDate = date.substr(0, 4); //! значение года из строки даты:
-                // console.log("yearDate:", yearDate); //!
+                const yearDate = date.substr(0, 4);
 
                 //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
                 let capitalsTitle = title;
                 if (title) {
                     capitalsTitle = title.toUpperCase();
-                    // const title = title.toUpperCase();
-                    // console.log("capitalsTitle:", capitalsTitle); //!
                 }
 
                 let capitalsName = name;
                 if (name) {
-                    const capitalsName = name.toUpperCase(); //!!! тут ошибка сделана СПЕЦИАЛЬНО!!!
-                    // const name = name.toUpperCase();
-                    // console.log("capitalsName:", capitalsName); //!
+                    const capitalsName = name.toUpperCase();
                 }
-                // console.log(typeof title); //!
-                // const capitalsTitle = title.toLocaleUpperCase();
-                // const capitalsTitle = title.toUpperCase();
-                // console.log("capitalsTitle:", capitalsTitle); //!
-                // const capitalsName = name.toUpperCase();
-
+                
                 return `
                 <li key=${id} class="gallery__item">
                 <div class="gallery__img-box">
@@ -830,14 +685,11 @@ function createMoviesCardsMarkup(results) {
 function appendInfoMovieMarkup(infoFilm) {
     //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
     refs.InfoMovie.insertAdjacentHTML('afterbegin', createInfoMovieMarkup(infoFilm));
-
-    // addIventListenerModalBtn(); //! НЕ СЮДА!!!
 }
 
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку ОДНОГО фильма в МОДАЛКЕ:
 function createInfoMovieMarkup(infoFilm) {
-    // console.log("createInfoMovieMarkup ==> infoFilm:", infoFilm); //!
     const {
         id,
         poster_path,
@@ -858,15 +710,11 @@ function createInfoMovieMarkup(infoFilm) {
     let capitalsTitle = title;
     if (title) {
         capitalsTitle = title.toUpperCase();
-        // const title = title.toUpperCase();
-        // console.log("capitalsTitle:", capitalsTitle); //!
     };
 
     let capitalsName = name;
     if (name) {
-        const capitalsName = name.toUpperCase(); //!!! тут ошибка сделана СПЕЦИАЛЬНО!!!
-        // const name = name.toUpperCase();
-        // console.log("capitalsName:", capitalsName); //!
+        const capitalsName = name.toUpperCase();
     };
 
     return `
@@ -902,8 +750,8 @@ function createInfoMovieMarkup(infoFilm) {
             </div>
 
             <div class="modal-button" data-action="library-btn">
-                <button type="button" class="modal-button-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
-                <button type="button" class="modal-button-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
+                <button type="button" class="modal-button-add-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+                <button type="button" class="modal-button-add-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
             </div>
         </div>
 

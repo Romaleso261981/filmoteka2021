@@ -309,46 +309,105 @@ img {
     }
 }
 
-// .button-color-add {
+
+
+.modal-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (min-width: 768px) {
+    .modal-button {
+        justify-content: flex-start;
+    }
+}
+.modal-button-add-watched,
+.modal-button-add-queue,
+.modal-button-delete {
+    display: block;
+    width: 110px;
+    height: 44px;
+    border-radius: 5px;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    cursor: pointer;
+}
+.modal-button-add-watched {
+    margin-right: 20px;
+    color: #FFFFFF;
+    background-color: #FF6B01;
+    border: none;
+    &:hover,
+    &:focus {
+        background-color: #FF964B;
+    }
+}
+.modal-button-add-queue {
+    color: #000;
+    background-color: transparent;
+    border: 1px solid #000;
+    &:hover,
+    &:focus {
+        background-color: #DDDDDD;
+    }
+}
+@media screen and (min-width: 768px) {
+    .modal-button-add-watched,
+    .modal-button-add-queue,
+    .modal-button-delete {
+        width: 125px;
+        height: 44px;
+    }
+    .modal-button-add-watched {
+        margin-right: 15px;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .modal-button-add-watched,
+    .modal-button-add-queue,
+    .modal-button-delete {
+        width: 136px;
+        height: 44px;
+    }
+}
+.modal-button-delete {
+    background-color: #DA0000;
+    margin-right: 20px;
+    &:hover,
+    &:focus {
+        background-color: #FFAAAA;
+    }
+}
+@media screen and (min-width: 768px) {
+    .modal-button-delete {
+        margin-right: 15px;
+    }
+}
+
+// .colorGreen { 
+//     color: white;
+//     // background-color: #006100;
+//     background-color: #0dee54;
+
+//     &:hover,
+//     &:focus {
+//         // background-color: #00a300;
+//         background-color: #8aac95;
+//     }
+// }
+
+// .colorRed {
+//     color: white;
+//     // background-color: #810000;
 //     background-color: #FF6B01;
 
-//     // &:hover,
-//     // &:focus {
-//     //     background-color: #00a300;
-//     // }
+//     &:hover,
+//     &:focus {
+//         // background-color: #da0000;
+//         background-color: #ff964b;
+//     }
 // }
-
-// .button-color-delete {
-//     background-color: #ff0000;
-
-//     // &:hover,
-//     // &:focus {
-//     //     background-color: #da0000;
-//     // }
-// }
-
-
-//! Руслан
-.colorGreen {
-    color: white;
-    // background-color: #006100;
-    background-color: #63796a;
-
-    &:hover,
-    &:focus {
-        // background-color: #00a300;
-        background-color: #8aac95;
-    }
-}
-
-.colorRed {
-    color: white;
-    // background-color: #810000;
-    background-color: #FF6B01;
-
-    &:hover,
-    &:focus {
-        // background-color: #da0000;
-        background-color: #ff964b;
-    }
-}
