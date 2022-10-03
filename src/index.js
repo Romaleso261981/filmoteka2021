@@ -656,7 +656,7 @@ function createInfoMovieMarkup(infoFilm) {
     };
 
     return `
-        <img src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
+        <img class="modal-img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
         
         <div class="modal-сontent">
             <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3>
