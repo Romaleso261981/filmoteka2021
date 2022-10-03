@@ -1,4 +1,4 @@
-var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global:{},t={},o={},n=e.parcelRequirea6b3;null==n&&((n=function(e){if(e in t)return t[e].exports;if(e in o){var n=o[e];delete o[e];var a={id:e,exports:{}};return t[e]=a,n.call(a.exports,a,a.exports),a.exports}var r=new Error("Cannot find module '"+e+"'");throw r.code="MODULE_NOT_FOUND",r}).register=function(e,t){o[e]=t},e.parcelRequirea6b3=n);n("eWCmQ");var a=n("3oXzi");
+!function(){var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global:{},t={},o={},n=e.parcelRequirea6b3;null==n&&((n=function(e){if(e in t)return t[e].exports;if(e in o){var n=o[e];delete o[e];var a={id:e,exports:{}};return t[e]=a,n.call(a.exports,a,a.exports),a.exports}var r=new Error("Cannot find module '"+e+"'");throw r.code="MODULE_NOT_FOUND",r}).register=function(e,t){o[e]=t},e.parcelRequirea6b3=n);n("iU1Pc");var a=n("g2eb2");
 //! Создаем объект всех ссылок refs.*
 const r={
 //! Получаем ссылку на div-контейнер для разметки карточек изображений:
@@ -28,29 +28,30 @@ queueHeader:document.querySelector('[data-action="library-queue"]')};
 //! Создаем слушателя событий на кнопке HOME:
 //! Создаем слушателя событий на кнопке Filmoteka:
 //! Создаем слушателя событий на кнопке MY LIBRARY:
-r.myLibraryBtn.addEventListener("click",i),
+r.myLibraryBtn.addEventListener("click",s),
 //! Создаем слушателя событий на <section class="section-hero"> ==> на poster_path:
 r.movieDetails.addEventListener("click",(
 //!!!!!! Загрузка популярных фильмов на главную (первую) страницу (без нажатия на кнопки HOME или Filmoteka)
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 async function(e){//!
-if(console.log("Вешаю слушателя на открытие МОДАЛКИ (onMovieDetails)"),!e.target.closest("li"))return;
+if(console.log("Вешаю слушателя на открытие МОДАЛКИ (onMovieDetails)"),!e.target.closest("li"))return;{const o=e.target.closest("li");l=Number(o.getAttribute("key")),async function(e){JSON.parse(localStorage.getItem("watched")).find((o=>{if(console.log(o),o.id===e)return t=o})),JSON.parse(localStorage.getItem("queue")).find((o=>{if(o.id===e)return t=o}))}(l),console.log("idFilms:",l)}let t={};console.log(t),
 //! ПОКАЗЫВАЕМ Spinner
-{const t=e.target.closest("li");l=Number(t.getAttribute("key")),//!!! вот ОН, РОДНОЙ!!!
-console.log("idFilms:",l)}a.default.startSpinner(),
+a.default.startSpinner(),
 //! ==> Делаем запрос-3 полной информации о фильме для МОДАЛКИ.
 //! ==> Открываем модалку
-window.addEventListener("keydown",u),document.body.classList.add("show-modal"),
+window.addEventListener("keydown",g),document.body.classList.add("show-modal"),
 //! Прячем Spinner
 a.default.removeSpinner()}
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 )),
 //! +++++++++++++++++++ Создаем слушателей для МОДАЛКИ ++++++++++++++++++++++++
-r.closeModalBtn.addEventListener("click",s),r.backdrop.addEventListener("click",(function(e){e.currentTarget===e.target&&s()})),
+r.closeModalBtn.addEventListener("click",m),r.backdrop.addEventListener("click",(function(e){e.currentTarget===e.target&&m()})),
 //! +++++++++ Создаем слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ ++++++++++++++
 //! Импортируем ГОТОВЫХ слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ
 //! ++++ Создаем слушателей на кнопках WATCHED и QUEUE для страницы MY LIBRARY +++++++
-r.watchedHeader.addEventListener("click",i),r.queueHeader.addEventListener("click",(function(){console.log("Вешаю слушателя на кнопку my-library.js==>QUEUE"),//!
+r.watchedHeader.addEventListener("click",s),r.queueHeader.addEventListener("click",(function(){var e;
+//! Перезаписываем в локальную переменную (results) значение всего (localStorage)
+console.log("Вешаю слушателя на кнопку my-library.js==>QUEUE"),//!
 //! Назначаем тип станицы QUEUE для логики работы кнопок МОДАЛКИ
 c="queue",
 //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
@@ -58,18 +59,19 @@ c="queue",
 //! ПОКАЗЫВАЕМ блок кнопок WATCHED и QUEUE в header:
 //! Кнопка LOAD MORE => показываем и отключаем
 //! Очищаем контейнер:
-d();
-//! Перезаписываем в локальную переменную (results) значение всего (localStorage)
-const e=JSON.parse(localStorage.getItem("queue"))??[];console.log("results:",e),//!
+u();const t=null!==(e=JSON.parse(localStorage.getItem("queue")))&&void 0!==e?e:[];console.log("results:",t),//!
 //! Рисование интерфейса
-m(e)}
+y(t)}
 //!  Ф-ция, к-рая прослушивает события на кнопке LOAD MORE:
 ));
 //! ++++++++++++++++++ ПОКАЗЫВАЕМ/ПРЯЧЕМ элементы разметки ++++++++++++++++++++
 //! Создаем глобальную переменную (films) для хранения значение всей (results)
 let l=1,c="";
 //! Создаем глобальную переменную (idFilms) для хранения idF одного фильма
-JSON.parse(localStorage.getItem("watched")),JSON.parse(localStorage.getItem("queue"));function i(){console.log("Вешаю слушателя на кнопку my-library.js==>WATCHED"),//!
+var i;
+//! Переменные для хранения массива объектов фильмов для станиц WATCHED и QUEUE
+i=JSON.parse(localStorage.getItem("watched"));var d;d=JSON.parse(localStorage.getItem("queue"));function s(){var e;
+//! Перезаписываем в локальную переменную (results) значение всего (localStorage)
 //! Назначаем тип станицы WATCHED для логики работы кнопок МОДАЛКИ
 c="watched",
 //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
@@ -77,27 +79,25 @@ c="watched",
 //! ПОКАЗЫВАЕМ блок кнопок WATCHED и QUEUE в header:
 //! Кнопка LOAD MORE => показываем и отключаем
 //! Очищаем контейнер:
-d();
-//! Перезаписываем в локальную переменную (results) значение всего (localStorage)
-const e=JSON.parse(localStorage.getItem("watched"))??[];console.log("results:",e),//!
+u();
 //! Рисование интерфейса
-m(e)}
+y(null!==(e=JSON.parse(localStorage.getItem("watched")))&&void 0!==e?e:[])}
 //! ++++++++++++++ Ф-ция, к-рая получает id жанра и возвращает тип жанра ++++++++++++++
 //! ++++++++++++++ Ф-ция, к-рая очищает контейнер при новом вводе данных в input form: ++++++++++++++
-function d(){r.moviesCards.innerHTML=""}
+function u(){r.moviesCards.innerHTML=""}
 //! ++++++++++++++ Ф-ция, к-рая очищает контейнер МОДАЛКИ: ++++++++++++++
 //! ++++++++++++++ Ф-ция, к-рая  прверяет results на пустой массив: ++++++++++++++
 //! +++++++++++++++++++++++ Функции для МОДАЛКИ +++++++++++++++++++++++++++
-function s(){window.removeEventListener("keydown",u),document.body.classList.remove("show-modal"),r.InfoMovie.innerHTML=""}function u(e){"Escape"===e.code&&s()}
+function m(){window.removeEventListener("keydown",g),document.body.classList.remove("show-modal"),r.InfoMovie.innerHTML=""}function g(e){"Escape"===e.code&&m()}
 //!_____________________________________________________________________
 //! +++++++++ Создаем слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ ++++++++++++++
 //! +++++++++++++++++++++++++++++ Markup WATCHED и QUEUE ++++++++++++++++++++++++++++++++++++++++++++++
-function m(e){
+function y(e){
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 r.moviesCards.insertAdjacentHTML("beforeend",
 //! --------------------------------------------------------------------------------------------
-function(e){return console.log("results:",e),e.map((({id:e,poster_path:t,title:o,name:n,genres:a,first_air_date:r,release_date:l,vote_average:c})=>{const i=a.map((e=>e.name)).join(", "),d=(r||l||"???? - ?? - ??").substr(0,4),s=c.toFixed(1);let u=o;o&&(u=o.toUpperCase());let m=n;if(n){n.toUpperCase();//!!! тут ошибка сделана СПЕЦИАЛЬНО!!!
+function(e){return e.map((({id:e,poster_path:t,title:o,name:n,genres:a,first_air_date:r,release_date:l,vote_average:c})=>{const i=a.map((e=>e.name)).join(", "),d=(r||l||"???? - ?? - ??").substr(0,4),s=c.toFixed(1);let u=o;o&&(u=o.toUpperCase());let m=n;if(n){n.toUpperCase();//!!! тут ошибка сделана СПЕЦИАЛЬНО!!!
 }return`\n                <li class="gallery__item" key=${e}>\n                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${t}" alt="${o||n}" />\n\n                    <div class="gallery__thumb">\n                        <h2 class="gallery__title">${u||m}</h2>\n                        <p class="gallery__text">${i} &nbsp|&nbsp ${d}&nbsp &nbsp${s}</p>\n                    </div>\n                </li>\n                `})).join("")}
 //! +++++++++++++++++++++++++++++ Markup infoFilm ++++++++++++++++++++++++++++++++++++++++++++++
-(e))}i(),(()=>{const e={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:t,closeModalTeamBtn:o,modalTeam:n,body:a}=e;function r(e){n.classList.toggle("is-hidden"),a.classList.toggle("no-scroll"),window.removeEventListener("keydown",l)}function l(e){"Escape"===e.key&&r()}t.addEventListener("click",(function(e){window.addEventListener("keydown",l),n.classList.toggle("is-hidden"),a.classList.toggle("no-scroll")})),o.addEventListener("click",r),n.addEventListener("click",(function(e){e.currentTarget===e.target&&r()}))})();
-//# sourceMappingURL=my-library.2fbf6f86.js.map
+(e))}s(),(()=>{const e={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:t,closeModalTeamBtn:o,modalTeam:n,body:a}=e;function r(e){n.classList.toggle("is-hidden"),a.classList.toggle("no-scroll"),window.removeEventListener("keydown",l)}function l(e){"Escape"===e.key&&r()}t.addEventListener("click",(function(e){window.addEventListener("keydown",l),n.classList.toggle("is-hidden"),a.classList.toggle("no-scroll")})),o.addEventListener("click",r),n.addEventListener("click",(function(e){e.currentTarget===e.target&&r()}))})()}();
+//# sourceMappingURL=my-library.3d04ad7f.js.map
