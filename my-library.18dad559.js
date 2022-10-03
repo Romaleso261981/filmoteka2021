@@ -1,4 +1,4 @@
-function e(e){return e&&e.__esModule?e.default:e}var t="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global:{},o={},a={},n=t.parcelRequirea6b3;null==n&&((n=function(e){if(e in o)return o[e].exports;if(e in a){var t=a[e];delete a[e];var n={id:e,exports:{}};return o[e]=n,t.call(n.exports,n,n.exports),n.exports}var l=new Error("Cannot find module '"+e+"'");throw l.code="MODULE_NOT_FOUND",l}).register=function(e,t){a[e]=t},t.parcelRequirea6b3=n);var l=n("eWCmQ"),d=n("3oXzi"),c=n("bGAxz");
+function e(e){return e&&e.__esModule?e.default:e}var t="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global:{},o={},a={},n=t.parcelRequirea6b3;null==n&&((n=function(e){if(e in o)return o[e].exports;if(e in a){var t=a[e];delete a[e];var n={id:e,exports:{}};return o[e]=n,t.call(n.exports,n,n.exports),n.exports}var l=new Error("Cannot find module '"+e+"'");throw l.code="MODULE_NOT_FOUND",l}).register=function(e,t){a[e]=t},t.parcelRequirea6b3=n);var l=n("eWCmQ"),d=n("3oXzi");n("gY4QW");var c=n("bGAxz");
 //! Создаем объект всех ссылок refs.*
 const s={
 //! Получаем ссылку на div-контейнер для разметки карточек изображений:
@@ -72,7 +72,7 @@ M();
 //! Перезаписываем в локальную переменную (results) значение всего (localStorage)
 const e=JSON.parse(localStorage.getItem("queue"))??[];console.log("results:",e),//!
 //! Рисование интерфейса
-w(e)}
+v(e)}
 //!  Ф-ция, к-рая прослушивает события на кнопке LOAD MORE:
 //! ++++++++++++++ Ф-ция, к-рая проверяет значения переменной (currentPage) для определения типа запроса в кнопке LOAD MORE ++++++++++++++
 ));
@@ -96,7 +96,7 @@ s.watchedModal.textContent="DELETE FROM WATCHED",s.watchedModal.classList.contai
 e(l).Notify.info(`Фильм ${r.title||r.name} удален из WATCHED`,{timeout:3500}),s.watchedModal.textContent="ADD TO WATCHED",s.watchedModal.classList.contains("colorRed")&&s.watchedModal.classList.remove("colorRed"),s.watchedModal.classList.contains("colorGreen")||s.watchedModal.classList.add("colorGreen"),"watched"===u&&(console.log("currentPage",u),//!
 p(),
 //! Очищаем контейнер:
-M(),w(m)))}
+M(),v(m)))}
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 function y(){console.log("Вешаю слушателя на кнопку ADD TO QUEUE в МОДАЛКЕ"),//!
 console.log("infoFilm:",r),//!
@@ -112,7 +112,7 @@ localStorage.setItem("queue",JSON.stringify(g)),e(l).Notify.success(`Фильм 
 s.queueModal.textContent="DELETE FROM QUEUE",s.queueModal.classList.contains("colorGreen")&&s.queueModal.classList.remove("colorGreen"),s.queueModal.classList.contains("colorRed")||s.queueModal.classList.add("colorRed"),console.log("textQueuedModal ==> конец:",t)}else"DELETE FROM QUEUE"===t&&(g=g.filter((e=>e.id!==r.id)),localStorage.setItem("queue",JSON.stringify(g)),console.log("Фильм удален из QUEUE"),e(l).Notify.info(`Фильм ${r.title||r.name} удален из QUEUE`,{timeout:3500}),s.queueModal.textContent="ADD TO QUEUE",s.queueModal.classList.contains("colorRed")&&s.queueModal.classList.remove("colorRed"),s.queueModal.classList.contains("colorGreen")||s.queueModal.classList.add("colorGreen"),"queue"===u&&(console.log("currentPage",u),//!
 p(),
 //! Очищаем контейнер:
-M(),w(g)))}function E(){
+M(),v(g)))}function E(){
 //! Назначаем тип станицы WATCHED для логики работы кнопок МОДАЛКИ
 u="watched",
 //! ПРЯЧЕМ строку предупреждения об отсутствии фильмов:
@@ -122,7 +122,7 @@ u="watched",
 //! Очищаем контейнер:
 M();
 //! Рисование интерфейса
-w(JSON.parse(localStorage.getItem("watched"))??[])}
+v(JSON.parse(localStorage.getItem("watched"))??[])}
 //! ++++++++++++++ Ф-ция, к-рая получает id жанра и возвращает тип жанра ++++++++++++++
 //! ++++++++++++++ Ф-ция, к-рая очищает контейнер при новом вводе данных в input form: ++++++++++++++
 function M(){s.moviesCards.innerHTML=""}
@@ -135,7 +135,7 @@ function p(){window.removeEventListener("keydown",h),document.body.classList.rem
 //!+++++++++++++ БЛОК ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE> ++++++++++++++++++
 //! __________________________________________________________________________________________________________________
 //! +++++++++++++++++++++++++++++ Markup WATCHED и QUEUE ++++++++++++++++++++++++++++++++++++++++++++++
-function w(e){
+function v(e){
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 s.moviesCards.insertAdjacentHTML("beforeend",
 //! --------------------------------------------------------------------------------------------
@@ -143,4 +143,4 @@ function(e){return e.map((({id:e,poster_path:t,title:o,name:a,genres:n,first_air
 }return`\n                <li class="gallery__item" key=${e}>\n                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${t}" alt="${o||a}" />\n\n                    <div class="gallery__thumb">\n                        <h2 class="gallery__title">${u||m}</h2>\n                        <p class="gallery__text">${s} &nbsp|&nbsp ${i}&nbsp &nbsp${r}</p>\n                    </div>\n                </li>\n                `})).join("")}(e))}
 //!!!!!! Загрузка популярных фильмов на страницу MY LIDRARY
 E(),(()=>{const e={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:t,closeModalTeamBtn:o,modalTeam:a,body:n}=e;function l(e){a.classList.toggle("is-hidden"),n.classList.toggle("no-scroll"),window.removeEventListener("keydown",d)}function d(e){"Escape"===e.key&&l()}t.addEventListener("click",(function(e){window.addEventListener("keydown",d),a.classList.toggle("is-hidden"),n.classList.toggle("no-scroll")})),o.addEventListener("click",l),a.addEventListener("click",(function(e){e.currentTarget===e.target&&l()}))})();
-//# sourceMappingURL=my-library.de8893d0.js.map
+//# sourceMappingURL=my-library.18dad559.js.map
