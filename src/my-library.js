@@ -159,7 +159,12 @@ function onWatchedModal() {
     if (localStorageWatched.find(option => option.id === infoFilm.id)) {
       Notiflix.Notify.warning(
         `Фильм ${infoFilm.title || infoFilm.name} уже есть в WATCHED`,
-        { timeout: 3500 }
+        {
+          position: 'center-top',
+          showOnlyTheLastOne: true,
+          clickToClose: true,
+          timeout: 2500,
+        }
       );
       refs.watchedModal.textContent = 'DELETE FROM WATCHED';
       if (refs.watchedModal.classList.contains('colorGreen'))
@@ -173,7 +178,12 @@ function onWatchedModal() {
     localStorage.setItem('watched', JSON.stringify(localStorageWatched));
     Notiflix.Notify.success(
       `Фильм ${infoFilm.title || infoFilm.name} добавлен в WATCHED`,
-      { timeout: 3500 }
+      {
+        position: 'center-top',
+        showOnlyTheLastOne: true,
+        clickToClose: true,
+        timeout: 2500,
+      }
     );
     //! Смена названия (textContent) кнопки на "DELETE FROM WATCHED"
     refs.watchedModal.textContent = 'DELETE FROM WATCHED';
@@ -189,7 +199,12 @@ function onWatchedModal() {
       localStorage.setItem('watched', JSON.stringify(localStorageWatched));
       Notiflix.Notify.info(
         `Фильм ${infoFilm.title || infoFilm.name} удален из WATCHED`,
-        { timeout: 3500 }
+        {
+          position: 'center-top',
+          showOnlyTheLastOne: true,
+          clickToClose: true,
+          timeout: 2500,
+        }
       );
       refs.watchedModal.textContent = 'ADD TO WATCHED';
       if (refs.watchedModal.classList.contains('colorRed'))
@@ -218,7 +233,12 @@ function onQueueModal() {
     if (localStorageQueue.find(option => option.id === infoFilm.id)) {
       Notiflix.Notify.warning(
         `Фильм ${infoFilm.title || infoFilm.name} уже есть в QUEUE`,
-        { timeout: 3500 }
+        {
+          position: 'center-top',
+          showOnlyTheLastOne: true,
+          clickToClose: true,
+          timeout: 2500,
+        }
       );
       refs.queueModal.textContent = 'DELETE FROM QUEUE';
       if (refs.queueModal.classList.contains('colorGreen'))
@@ -232,7 +252,12 @@ function onQueueModal() {
     localStorage.setItem('queue', JSON.stringify(localStorageQueue));
     Notiflix.Notify.success(
       `Фильм ${infoFilm.title || infoFilm.name} добавлен в QUEUE`,
-      { timeout: 3500 }
+      {
+        position: 'center-top',
+        showOnlyTheLastOne: true,
+        clickToClose: true,
+        timeout: 2500,
+      }
     );
     //! Смена названия (textContent) кнопки на "DELETE FROM QUEUE"
     refs.queueModal.textContent = 'DELETE FROM QUEUE';
@@ -248,7 +273,12 @@ function onQueueModal() {
       localStorage.setItem('queue', JSON.stringify(localStorageQueue));
       Notiflix.Notify.info(
         `Фильм ${infoFilm.title || infoFilm.name} удален из QUEUE`,
-        { timeout: 3500 }
+        {
+          position: 'center-top',
+          showOnlyTheLastOne: true,
+          clickToClose: true,
+          timeout: 2500,
+        }
       );
       refs.queueModal.textContent = 'ADD TO QUEUE';
       if (refs.queueModal.classList.contains('colorRed'))
