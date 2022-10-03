@@ -732,8 +732,8 @@ function createInfoMovieMarkup(infoFilm) {
             </div>
         
             <div class="modal-button" data-action="library-btn">
-                <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
-                <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
+                <button type="button" class="modal-button-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+                <button type="button" class="modal-button-watched" data-action="modal-add-queue">ADD TO QUEUE</button>
             </div>
         </div>
     `;
