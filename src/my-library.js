@@ -158,11 +158,26 @@ async function onMovieDetails(event) {
   if (event.target.closest('li')) {
     const itemId = event.target.closest('li');
     // console.log("itemId:", itemId); //!
-    idFilms = Number(itemId.getAttribute('key')); //!!! вот ОН, РОДНОЙ!!!
+    idFilms = Number(itemId.getAttribute('key')); 
+    getfilmForModalFromLS(idFilms)
     console.log('idFilms:', idFilms); //!
   } else return;
   //?__________ ПОЛУЧАЕМ (id) фильма по клику на карточке фильма __________
-
+  let filmForMyLiberyModal ={}
+  
+  // шукає об'єкт по ID
+  async  function getfilmForModalFromLS (id) {
+    JSON.parse(localStorage.getItem('watched')).find((film)=>{
+      console.log(film);
+    if (film.id===id) {
+   return filmForMyLiberyModal = film; }
+    } )
+    JSON.parse(localStorage.getItem('queue')).find((film)=>{
+      if (film.id===id) {
+        return filmForMyLiberyModal = film }
+      } )
+  }
+    console.log(filmForMyLiberyModal);
   //! ПОКАЗЫВАЕМ Spinner
   spinner.startSpinner();
 
@@ -357,7 +372,7 @@ function onQueueModal() {
 onMyLibraryWatched();
 //* -------------------------- Ф-ция_6, для работы с MY LIBRARY или кнопкой WATCHED: ----------------------
 function onMyLibraryWatched() {
-  console.log('Вешаю слушателя на кнопку my-library.js==>WATCHED'); //!
+  // console.log('Вешаю слушателя на кнопку my-library.js==>WATCHED'); //!
 
   // refs.watchedModal.textContent = "DELETE FROM WATCHED";
   //! Назначаем тип станицы WATCHED для логики работы кнопок МОДАЛКИ
@@ -382,7 +397,7 @@ function onMyLibraryWatched() {
 
   //! Перезаписываем в локальную переменную (results) значение всего (localStorage)
   const results = JSON.parse(localStorage.getItem('watched')) ?? [];
-  console.log('results:', results); //!
+  // console.log('results:', results); //!
 
   //! Рисование интерфейса
   appendWatchedQueueMarkup(results);
@@ -591,7 +606,7 @@ function appendWatchedQueueMarkup(results) {
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку для ОДНОЙ карточки из ВСЕХ карточек:
 function createWatchedQueueCardsMarkup(results) {
-  console.log('results:', results);
+  // console.log('results:', results);
   return results
     .map(
       ({
