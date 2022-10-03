@@ -44,7 +44,7 @@ n=d,
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 r.InfoMovie.insertAdjacentHTML("afterbegin",
 //! --------------------------------------------------------------------------------------------
-function(e){const{id:t,poster_path:a,title:n,name:o,vote_average:r,vote_count:l,popularity:d,original_title:c,original_name:i,genres:s,overview:u}=e,m=s.map((e=>e.name)).join(", ");let p=n;n&&(p=n.toUpperCase());let y=o;return o&&o.toUpperCase(),`\n        <img src="https://image.tmdb.org/t/p/w300${a}" alt="${n||o}" />\n        \n        <div class="modal-сontent">\n            <h3 class="modal-title-film">${p||y}</h3>\n            <table class="modal-info">\n                <tbody>\n                    <tr>\n                        <td class="modal-key">Vote/Votes</td>\n                        <td class="modal-parametr"><span class="modal-parametr-vote">${r}</span> / ${l}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Popularity</td>\n                        <td class="modal-parametr">${d}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Original Title</td>\n                        <td class="modal-parametr">${c||i}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Genre</td>\n                        <td class="modal-parametr">${m}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <div class="modal-about-film">\n                <h5 class="modal-about-title">ABOUT</h5>\n                <span class="modal-about-text">${u}</span>\n            </div>\n        \n            <div class="modal-button" data-action="library-btn">\n                <button type="button" class="modal-watched" data-action="modal-add-watched">ADD TO WATCHED</button>\n                <button type="button" class="modal-queue" data-action="modal-add-queue">ADD TO QUEUE</button>\n            </div>\n        </div>\n    `}(n));
+function(e){const{id:t,poster_path:a,title:n,name:o,vote_average:r,vote_count:l,popularity:d,original_title:c,original_name:i,genres:s,overview:u}=e,m=s.map((e=>e.name)).join(", ");let p=n;n&&(p=n.toUpperCase());let y=o;return o&&o.toUpperCase(),`\n        <img src="https://image.tmdb.org/t/p/w300${a}" alt="${n||o}" />\n        \n        <div class="modal-сontent">\n            <h3 class="modal-title-film">${p||y}</h3>\n            <table class="modal-info">\n                <tbody>\n                    <tr>\n                        <td class="modal-key">Vote/Votes</td>\n                        <td class="modal-parametr"><span class="modal-parametr-vote">${r}</span> / ${l}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Popularity</td>\n                        <td class="modal-parametr">${d}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Original Title</td>\n                        <td class="modal-parametr">${c||i}</td>\n                    </tr>\n                    <tr>\n                        <td class="modal-key">Genre</td>\n                        <td class="modal-parametr">${m}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <div class="modal-about-film">\n                <h5 class="modal-about-title">ABOUT</h5>\n                <span class="modal-about-text">${u}</span>\n            </div>\n        \n            <div class="modal-button" data-action="library-btn">\n                <button type="button" class="modal-button-watched" data-action="modal-add-watched">ADD TO WATCHED</button>\n                <button type="button" class="modal-button-watched" data-action="modal-add-queue">ADD TO QUEUE</button>\n            </div>\n        </div>\n    `}(n));
 //! +++++++++++++++++++++++++++++ Markup infoFilm ++++++++++++++++++++++++++++++++++++++++++++++
 var n}
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
@@ -66,7 +66,7 @@ c="queue",
 //! Очищаем контейнер:
 m();const t=null!==(e=JSON.parse(localStorage.getItem("queue")))&&void 0!==e?e:[];console.log("results:",t),//!
 //! Рисование интерфейса
-g(t)}
+b(t)}
 //!  Ф-ция, к-рая прослушивает события на кнопке LOAD MORE:
 ));
 //! ++++++++++++++++++ ПОКАЗЫВАЕМ/ПРЯЧЕМ элементы разметки ++++++++++++++++++++
@@ -86,7 +86,7 @@ c="watched",
 //! Очищаем контейнер:
 m();
 //! Рисование интерфейса
-g(null!==(e=JSON.parse(localStorage.getItem("watched")))&&void 0!==e?e:[])}
+b(null!==(e=JSON.parse(localStorage.getItem("watched")))&&void 0!==e?e:[])}
 //! ++++++++++++++ Ф-ция, к-рая получает id жанра и возвращает тип жанра ++++++++++++++
 //! ++++++++++++++ Ф-ция, к-рая очищает контейнер при новом вводе данных в input form: ++++++++++++++
 function m(){r.moviesCards.innerHTML=""}
@@ -97,10 +97,10 @@ function p(){window.removeEventListener("keydown",y),document.body.classList.rem
 //!_____________________________________________________________________
 //! +++++++++ Создаем слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ ++++++++++++++
 //! +++++++++++++++++++++++++++++ Markup WATCHED и QUEUE ++++++++++++++++++++++++++++++++++++++++++++++
-function g(e){
+function b(e){
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 r.moviesCards.insertAdjacentHTML("beforeend",
 //! --------------------------------------------------------------------------------------------
 function(e){return e.map((({id:e,poster_path:t,title:a,name:n,genres:o,first_air_date:r,release_date:l,vote_average:d})=>{const c=o.map((e=>e.name)).join(", "),i=(r||l||"???? - ?? - ??").substr(0,4),s=d.toFixed(1);let u=a;a&&(u=a.toUpperCase());let m=n;if(n){n.toUpperCase();//!!! тут ошибка сделана СПЕЦИАЛЬНО!!!
 }return`\n                <li class="gallery__item" key=${e}>\n                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${t}" alt="${a||n}" />\n\n                    <div class="gallery__thumb">\n                        <h2 class="gallery__title">${u||m}</h2>\n                        <p class="gallery__text">${c} &nbsp|&nbsp ${i}&nbsp &nbsp${s}</p>\n                    </div>\n                </li>\n                `})).join("")}(e))}u(),(()=>{const e={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:t,closeModalTeamBtn:a,modalTeam:n,body:o}=e;function r(e){n.classList.toggle("is-hidden"),o.classList.toggle("no-scroll"),window.removeEventListener("keydown",l)}function l(e){"Escape"===e.key&&r()}t.addEventListener("click",(function(e){window.addEventListener("keydown",l),n.classList.toggle("is-hidden"),o.classList.toggle("no-scroll")})),a.addEventListener("click",r),n.addEventListener("click",(function(e){e.currentTarget===e.target&&r()}))})()}();
-//# sourceMappingURL=my-library.bde3125c.js.map
+//# sourceMappingURL=my-library.f9abd65a.js.map
