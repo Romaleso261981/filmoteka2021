@@ -3,7 +3,10 @@ import Notiflix from 'notiflix';
 //?  Импорт spinner (Loader ==> isLoadin)
 import spinner from './js/preLoader';
 
-// import ThemoviedbApiService from './js/api-themoviedb.js'; //todo ==> уже не надо
+import './js/login-modal';
+
+// import ThemoviedbApiService from './js/api-themoviedb.js';
+
 
 //! Импорт БЛОКА ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE> ./js/get-refs.js
 import operationLogicWatchedQueue from './js/operationLogicWatchedQueue.js';
