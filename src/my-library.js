@@ -140,21 +140,50 @@ onMyLibraryWatched();
 //* ---------- Ф-ция-запрос_2, к-рая прослушивает события на поле ввода данных - input form:-------
 
 //* -------------------------- Ф-ция-запрос_3, к-рая запрашивает полную информацию об одном фильме: ----------------------
-//! +++ Запрос полной информации о фильме для МОДАЛКИ +++
+//шукаємо по id фільм і виводимо його на сторінку
 async function onMovieDetails(event) {
-  console.log('Вешаю слушателя на открытие МОДАЛКИ (onMovieDetails)'); //!
-  //? !!!!!!! ПОЛУЧАЕМ (id) фильма по клику на карточке фильма !!!!!!!!!!!!!!!
   if (event.target.closest('li')) {
     const itemId = event.target.closest('li');
-    // console.log("itemId:", itemId); //!
-    idFilms = Number(itemId.getAttribute('key')); //!!! вот ОН, РОДНОЙ!!!
-    console.log('idFilms:', idFilms); //!
+    idFilms = Number(itemId.getAttribute('key'));
+    console.log('idFilms:', idFilms);
+    findFilmByIdLs(idFilms);
   } else return;
-  //?__________ ПОЛУЧАЕМ (id) фильма по клику на карточке фильма __________
 
+
+  // забираємо всі фільми з localStorage
+  function getQueueData() {
+    try {
+      const watched = JSON.parse(localStorage.getItem('queue')) || [];
+      if (watched === null) {
+        return [];
+      }
+      return watched;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function getWatchedData() {
+    try {
+      const watched = JSON.parse(localStorage.getItem('watched'));
+      if (watched === null) {
+        return [];
+      }
+      return watched;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // шукає об'єкт по ID
+  function findFilmByIdLs(id) {
+    const films = [...getQueueData(), ...getWatchedData()]
+    const film = films.find((film) => film.id == id)
+    infoFilm = film;
+    return film
+}
   //! ПОКАЗЫВАЕМ Spinner
   spinner.startSpinner();
-
   //! ==> Делаем запрос-3 полной информации о фильме для МОДАЛКИ.
   // try {
   //   const results = await themoviedbApiService.getMovieDetails(idFilms);
@@ -359,7 +388,7 @@ function onQueueModal() {
 
 //* -------------------------- Ф-ция_6, для работы с MY LIBRARY или кнопкой WATCHED: ----------------------
 function onMyLibraryWatched() {
-  console.log('Вешаю слушателя на кнопку my-library.js==>WATCHED'); //!
+  // console.log('Вешаю слушателя на кнопку my-library.js==>WATCHED'); //!
 
   // refs.watchedModal.textContent = "DELETE FROM WATCHED";
   //! Назначаем тип станицы WATCHED для логики работы кнопок МОДАЛКИ
@@ -384,7 +413,7 @@ function onMyLibraryWatched() {
 
   //! Перезаписываем в локальную переменную (results) значение всего (localStorage)
   const results = JSON.parse(localStorage.getItem('watched')) ?? [];
-  console.log('results:', results); //!
+  // console.log('results:', results); //!
 
   //! Рисование интерфейса
   appendWatchedQueueMarkup(results);
@@ -601,7 +630,7 @@ function appendWatchedQueueMarkup(results) {
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку для ОДНОЙ карточки из ВСЕХ карточек:
 function createWatchedQueueCardsMarkup(results) {
-  console.log('results:', results);
+  // console.log('results:', results);
   return results
     .map(
       ({
@@ -742,7 +771,9 @@ function createInfoMovieMarkup(infoFilm) {
         
             <div class="modal-button" data-action="library-btn">
                 <button type="button" class="modal-button-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+
                 <button type="button" class="modal-button-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
+
             </div>
         </div>
     `;
