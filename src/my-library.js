@@ -151,71 +151,52 @@ let localStorageQueue = JSON.parse(localStorage.getItem('queue')) ?? [];
 //* ---------- Ф-ция-запрос_2, к-рая прослушивает события на поле ввода данных - input form:-------
 
 //* -------------------------- Ф-ция-запрос_3, к-рая запрашивает полную информацию об одном фильме: ----------------------
-//! +++ Запрос полной информации о фильме для МОДАЛКИ +++
+//шукаємо по id фільм і виводимо його на сторінку
 async function onMovieDetails(event) {
-  console.log('Вешаю слушателя на открытие МОДАЛКИ (onMovieDetails)'); //!
-  //? !!!!!!! ПОЛУЧАЕМ (id) фильма по клику на карточке фильма !!!!!!!!!!!!!!!
   if (event.target.closest('li')) {
     const itemId = event.target.closest('li');
-    // console.log("itemId:", itemId); //!
-    idFilms = Number(itemId.getAttribute('key')); 
-    getfilmForModalFromLS(idFilms)
-    console.log('idFilms:', idFilms); //!
+    idFilms = Number(itemId.getAttribute('key'));
+    console.log('idFilms:', idFilms);
+    findFilmByIdLs(idFilms);
   } else return;
-  //?__________ ПОЛУЧАЕМ (id) фильма по клику на карточке фильма __________
-  let filmForMyLiberyModal ={}
-  
-  // шукає об'єкт по ID
-  async  function getfilmForModalFromLS (id) {
-    JSON.parse(localStorage.getItem('watched')).find((film)=>{
-      console.log(film);
-    if (film.id===id) {
-   return filmForMyLiberyModal = film; }
-    } )
-    JSON.parse(localStorage.getItem('queue')).find((film)=>{
-      if (film.id===id) {
-        return filmForMyLiberyModal = film }
-      } )
+
+
+  // забираємо всі фільми з localStorage
+  function getQueueData() {
+    try {
+      const watched = JSON.parse(localStorage.getItem('queue')) || [];
+      if (watched === null) {
+        return [];
+      }
+      return watched;
+    } catch (error) {
+      console.log(error);
+    }
   }
-    console.log(filmForMyLiberyModal);
+
+  function getWatchedData() {
+    try {
+      const watched = JSON.parse(localStorage.getItem('watched'));
+      if (watched === null) {
+        return [];
+      }
+      return watched;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // шукає об'єкт по ID
+  function findFilmByIdLs(id) {
+    const films = [...getQueueData(), ...getWatchedData()]
+    const film = films.find((film) => film.id == id)
+    infoFilm = film;
+    return film
+}
   //! ПОКАЗЫВАЕМ Spinner
   spinner.startSpinner();
 
-  //! ==> Делаем запрос-3 полной информации о фильме для МОДАЛКИ.
-  // try {
-  //   const results = await themoviedbApiService.getMovieDetails(idFilms);
-  //   //! Очищаем контейнер МОДАЛКИ:
-  //   clearModalContainer();
-  //   //! Перезаписываем в глобальную переменную (films) значение всей (results)
-  //   infoFilm = results;
-  // } catch (error) {
-  //   //! Очищаем контейнер МОДАЛКИ:
-  //   clearModalContainer();
-  //   //! Прячем Spinner
-  //   spinner.removeSpinner();
-  //   //! Очищаем контейнер переменную (films):
-  //   infoFilm = null;
-  //   console.log(error); //!
-  //   Notiflix.Notify.failure(`Ошибка запроса: ${error.message}`, {
-  //     timeout: 3500,
-  //   });
-  // }
-  //? ------- Получаем и консолим все данные для рендера разметки главной страницы -------
-  // console.log("getMovieDetails ==> infoFilm:", infoFilm); //!
-  // const titleOrName = infoFilm.title || infoFilm.name;
-  // console.log("titleOrName:", titleOrName);
-  // console.log("id:", infoFilm.id); //!
-  // console.log("poster_path:", infoFilm.poster_path);
-  // console.log("Vote:", infoFilm.vote_average);
-  // console.log("Votes:", infoFilm.vote_count);
-  // console.log("Popularity:", infoFilm.popularity);
-  // const originalTitleOrName = infoFilm.original_title || infoFilm.original_name;
-  // console.log("Original Title:", originalTitleOrName);
-  // const genresAllOneFilm = infoFilm.genres.map(item => item.name).join(", ");
-  // console.log("Genre:", genresAllOneFilm); //! строка всех жанров
-  // console.log("About:", infoFilm.overview);
-  //?_________________КОНЕЦ Получения и консоли всех данных _____________________
-
+ 
   //! ==> Открываем модалку
   window.addEventListener('keydown', onEscKeyPress);
   document.body.classList.add('show-modal');
@@ -224,7 +205,7 @@ async function onMovieDetails(event) {
   spinner.removeSpinner();
 
   //! Рисование интерфейса
-  // appendInfoMovieMarkup(infoFilm);
+  appendInfoMovieMarkup(infoFilm);
 
   //! Добавляем ГОТОВЫХ слушателей на кнопках <ADD TO WATCHED> и <ADD TO QUEUE> для МОДАЛКИ
   // addIventListenerModalBtn();
