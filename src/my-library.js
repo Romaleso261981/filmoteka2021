@@ -1,4 +1,4 @@
-// import Notiflix from 'notiflix';
+import Notiflix from 'notiflix';
 import spinner from './js/preLoader';
 import './js/login-modal';
 import operationLogicWatchedQueue from './js/operationLogicWatchedQueue.js';

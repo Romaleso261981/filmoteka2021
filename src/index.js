@@ -1,4 +1,4 @@
-// import Notiflix from 'notiflix';
+import Notiflix from 'notiflix';
 
 //?  Импорт spinner (Loader ==> isLoadin)
 import spinner from './js/preLoader';
