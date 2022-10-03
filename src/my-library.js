@@ -161,7 +161,6 @@ function onWatchedModal() {
         `Фильм ${infoFilm.title || infoFilm.name} уже есть в WATCHED`,
         {
           position: 'center-top',
-          showOnlyTheLastOne: true,
           clickToClose: true,
           timeout: 2500,
         }
@@ -180,7 +179,6 @@ function onWatchedModal() {
       `Фильм ${infoFilm.title || infoFilm.name} добавлен в WATCHED`,
       {
         position: 'center-top',
-        showOnlyTheLastOne: true,
         clickToClose: true,
         timeout: 2500,
       }
@@ -201,7 +199,6 @@ function onWatchedModal() {
         `Фильм ${infoFilm.title || infoFilm.name} удален из WATCHED`,
         {
           position: 'center-top',
-          showOnlyTheLastOne: true,
           clickToClose: true,
           timeout: 2500,
         }
@@ -235,7 +232,6 @@ function onQueueModal() {
         `Фильм ${infoFilm.title || infoFilm.name} уже есть в QUEUE`,
         {
           position: 'center-top',
-          showOnlyTheLastOne: true,
           clickToClose: true,
           timeout: 2500,
         }
@@ -254,7 +250,6 @@ function onQueueModal() {
       `Фильм ${infoFilm.title || infoFilm.name} добавлен в QUEUE`,
       {
         position: 'center-top',
-        showOnlyTheLastOne: true,
         clickToClose: true,
         timeout: 2500,
       }
@@ -275,7 +270,6 @@ function onQueueModal() {
         `Фильм ${infoFilm.title || infoFilm.name} удален из QUEUE`,
         {
           position: 'center-top',
-          showOnlyTheLastOne: true,
           clickToClose: true,
           timeout: 2500,
         }

@@ -22,7 +22,6 @@ export default function operationLogicWatchedQueue(currentPage, refs, infoFilm, 
               `Фильм ${infoFilm.title || infoFilm.name} уже есть в WATCHED`,
               {
                 position: 'center-top',
-                showOnlyTheLastOne: true,
                 clickToClose: true,
                 timeout: 2500,
               }
@@ -37,7 +36,6 @@ export default function operationLogicWatchedQueue(currentPage, refs, infoFilm, 
               `Фильм ${infoFilm.title || infoFilm.name} уже есть в QUEUE`,
               {
                 position: 'center-top',
-                showOnlyTheLastOne: true,
                 clickToClose: true,
                 timeout: 2500,
               }
@@ -59,7 +57,6 @@ export default function operationLogicWatchedQueue(currentPage, refs, infoFilm, 
               `Фильм ${infoFilm.title || infoFilm.name} уже есть в QUEUE`,
               {
                 position: 'center-top',
-                showOnlyTheLastOne: true,
                 clickToClose: true,
                 timeout: 2500,
               }
@@ -82,7 +79,6 @@ export default function operationLogicWatchedQueue(currentPage, refs, infoFilm, 
               `Фильм ${infoFilm.title || infoFilm.name} уже есть в WATCHED`,
               {
                 position: 'center-top',
-                showOnlyTheLastOne: true,
                 clickToClose: true,
                 timeout: 2500,
               }
