@@ -24,7 +24,7 @@ queueHeader:document.querySelector('[data-action="library-queue"]')};
 //! Создаем слушателя событий на кнопке MY LIBRARY:
 c.myLibraryBtn.addEventListener("click",y),
 //! Создаем слушателя событий на <section class="section-hero"> ==> на poster_path:
-c.movieDetails.addEventListener("click",(async function(e){if(!e.target.closest("li"))return;{const o=e.target.closest("li");i=Number(o.getAttribute("key")),console.log("idFilms:",i),function(e){const o=[...t(),...a()].find((t=>t.id==e));r=o}
+c.movieDetails.addEventListener("click",(async function(e){if(!e.target.closest("li"))return;{const o=e.target.closest("li");i=Number(o.getAttribute("key")),function(e){const o=[...t(),...a()].find((t=>t.id==e));r=o}
 //! ПОКАЗЫВАЕМ Spinner
 (i)}function t(){try{const e=JSON.parse(localStorage.getItem("queue"))||[];return null===e?[]:e}catch(e){console.log(e)}}function a(){try{const e=JSON.parse(localStorage.getItem("watched"));return null===e?[]:e}catch(e){console.log(e)}}
 //! Достаем из localStorage полную информации о фильме для МОДАЛКИ.
@@ -99,4 +99,4 @@ function E(e){
 c.moviesCards.insertAdjacentHTML("beforeend",function(e){return e.map((({id:e,poster_path:t,title:a,name:o,genres:n,first_air_date:d,release_date:l,vote_average:s})=>{const c=n.map((e=>e.name)).join(", "),i=(d||l||"???? - ?? - ??").substr(0,4),r=s.toFixed(1);let u=a;a&&(u=a.toUpperCase());let m=o;if(o){o.toUpperCase()}return`\n                <li class="gallery__item" key=${e}>\n                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${t}" alt="${a||o}" />\n\n                    <div class="gallery__thumb">\n                        <h2 class="gallery__title">${u||m}</h2>\n                        <p class="gallery__text">${c} &nbsp|&nbsp ${i}&nbsp &nbsp${r}</p>\n                    </div>\n                </li>\n                `})).join("")}(e))}
 //!!!!!! Загрузка популярных фильмов на страницу MY LIDRARY
 y(),(()=>{const e={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:t,closeModalTeamBtn:a,modalTeam:o,body:n}=e;function d(e){o.classList.toggle("is-hidden"),n.classList.toggle("no-scroll"),window.removeEventListener("keydown",l)}function l(e){"Escape"===e.key&&d()}t.addEventListener("click",(function(e){window.addEventListener("keydown",l),o.classList.toggle("is-hidden"),n.classList.toggle("no-scroll")})),a.addEventListener("click",d),o.addEventListener("click",(function(e){e.currentTarget===e.target&&d()}))})();
-//# sourceMappingURL=my-library.2c1c0356.js.map
+//# sourceMappingURL=my-library.e997aae9.js.map

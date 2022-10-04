@@ -45,7 +45,7 @@ async getSearchMovies(){const t=`https://api.themoviedb.org/3/search/movie?api_k
 const n=await e(s).get(t),{results:r,total_results:o}=n.data;//!
 return h(o),this.incrementPage(),console.log("getSearchMovies ==> this.page: ",this.page),r}async getSearchMoviesPaginationClick(){const t=`https://api.themoviedb.org/3/search/movie?api_key=41b230c5977baa736e324532e16fdadb&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;return(await e(s).get(t)).data.results}
 //! 3 - Запрос полной информации о фильме для МОДАЛКИ.
-async getMovieDetails(t){const n=`https://api.themoviedb.org/3/movie/${t}?api_key=41b230c5977baa736e324532e16fdadb&language=en-US`;console.log("url_3: ",n);return(await e(s).get(n)).data}incrementPage(){this.page+=1}resetPage(){this.page=1}get query(){return this.searchQuery}set query(t){this.searchQuery=t}changePage(t){this.page=t}constructor(){this.searchQuery="",//! это то, что приходит в input
+async getMovieDetails(t){const n=`https://api.themoviedb.org/3/movie/${t}?api_key=41b230c5977baa736e324532e16fdadb&language=en-US`;return(await e(s).get(n)).data}incrementPage(){this.page+=1}resetPage(){this.page=1}get query(){return this.searchQuery}set query(t){this.searchQuery=t}changePage(t){this.page=t}constructor(){this.searchQuery="",//! это то, что приходит в input
 //! Пагинация:
 this.page=1,//! номер страницы (группы) в axios-запросе
 this.per_page=40}};
@@ -129,7 +129,7 @@ window.addEventListener("keydown",R),document.body.classList.add("show-modal"),d
 //! Прячем Spinner
 u.default.removeSpinner(),
 //! Рисование интерфейса
-n=w,console.log(n),
+n=w,
 //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
 m.InfoMovie.insertAdjacentHTML("afterbegin",
 //! --------------------------------------------------------------------------------------------
@@ -177,15 +177,13 @@ v=t,
 //! Рисование интерфейса
 P(t),
 //! Прячем Spinner
-u.default.removeSpinner()}function T(){const t=m.watchedModal.textContent;//!
-if(console.log("textWatchedModal ==> начало:",t),"ADD TO WATCHED"===t){
+u.default.removeSpinner()}function T(){const t=m.watchedModal.textContent;if("ADD TO WATCHED"===t){
 //! Блокировка повторной записи фильма в localStorage 
 if(x.find((t=>t.id===w.id)))return e(a).Notify.warning(`Фильм ${w.title||w.name} уже есть в WATCHED`,{position:"center-top",clickToClose:!0,timeout:2500}),m.watchedModal.textContent="DELETE FROM WATCHED",m.watchedModal.classList.contains("modal-button-add-watched")&&m.watchedModal.classList.remove("modal-button-add-watched"),void(m.watchedModal.classList.contains("modal-button-delete")||m.watchedModal.classList.add("modal-button-delete"));
 //! Запись фильма в localStorage
 x=[...x,w],localStorage.setItem("watched",JSON.stringify(x)),e(a).Notify.success(`Фильм ${w.title||w.name} добавлен в WATCHED`,{position:"center-top",clickToClose:!0,timeout:2500}),
 //! Смена названия (textContent) кнопки на "DELETE FROM WATCHED"
-m.watchedModal.textContent="DELETE FROM WATCHED",m.watchedModal.classList.contains("modal-button-add-watched")&&m.watchedModal.classList.remove("modal-button-add-watched"),m.watchedModal.classList.contains("modal-button-delete")||m.watchedModal.classList.add("modal-button-delete")}else"DELETE FROM WATCHED"===t&&(x=x.filter((t=>t.id!==w.id)),localStorage.setItem("watched",JSON.stringify(x)),console.log("Фильм удален из WATCHED"),//!
-e(a).Notify.info(`Фильм ${w.title||w.name} удален из WATCHED`,{position:"center-top",clickToClose:!0,timeout:2500}),m.watchedModal.textContent="ADD TO WATCHED",m.watchedModal.classList.contains("modal-button-delete")&&m.watchedModal.classList.remove("modal-button-delete"),m.watchedModal.classList.contains("modal-button-add-watched")||m.watchedModal.classList.add("modal-button-add-watched"),"watched"===E&&(M(),
+m.watchedModal.textContent="DELETE FROM WATCHED",m.watchedModal.classList.contains("modal-button-add-watched")&&m.watchedModal.classList.remove("modal-button-add-watched"),m.watchedModal.classList.contains("modal-button-delete")||m.watchedModal.classList.add("modal-button-delete")}else"DELETE FROM WATCHED"===t&&(x=x.filter((t=>t.id!==w.id)),localStorage.setItem("watched",JSON.stringify(x)),e(a).Notify.info(`Фильм ${w.title||w.name} удален из WATCHED`,{position:"center-top",clickToClose:!0,timeout:2500}),m.watchedModal.textContent="ADD TO WATCHED",m.watchedModal.classList.contains("modal-button-delete")&&m.watchedModal.classList.remove("modal-button-delete"),m.watchedModal.classList.contains("modal-button-add-watched")||m.watchedModal.classList.add("modal-button-add-watched"),"watched"===E&&(M(),
 //! Очищаем контейнер:
 S(),appendWatchedQueueMarkup(x)))}function O(){const t=m.queueModal.textContent;if("ADD TO QUEUE"===t){
 //! Блокировка повторной записи фильма в localStorage 
@@ -193,7 +191,7 @@ if(A.find((t=>t.id===w.id)))return e(a).Notify.warning(`Фильм ${w.title||w.
 //! Запись фильма в localStorage
 A=[...A,w],localStorage.setItem("queue",JSON.stringify(A)),e(a).Notify.success(`Фильм ${w.title||w.name} добавлен в QUEUE`,{position:"center-top",clickToClose:!0,timeout:2500}),
 //! Смена названия (textContent) кнопки на "DELETE FROM QUEUE"
-m.queueModal.textContent="DELETE FROM QUEUE",m.queueModal.classList.contains("modal-button-add-queue")&&m.queueModal.classList.remove("modal-button-add-queue"),m.queueModal.classList.contains("modal-button-delete")||m.queueModal.classList.add("modal-button-delete")}else"DELETE FROM QUEUE"===t&&(A=A.filter((t=>t.id!==w.id)),localStorage.setItem("queue",JSON.stringify(A)),console.log("Фильм удален из QUEUE"),e(a).Notify.info(`Фильм ${w.title||w.name} удален из QUEUE`,{position:"center-top",clickToClose:!0,timeout:2500}),m.queueModal.textContent="ADD TO QUEUE",m.queueModal.classList.contains("modal-button-delete")&&m.queueModal.classList.remove("modal-button-delete"),m.queueModal.classList.contains("modal-button-add-queue")||m.queueModal.classList.add("modal-button-add-queue"),"queue"===E&&(M(),
+m.queueModal.textContent="DELETE FROM QUEUE",m.queueModal.classList.contains("modal-button-add-queue")&&m.queueModal.classList.remove("modal-button-add-queue"),m.queueModal.classList.contains("modal-button-delete")||m.queueModal.classList.add("modal-button-delete")}else"DELETE FROM QUEUE"===t&&(A=A.filter((t=>t.id!==w.id)),localStorage.setItem("queue",JSON.stringify(A)),e(a).Notify.info(`Фильм ${w.title||w.name} удален из QUEUE`,{position:"center-top",clickToClose:!0,timeout:2500}),m.queueModal.textContent="ADD TO QUEUE",m.queueModal.classList.contains("modal-button-delete")&&m.queueModal.classList.remove("modal-button-delete"),m.queueModal.classList.contains("modal-button-add-queue")||m.queueModal.classList.add("modal-button-add-queue"),"queue"===E&&(M(),
 //! Очищаем контейнер:
 S(),appendWatchedQueueMarkup(A)))}function S(){m.moviesCards.innerHTML=""}
 //!  Ф-ция, к-рая очищает контейнер МОДАЛКИ:
@@ -210,4 +208,4 @@ function(t){return t.map((({id:t,poster_path:e,title:n,name:r,genre_ids:o,first_
 //!  Ф-ция, к-рая получает id жанра и возвращает тип жанра
 function(t){return g.filter((e=>e.id===t))[0].name}(t))).join(", "),u=(i||s||"???? - ?? - ??").substr(0,4);//! массив жанров для каждого фильма
 let c=n;n&&(c=n.toUpperCase());let f=r;if(r){r.toUpperCase()}return`\n                <li key=${t} class="gallery__item">\n                <div class="gallery__img-box">\n                    <img src="https://image.tmdb.org/t/p/w780${e}" alt="${n||r}" class="gallery__img" /></div>\n                    <div class="gallery__box">\n                        <h5 class="gallery__title">${c||f}</h5>\n                        <h5 class="gallery__title--color">${a} | ${u}</h5>\n                    </div>\n                </li>\n                `})).join("")}(t))}C(),(()=>{const t={openModalTeamLink:document.querySelector(".team-link"),closeModalTeamBtn:document.querySelector(".team-close-btn"),modalTeam:document.querySelector(".backdrop-team"),body:document.querySelector("body")},{openModalTeamLink:e,closeModalTeamBtn:n,modalTeam:r,body:o}=t;function i(t){r.classList.toggle("is-hidden"),o.classList.toggle("no-scroll"),window.removeEventListener("keydown",s)}function s(t){"Escape"===t.key&&i()}e.addEventListener("click",(function(t){window.addEventListener("keydown",s),r.classList.toggle("is-hidden"),o.classList.toggle("no-scroll")})),n.addEventListener("click",i),r.addEventListener("click",(function(t){t.currentTarget===t.target&&i()}))})()}();
-//# sourceMappingURL=index.06921de0.js.map
+//# sourceMappingURL=index.42d2f211.js.map
