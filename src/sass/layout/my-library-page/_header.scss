@@ -1,10 +1,11 @@
 .section-header {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 40px 20px;
   color: #ffe8e8;
   text-align: center;
   background-color: rgb(121, 0, 0);
-  background-image: url('../images/header/library_bg/library-bg-mob.jpg');
+  background-image: 
+  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  url('../images/header/library_bg/library-bg-mob.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -18,24 +19,34 @@
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    background-image: url('../images/header/library_bg/library-bg-mob@2x.jpg');
+    background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../images/header/library_bg/library-bg-mob@2x.jpg');
   }
 
   @media screen and (min-width: 768px) {
-    background-image: url('../images/header/library_bg/library-bg-tab.jpg');
+    background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../images/header/library_bg/library-bg-tab.jpg');
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-      background-image: url('../images/header/library_bg/library-bg-tab@2x.jpg');
+      background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('../images/header/library_bg/library-bg-tab@2x.jpg');
     }
   }
 
   @media screen and (min-width: 1024px) {
-    background-image: url('../images/header/library_bg/library-bg-desk.jpg');
+    background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../images/header/library_bg/library-bg-desk.jpg');
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-      background-image: url('../images/header/library_bg/library-bg-desk@2x.jpg');
+      background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url('../images/header/library_bg/library-bg-desk@2x.jpg');
     }
   }
 }
