@@ -22,7 +22,7 @@ import { genres } from './js/genres.js'; //? api-themoviedb
 // import addIventListenerModalBtn from './js/addIventListenerModalBtn';
 
 
-import './js/login-modal';";
+import './js/login-modal';
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -631,6 +631,7 @@ export function appendHitsMarkup(results) {
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку для ОДНОЙ карточки из ВСЕХ карточек:
 function createMoviesCardsMarkup(results) {
+    console.log(results);
     return results
         .map(
             ({
@@ -658,7 +659,7 @@ function createMoviesCardsMarkup(results) {
                 if (title) {
                     capitalsTitle = title.toUpperCase();
                 }
-
+                
                 let capitalsName = name;
                 if (name) {
                     const capitalsName = name.toUpperCase();
@@ -668,8 +669,8 @@ function createMoviesCardsMarkup(results) {
                 <li key=${id} class="gallery__item">
                 <div class="gallery__img-box">
                 ${poster_path ? 
-                    `<img class="poster" src="${imageURL}${poster_path}" alt="${title}"  />` : 
-                    `<img class="poster" src=${noImg} alt="${title}" class="gallery__img" />`
+                    `<img class="gallery__img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${title}"  />` : 
+                    `<img class="gallery__img" src=${noImg} alt="${title}" />`
                     }
                     </div>
 
@@ -687,80 +688,131 @@ function createMoviesCardsMarkup(results) {
 //! +++++++++++++++++++++++++++++ Markup infoFilm ++++++++++++++++++++++++++++++++++++++++++++++
 //*  Ф-ция-then, к-рая отрисовывает интерфейс ОДНОГО фильма в МОДАЛКЕ:
 function appendInfoMovieMarkup(infoFilm) {
+    console.log(infoFilm);
     //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
     refs.InfoMovie.insertAdjacentHTML('afterbegin', createInfoMovieMarkup(infoFilm));
 }
 
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку ОДНОГО фильма в МОДАЛКЕ:
-function createInfoMovieMarkup(infoFilm) {
-    const {
-        id,
-        poster_path,
-        title, name,
-        vote_average,
-        vote_count,
-        popularity,
-        original_title,
-        original_name,
-        genres,
-        overview
-    } = infoFilm
+// function createInfoMovieMarkup(infoFilm) {
+//     const {
+//         id,
+//         poster_path,
+//         title, name,
+//         vote_average,
+//         vote_count,
+//         popularity,
+//         original_title,
+//         original_name,
+//         genres,
+//         overview
+//     } = infoFilm
 
-    //? Получаем строку со всеми жанрами
-    const genresAllOneFilm = genres.map(item => item.name).join(", ");
+//     //? Получаем строку со всеми жанрами
+//     const genresAllOneFilm = genres.map(item => item.name).join(", ");
 
-    //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
-    let capitalsTitle = title;
-    if (title) {
-        capitalsTitle = title.toUpperCase();
-    };
+//     //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
+//     let capitalsTitle = title;
+//     if (title) {
+//         capitalsTitle = title.toUpperCase();
+//     };
 
-    let capitalsName = name;
-    if (name) {
-        const capitalsName = name.toUpperCase();
-    };
+//     let capitalsName = name;
+//     if (name) {
+//         const capitalsName = name.toUpperCase();
+//     };
 
-    return `
-        <img class="modal-img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
+//     return `
+//         <img class="modal-img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name}" />
         
-        <div class="modal-сontent">
-            <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3>
+//         <div class="modal-сontent">
+//             <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3>
           
-            <table class="modal-info">
-                <tbody>
-                    <tr>
-                        <td class="modal-key">Vote/Votes</td>
-                        <td class="modal-parametr"><span class="modal-parametr-vote">${vote_average}</span> / ${vote_count}</td>
-                    </tr>
-                    <tr>
-                        <td class="modal-key">Popularity</td>
-                        <td class="modal-parametr">${popularity}</td>
-                    </tr>
-                    <tr>
-                        <td class="modal-key">Original Title</td>
-                        <td class="modal-parametr">${original_title || original_name}</td>
-                    </tr>
-                    <tr>
-                        <td class="modal-key">Genre</td>
-                        <td class="modal-parametr">${genresAllOneFilm}</td>
-                    </tr>
-                </tbody>
-            </table>
+//             <table class="modal-info">
+//                 <tbody>
+//                     <tr>
+//                         <td class="modal-key">Vote/Votes</td>
+//                         <td class="modal-parametr"><span class="modal-parametr-vote">${vote_average}</span> / ${vote_count}</td>
+//                     </tr>
+//                     <tr>
+//                         <td class="modal-key">Popularity</td>
+//                         <td class="modal-parametr">${popularity}</td>
+//                     </tr>
+//                     <tr>
+//                         <td class="modal-key">Original Title</td>
+//                         <td class="modal-parametr">${original_title || original_name}</td>
+//                     </tr>
+//                     <tr>
+//                         <td class="modal-key">Genre</td>
+//                         <td class="modal-parametr">${genresAllOneFilm}</td>
+//                     </tr>
+//                 </tbody>
+//             </table>
 
-            <div class="modal-about-film">
-                <h5 class="modal-about-title">ABOUT</h5>
-                <span class="modal-about-text">${overview}</span>
-            </div>
+//             <div class="modal-about-film">
+//                 <h5 class="modal-about-title">ABOUT</h5>
+//                 <span class="modal-about-text">${overview}</span>
+//             </div>
 
-            <div class="modal-button" data-action="library-btn">
-                <button type="button" class="modal-button-add-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
-                <button type="button" class="modal-button-add-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
-            </div>
-        </div>
+//             <div class="modal-button" data-action="library-btn">
+//                 <button type="button" class="modal-button-add-watched" data-action="modal-add-watched">ADD TO WATCHED</button>
+//                 <button type="button" class="modal-button-add-queue" data-action="modal-add-queue">ADD TO QUEUE</button>
+//             </div>
+//         </div>
 
-    `;
-}
+//     `;
+// }
+function createInfoMovieMarkup(infoFilm) {
+    console.log(infoFilm);
+    return infoFilm
+      .map(
+        ({
+          id,
+          poster_path,
+          title,
+          name,
+          genres,
+          first_air_date,
+          release_date,
+          vote_average,
+        }) => {
+          //? Получаем строку со всеми жанрами
+          const genresAllOneFilm = genres.map(item => item.name).join(', ');
+  
+          //? Получаем значение года из строки даты:
+          const date = first_air_date || release_date || '???? - ?? - ??';
+          const yearDate = date.substr(0, 4);
+  
+          //?Убираем лишние знаки после запятой
+          const voteAverage = vote_average.toFixed(1);
+  
+          //? Делаем заглавныее буквы в названии фильма (пока НЕ РАБОТАЕТ capitalsName)
+          let capitalsTitle = title;
+          if (title) {
+            capitalsTitle = title.toUpperCase();
+          }
+  
+          let capitalsName = name;
+          if (name) {
+            const capitalsName = name.toUpperCase();
+          }
+  
+          return `
+                  <li class="gallery__item" key=${id}>
+                      <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name
+            }" />
+  
+                      <div class="gallery__thumb">
+                          <h2 class="gallery__title">${capitalsTitle || capitalsName}</h2>
+                          <p class="gallery__text">${genresAllOneFilm} &nbsp|&nbsp ${yearDate}&nbsp &nbsp${voteAverage}</p>
+                      </div>
+                  </li>
+                  `;
+        }
+      )
+      .join('');
+  }
 
 //todo ------------------------- OLD-Функции (пока не удалять)------------------------------------
 //? Ф-ция, к-рая проверяет hits на ОКОНЧАНИЕ КОЛЛЕКЦИИ
