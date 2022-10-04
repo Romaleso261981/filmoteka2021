@@ -1,3 +1,8 @@
+
+                //     <img src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name
+                // }" class="gallery__img" />
+import noImg from './images/noImg.jpg';                
+
 import Notiflix from 'notiflix';
 
 //?  Импорт spinner (Loader ==> isLoadin)
@@ -663,8 +668,11 @@ function createMoviesCardsMarkup(results) {
                 return `
                 <li key=${id} class="gallery__item">
                 <div class="gallery__img-box">
-                    <img src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name
-                    }" class="gallery__img" /></div>
+                ${poster_path ? 
+                    `<img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title}"  />` : 
+                    `<img class="gallery__img" src=${noImg} alt="${title}" />`
+                    }
+                    </div>
                     <div class="gallery__box">
                         <h5 class="gallery__title">${capitalsTitle || capitalsName}</h5>
                         <h5 class="gallery__title--color">${genresAllOneFilm} | ${yearDate}</h5>

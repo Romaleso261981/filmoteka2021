@@ -2,7 +2,7 @@ import Notiflix from 'notiflix';
 import spinner from './js/preLoader';
 import './js/login-modal';
 import operationLogicWatchedQueue from './js/operationLogicWatchedQueue.js';
-
+import noImg from './images/noImg.jpg'; 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 function getRefsLibrary() {
   return {
@@ -435,10 +435,11 @@ function createWatchedQueueCardsMarkup(results) {
 
         return `
                 <li class="gallery__item" key=${id}>
-                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${
-          title || name
-        }" />
-
+                ${poster_path ? 
+                  `<img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name}"  />` : 
+                  `<img class="gallery__img" src=${noImg} alt="${title}" />`
+                  }
+                    
                     <div class="gallery__thumb">
                         <h2 class="gallery__title">${
                           capitalsTitle || capitalsName
