@@ -21,11 +21,14 @@
   <body>
     <!-- <body class="show-modal"> -->
     <!--! ❗️❗️❗️ Add partials like so for every page -->
-
-    <include src="./partials/home-page/header.html"></include>
-    <include src="./partials/home-page/main-page.html"></include>
-    <include src="./partials/pagination.html"></include>
-    <include src="./partials/home-page/footer.html"></include>
+    <div class="page-home">
+      <include src="./partials/home-page/header.html"></include>
+      <div class="main-pagination-wrap">
+        <include src="./partials/home-page/main-page.html"></include>
+        <include src="./partials/pagination.html"></include>
+      </div>      
+      <include src="./partials/home-page/footer.html"></include>
+    </div>
     <include src="./partials/modal-header.html"></include>
     <include src="./partials/modal-team.html"></include>
     <include src="./partials/scroll-up.html"></include>
