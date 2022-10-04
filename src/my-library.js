@@ -76,7 +76,6 @@ async function onMovieDetails(event) {
   if (event.target.closest('li')) {
     const itemId = event.target.closest('li');
     idFilms = Number(itemId.getAttribute('key'));
-    console.log('idFilms:', idFilms);
     findFilmByIdLs(idFilms);
   } else return;
 

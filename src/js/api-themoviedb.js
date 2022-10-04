@@ -85,7 +85,6 @@ export default class ThemoviedbApiService {
     //! 3 - Запрос полной информации о фильме для МОДАЛКИ.
     async getMovieDetails(idFilms) {
         const url_3 = `${BASE_URL}/${END_POINTS_3}/${idFilms}?api_key=${API_KEY}&language=en-US`;
-        console.log("url_3: ", url_3); //!
         const response = await axios.get(url_3) //!
         const results = response.data
         return results;

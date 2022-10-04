@@ -338,7 +338,6 @@ async function onMovieDetails(event) {
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 export function onWatchedModal() {
     const textWatchedModal = refs.watchedModal.textContent;
-    console.log("textWatchedModal ==> начало:", textWatchedModal); //!
 
     if (textWatchedModal === "ADD TO WATCHED") {
         //! Блокировка повторной записи фильма в localStorage 
@@ -377,7 +376,6 @@ export function onWatchedModal() {
         if (textWatchedModal === "DELETE FROM WATCHED") {
             localStorageWatched = localStorageWatched.filter(item => item.id !== infoFilm.id);
             localStorage.setItem("watched", JSON.stringify(localStorageWatched));
-            console.log("Фильм удален из WATCHED"); //!
             Notiflix.Notify.info(
               `Фильм ${infoFilm.title || infoFilm.name} удален из WATCHED`,
               {
@@ -443,7 +441,6 @@ export function onQueueModal() {
         if (textQueuedModal === "DELETE FROM QUEUE") {
             localStorageQueue = localStorageQueue.filter(item => item.id !== infoFilm.id);
             localStorage.setItem("queue", JSON.stringify(localStorageQueue));
-            console.log("Фильм удален из QUEUE");
             Notiflix.Notify.info(
               `Фильм ${infoFilm.title || infoFilm.name} удален из QUEUE`,
               {
@@ -682,7 +679,6 @@ function createMoviesCardsMarkup(results) {
 //! +++++++++++++++++++++++++++++ Markup infoFilm ++++++++++++++++++++++++++++++++++++++++++++++
 //*  Ф-ция-then, к-рая отрисовывает интерфейс ОДНОГО фильма в МОДАЛКЕ:
 function appendInfoMovieMarkup(infoFilm) {
-    console.log(infoFilm);
     //!   Добавляем новую разметку в div-контейнер с помощью insertAdjacentHTML:
     refs.InfoMovie.insertAdjacentHTML('afterbegin', createInfoMovieMarkup(infoFilm));
 }
