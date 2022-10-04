@@ -631,12 +631,10 @@ export function appendHitsMarkup(results) {
 //! --------------------------------------------------------------------------------------------
 //*   Ф-ция, к-рая создает новую разметку для ОДНОЙ карточки из ВСЕХ карточек:
 function createMoviesCardsMarkup(results) {
-    console.log(results);
     return results
         .map(
             ({
                 id,
-                imageURL,
                 poster_path,
                 title,
                 name,
@@ -659,7 +657,7 @@ function createMoviesCardsMarkup(results) {
                 if (title) {
                     capitalsTitle = title.toUpperCase();
                 }
-                
+
                 let capitalsName = name;
                 if (name) {
                     const capitalsName = name.toUpperCase();
@@ -668,12 +666,8 @@ function createMoviesCardsMarkup(results) {
                 return `
                 <li key=${id} class="gallery__item">
                 <div class="gallery__img-box">
-                ${poster_path ? 
-                    `<img class="gallery__img" src="https://image.tmdb.org/t/p/w500${poster_path}" alt="${title}"  />` : 
-                    `<img class="gallery__img" src=${noImg} alt="${title}" />`
-                    }
-                    </div>
-
+                    <img src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name
+                    }" class="gallery__img" /></div>
                     <div class="gallery__box">
                         <h5 class="gallery__title">${capitalsTitle || capitalsName}</h5>
                         <h5 class="gallery__title--color">${genresAllOneFilm} | ${yearDate}</h5>
