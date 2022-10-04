@@ -22,9 +22,7 @@ import { genres } from './js/genres.js'; //? api-themoviedb
 // import addIventListenerModalBtn from './js/addIventListenerModalBtn';
 
 
-import './js/login-modal';
-
-import noImg from "../images/no-image.jpg";
+import './js/login-modal';";
 
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 
