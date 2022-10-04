@@ -24,6 +24,8 @@ import { genres } from './js/genres.js'; //? api-themoviedb
 
 import './js/login-modal';
 
+import noImg from "../images/no-image.jpg";
+
 //* +++++++++++++++++++++++++++++++++++ Импорты файлов ++++++++++++++++++++++++++++++++++++++++++++
 
 //! Создаем объект всех ссылок refs.*
@@ -635,6 +637,7 @@ function createMoviesCardsMarkup(results) {
         .map(
             ({
                 id,
+                imageURL,
                 poster_path,
                 title,
                 name,
@@ -666,8 +669,11 @@ function createMoviesCardsMarkup(results) {
                 return `
                 <li key=${id} class="gallery__item">
                 <div class="gallery__img-box">
-                    <img src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name
-                    }" class="gallery__img" /></div>
+                ${poster_path ? 
+                    `<img class="poster" src="${imageURL}${poster_path}" alt="${title}"  />` : 
+                    `<img class="poster" src=${noImg} alt="${title}" class="gallery__img" />`
+                    }
+                    </div>
 
                     <div class="gallery__box">
                         <h5 class="gallery__title">${capitalsTitle || capitalsName}</h5>
