@@ -49,7 +49,6 @@ refs.backdrop.addEventListener('click', onBackdropClick);
 refs.watchedHeader.addEventListener('click', onMyLibraryWatched);
 refs.queueHeader.addEventListener('click', onQueue);
 
-
 //* +++++++++++++++++++++++++++++++ Создаем ГЛОБАЛЬНЫЕ переменные +++++++++++++++++++++++++++++++++++++++++
 
 //! Создаем глобальную переменную (idFilms) для хранения idF одного фильма
@@ -66,11 +65,7 @@ let currentPage = '';
 let localStorageWatched = JSON.parse(localStorage.getItem('watched')) ?? [];
 let localStorageQueue = JSON.parse(localStorage.getItem('queue')) ?? [];
 
-
-
-
 //* +++++++++++++++++++++++++++++++++++++++ Блок Функций  +++++++++++++++++++++++++++++++++++++++++++++++++
-
 
 //!!!!!! Загрузка популярных фильмов на страницу MY LIDRARY
 onMyLibraryWatched();
@@ -84,7 +79,6 @@ async function onMovieDetails(event) {
     console.log('idFilms:', idFilms);
     findFilmByIdLs(idFilms);
   } else return;
-
 
   // забираємо всі фільми з localStorage
   function getQueueData() {
@@ -113,23 +107,23 @@ async function onMovieDetails(event) {
 
   // шукає об'єкт по ID
   function findFilmByIdLs(id) {
-    const films = [...getQueueData(), ...getWatchedData()]
-    const film = films.find((film) => film.id == id)
+    const films = [...getQueueData(), ...getWatchedData()];
+    const film = films.find(film => film.id == id);
     infoFilm = film;
-    return film
-}
+    return film;
+  }
   //! ПОКАЗЫВАЕМ Spinner
   spinner.startSpinner();
-  
-   //! Достаем из localStorage полную информации о фильме для МОДАЛКИ.
-  //! + проверяем на какой странице находимся (т.е. в каком localStorage искать) 
+
+  //! Достаем из localStorage полную информации о фильме для МОДАЛКИ.
+  //! + проверяем на какой странице находимся (т.е. в каком localStorage искать)
   if (currentPage === 'watched') {
     infoFilm = localStorageWatched.find(option => option.id === idFilms);
-  };
+  }
 
   if (currentPage === 'queue') {
     infoFilm = localStorageQueue.find(option => option.id === idFilms);
-  };
+  }
   //?_________________КОНЕЦ Получения и консоли всех данных _____________________
 
   //! ==> Открываем модалку
@@ -146,7 +140,13 @@ async function onMovieDetails(event) {
   addIventListenerModalBtn();
 
   //! Вызываем БЛОК ЛОГИКИ работы кнопок <ADD TO WATCHED> и <ADD TO QUEUE>
-  operationLogicWatchedQueue(currentPage, refs, infoFilm, localStorageWatched, localStorageQueue);
+  operationLogicWatchedQueue(
+    currentPage,
+    refs,
+    infoFilm,
+    localStorageWatched,
+    localStorageQueue
+  );
 }
 
 //* -------------- Ф-ция_4, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO WATCHED: ----------
@@ -226,13 +226,11 @@ function onWatchedModal() {
 //* ------------------ Ф-ция_5, ДОБАВЛЕНИЕ/УДАЛЕНИЕ просмотренных фильмов в localStorage по кноке ADD TO QUEUE: --------------
 //! +++ Запрос полной информации о фильме для МОДАЛКИ +++
 function onQueueModal() {
-
   const textQueuedModal = refs.queueModal.textContent;
 
   if (textQueuedModal === 'ADD TO QUEUE') {
     //! Блокировка повторной записи фильма в localStorage (ВРЕМЕННО)
     if (localStorageQueue.find(option => option.id === infoFilm.id)) {
-
       Notiflix.Notify.warning(
         `Фильм ${infoFilm.title || infoFilm.name} уже есть в QUEUE`,
         {
@@ -294,6 +292,7 @@ function onQueueModal() {
         //! Очищаем контейнер:
         clearMovieContainer();
         appendWatchedQueueMarkup(localStorageQueue);
+        // refs.queueHeader.classList.t oggle('current-page');
       }
     }
   }
@@ -308,11 +307,13 @@ function onMyLibraryWatched() {
   const results = JSON.parse(localStorage.getItem('watched')) ?? [];
   //! Рисование интерфейса
   appendWatchedQueueMarkup(results);
+
+    refs.watchedHeader.classList.add('current-page');
+  refs.queueHeader.classList.remove('current-page');
 }
 
 //* -------------------------- Ф-ция_7, для работы с кнопкой QUEUEв MY LIBRARY : ----------------------
 function onQueue() {
-
   //! Назначаем тип станицы QUEUE для логики работы кнопок МОДАЛКИ
   currentPage = 'queue';
   //! Очищаем контейнер:
@@ -321,7 +322,9 @@ function onQueue() {
   //! Перезаписываем в локальную переменную (results) значение всего (localStorage)
   const results = JSON.parse(localStorage.getItem('queue')) ?? [];
 
-  //! Рисование интерфейса
+  //! Рисование интерфейса ;
+  refs.watchedHeader.classList.remove('current-page');
+  refs.queueHeader.classList.add('current-page');
   appendWatchedQueueMarkup(results);
 }
 
@@ -340,7 +343,6 @@ async function checkResults() {
     }
   }
 }
-
 
 //! ++++++++++++++ Ф-ция, к-рая очищает контейнер при новом вводе данных в input form: ++++++++++++++
 function clearMovieContainer() {
@@ -385,7 +387,6 @@ function addIventListenerModalBtn() {
   refs.watchedModal.addEventListener('click', onWatchedModal);
   refs.queueModal.addEventListener('click', onQueueModal);
 }
-
 
 //* --------------------------------------- Функции-разметки ---------------------------------------------------------
 //! +++++++++++++++++++++++++++++ Markup WATCHED и QUEUE ++++++++++++++++++++++++++++++++++++++++++++++
@@ -435,11 +436,14 @@ function createWatchedQueueCardsMarkup(results) {
 
         return `
                 <li class="gallery__item" key=${id}>
-                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${title || name
-          }" />
+                    <img class="gallery__img" src="https://image.tmdb.org/t/p/w780${poster_path}" alt="${
+          title || name
+        }" />
 
                     <div class="gallery__thumb">
-                        <h2 class="gallery__title">${capitalsTitle || capitalsName}</h2>
+                        <h2 class="gallery__title">${
+                          capitalsTitle || capitalsName
+                        }</h2>
                         <p class="gallery__text">${genresAllOneFilm} &nbsp|&nbsp ${yearDate}&nbsp &nbsp${voteAverage}</p>
                     </div>
                 </li>
@@ -491,8 +495,9 @@ function createInfoMovieMarkup(infoFilm) {
   }
 
   return `
-        <img class="modal-img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${title || name
-    }" />
+        <img class="modal-img" src="https://image.tmdb.org/t/p/w300${poster_path}" alt="${
+    title || name
+  }" />
         
         <div class="modal-сontent">
             <h3 class="modal-title-film">${capitalsTitle || capitalsName}</h3>
@@ -508,8 +513,9 @@ function createInfoMovieMarkup(infoFilm) {
                     </tr>
                     <tr>
                         <td class="modal-key">Original Title</td>
-                        <td class="modal-parametr">${original_title || original_name
-    }</td>
+                        <td class="modal-parametr">${
+                          original_title || original_name
+                        }</td>
                     </tr>
                     <tr>
                         <td class="modal-key">Genre</td>

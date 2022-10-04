@@ -205,9 +205,9 @@ margin-left: 40px;
 
   transition: background 200ms;
 
-  &:hover {
-    background: var(--btn-rating-bg);
-  }
+  // &:hover {
+  //   background: var(--btn-rating-bg);
+  // }
 }
 
 .nav-library-queue {
@@ -224,7 +224,11 @@ margin-left: 40px;
 
   transition: background 200ms;
 
-  &:hover {
-    background: var(--btn-rating-bg);
-  }
+  // &:hover {
+  //   background: var(--btn-rating-bg);
+  // }
+}
+
+.current-page{
+  background-color: var(--colorGreen);
 }
